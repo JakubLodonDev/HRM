@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <title>Human Resource Menagment</title>
+  </head>
+  <body>
+  <!-- header -->
+    <div th:replace="~{header :: header}">...</div>
+  <!-- //header -->
+
+    <main class="dash-main">
+      <div class="dash-main-greet">
+        <h2>Witaj - Jacek</h2>
+      </div>
+      <div class="dash-main-panel">
+        <div class="dash-box">
+          <a class="dash-box-text" href="job.html">Job</a>
+        </div>
+        <div class="dash-box">
+          <a class="dash-box-text" href="">Applications</a>
+        </div>
+        <div class="dash-box">
+          <a class="dash-box-text" href="">Employee</a>
+        </div>
+      </div>
+    </main>
+
+  <!-- footer block -->
+    <div th:replace="~{footer :: footer}">...</div>
+  <!-- //footer block -->
+  </body>
+</html>
