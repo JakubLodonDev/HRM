@@ -13,34 +13,32 @@
 
     <main>
       <form
-        action="submit_application.php"
+        th:action="@{/saveApplicationForm}"
         method="post"
-        enctype="multipart/form-data"
       >
         <label for="firstName">Imię:</label>
-        <input type="text" id="firstName" name="firstName" required />
+        <input type="text" id="firstName" name="firstName" />
 
         <label for="lastName">Nazwisko:</label>
-        <input type="text" id="lastName" name="lastName" required />
-
-        <label for="phone">Numer telefonu:</label>
-        <input type="tel" id="phone" name="phone" required />
+        <input type="text" id="lastName" name="lastName" />
 
         <label for="email">Adres e-mail:</label>
-        <input type="email" id="email" name="email" required />
+        <input type="text" id="email" name="email" />
 
-        <label for="description">Opis:</label>
+        <label for="mobilePhone">Numer telefonu:</label>
+        <input type="text" id="mobilePhone" name="mobilePhone" />
+
+        <label for="aboutYourself">Opis:</label>
         <textarea
-          id="description"
-          name="description"
+          id="aboutYourself"
+          name="aboutYourself"
           rows="4"
-          required
         ></textarea>
 
         <label for="cv">CV (PDF lub DOCX):</label>
-        <input type="file" id="cv" name="cv" accept=".pdf, .docx" required />
+        <input type="file" id="cv" name="cv" accept=".pdf, .docx" />
 
-        <button type="submit">Wyślij zgłoszenie</button>
+        <button >Wyślij zgłoszenie</button>
       </form>
     </main>
 
