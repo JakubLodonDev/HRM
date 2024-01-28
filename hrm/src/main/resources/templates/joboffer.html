@@ -20,10 +20,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-            <td><a th:href="@{/career/application}">APPLAY</a></td>
+          <tr th:each="jobOffer : ${jobOffers}">
+            <td th:text="${jobOffer.name}"></td>
+            <td th:text="${jobOffer.level}"></td>
+            <td><a th:href="@{/application}">APPLAY</a></td>
           </tr>
         </tbody>
       </table>
