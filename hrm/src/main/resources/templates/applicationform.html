@@ -15,25 +15,22 @@
       <form
         th:action="@{/saveApplicationForm}"
         method="post"
+        th:object="${applicationForm}"
       >
-        <label for="firstName">Imię:</label>
-        <input type="text" id="firstName" name="firstName" />
+        <label >Imię:</label>
+        <input type="text" th:field="*{firstName}" />
 
-        <label for="lastName">Nazwisko:</label>
-        <input type="text" id="lastName" name="lastName" />
+        <label >Nazwisko:</label>
+        <input type="text" th:field="*{lastName}" />
 
-        <label for="email">Adres e-mail:</label>
-        <input type="text" id="email" name="email" />
+        <label >Adres e-mail:</label>
+        <input type="text" th:field="*{email}" />
 
-        <label for="mobilePhone">Numer telefonu:</label>
-        <input type="text" id="mobilePhone" name="mobilePhone" />
+        <label >Numer telefonu:</label>
+        <input type="text" th:field="*{mobilePhone}"/>
 
-        <label for="aboutYourself">Opis:</label>
-        <textarea
-          id="aboutYourself"
-          name="aboutYourself"
-          rows="4"
-        ></textarea>
+        <label >Opis:</label>
+        <textarea th:field="*{aboutYourself}" rows="4"></textarea>
 
         <label for="cv">CV (PDF lub DOCX):</label>
         <input type="file" id="cv" name="cv" accept=".pdf, .docx" />
