@@ -1,11 +1,11 @@
 package com.jakub.hrm.repo;
 
-import com.jakub.hrm.model.ApplicationForm;
+import com.jakub.hrm.model.JobOffer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
 @Repository
-public interface ApplicationFormRepo extends JpaRepository<ApplicationForm, UUID> {
+public interface JobOfferRepo extends JpaRepository<JobOffer, UUID> {
 }

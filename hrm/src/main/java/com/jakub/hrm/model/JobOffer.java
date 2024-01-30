@@ -1,30 +1,41 @@
 package com.jakub.hrm.model;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
+@Entity
+@Table(name="job_offer")
 public class JobOffer {
 
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "job_id")
+    private UUID jobOfferId;
+    @NotBlank(message="First name must not be blank")
     private String name;
+    @NotBlank(message="First name must not be blank")
     private String level;
+    @NotBlank(message="First name must not be blank")
     private String requirement;
+    @NotBlank(message="First name must not be blank")
     private String description;
     private String status;
 
-    public JobOffer(int id, String name, String level, String requirement, String description, String status) {
-        this.id = id;
-        this.name = name;
-        this.level = level;
-        this.requirement = requirement;
-        this.description = description;
-        this.status = status;
+    @OneToMany(mappedBy = "jobOffer", cascade = CascadeType.ALL)
+    private Set<ApplicationForm> applicationForms;
+
+    public JobOffer() {}
+
+    public UUID getJobOfferId() {
+        return jobOfferId;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setJobOfferId(UUID jobOfferId) {
+        this.jobOfferId = jobOfferId;
     }
 
     public String getName() {

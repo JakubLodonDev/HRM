@@ -17,7 +17,6 @@ public class ApplicationFormService {
     ApplicationFormRepo applicationFormRepo;
 
     public ApplicationForm saveApplicationForm(ApplicationForm applicationForm) {
-        //applicationForm.setId(UUID.randomUUID().toString());
         applicationForm.setEmploymentStatus(EmploymentStatus.PROCESS);
         return applicationFormRepo.save(applicationForm);
     }

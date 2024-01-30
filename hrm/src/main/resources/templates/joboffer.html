@@ -23,7 +23,7 @@
           <tr th:each="jobOffer : ${jobOffers}">
             <td th:text="${jobOffer.name}"></td>
             <td th:text="${jobOffer.level}"></td>
-            <td><a th:href="@{/applicationform}">APPLY</a></td>
+            <td><a th:href="@{'/applicationform/' + ${jobOffer.jobOfferId}}">APPLY</a></td>
           </tr>
         </tbody>
       </table>

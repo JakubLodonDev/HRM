@@ -13,7 +13,7 @@
 
     <main>
       <form
-        th:action="@{/saveApplicationForm}"
+        th:action="@{'/saveApplicationForm'}"
         method="post"
         th:object="${applicationForm}"
       >
@@ -34,6 +34,8 @@
 
         <label for="cv">CV (PDF lub DOCX):</label>
         <input type="file" id="cv" name="cv" accept=".pdf, .docx" />
+
+        <input type="hidden" name="jobOfferId" th:value="${jobOfferId}" />
 
         <button >Wyślij zgłoszenie</button>
       </form>

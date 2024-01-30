@@ -5,6 +5,9 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
+import java.util.Set;
+import java.util.UUID;
+
 
 @Entity
 @Table(name="application_form")
@@ -13,7 +16,7 @@ public class ApplicationForm {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "form_id")
-    private String id;
+    private UUID applicationFormId;
     @NotBlank(message="First name must not be blank")
     private String firstName;
     @NotBlank(message="Last name must not be blank")
@@ -28,21 +31,19 @@ public class ApplicationForm {
 
     private String employmentStatus;
 
+    @ManyToOne
+    @JoinColumn(name = "job_id")
+    private JobOffer jobOffer;
+
+
     public ApplicationForm() {}
-    public ApplicationForm(String firstName,String lastName, String email, String mobilePhone, String aboutYourself) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.mobilePhone = mobilePhone;
-        this.aboutYourself = aboutYourself;
+
+    public UUID getApplicationFormId() {
+        return applicationFormId;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public void setApplicationFormId(UUID applicationFormId) {
+        this.applicationFormId = applicationFormId;
     }
     public String getFirstName() {
         return firstName;
@@ -90,6 +91,14 @@ public class ApplicationForm {
 
     public void setEmploymentStatus(String employmentStatus) {
         this.employmentStatus = employmentStatus;
+    }
+
+    public JobOffer getJobOffer() {
+        return jobOffer;
+    }
+
+    public void setJobOffer(JobOffer jobOffer) {
+        this.jobOffer = jobOffer;
     }
 
     @Override
