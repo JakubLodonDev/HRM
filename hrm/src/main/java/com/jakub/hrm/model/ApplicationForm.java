@@ -4,11 +4,13 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+import lombok.Data;
 
 import java.util.Set;
 import java.util.UUID;
 
-
+@Data
 @Entity
 @Table(name="application_form")
 public class ApplicationForm {

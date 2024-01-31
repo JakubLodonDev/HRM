@@ -12,6 +12,9 @@
   <!-- //header -->
 
     <main>
+      <ul>
+        <li th:each="error : ${#fields.errors('applicationForm.*')}" th:text="${error}" />
+      </ul>
       <form
         th:action="@{'/saveApplicationForm'}"
         method="post"
