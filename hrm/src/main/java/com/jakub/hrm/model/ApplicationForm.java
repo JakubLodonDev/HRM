@@ -37,6 +37,10 @@ public class ApplicationForm {
     @JoinColumn(name = "job_id")
     private JobOffer jobOffer;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "address_id")
+    private Address address;
+
 
     public ApplicationForm() {}
 
