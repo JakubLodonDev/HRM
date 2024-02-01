@@ -23,9 +23,15 @@ public class WebSecurityConfig {
                         .requestMatchers("/joboffer/**").permitAll()
                         .requestMatchers("/applicationform").permitAll()
                         .requestMatchers("/assets/**").permitAll()
-                        .anyRequest().authenticated())
-                .formLogin(withDefaults())
-                .httpBasic(withDefaults());
+                        .requestMatchers("/dashboard").authenticated()
+                        .requestMatchers("/logout").authenticated())
+
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/login").defaultSuccessUrl("/dashboard").
+                        failureUrl("/login?error=true").permitAll())
+                .logout(formlogout -> formlogout.logoutSuccessUrl("/login?logout=true")
+                        .invalidateHttpSession(true).permitAll())
+                .httpBasic(Customizer.withDefaults());
 
         return http.build();
     }
@@ -38,6 +44,12 @@ public class WebSecurityConfig {
                 .roles("USER")
                 .build();
 
-        return new InMemoryUserDetailsManager(user);
+        UserDetails admin = User.withDefaultPasswordEncoder()
+                .username("admin")
+                .password("12345")
+                .roles("USER","ADMIN")
+                .build();
+
+        return new InMemoryUserDetailsManager(user, admin);
     }
 }

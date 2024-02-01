@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -9,20 +10,17 @@
   <h1>Human Resource Menagment</h1>
   <nav>
     <ul>
-      <li>
+      <li sec:authorize="isAnonymous()">
         <a th:href="@{/home}" >Home</a>
       </li>
-      <li>
+      <li sec:authorize="isAnonymous()">
         <a th:href="@{/joboffer}" >Career</a>
-      </li>
-      <li>
+      </li >
+      <li sec:authorize="isAuthenticated()">
         <a th:href="@{/dashboard}" >Dashboard</a>
       </li>
-      <li>
-        <a href="login.html">Log in</a>
-      </li>
-      <li>
-        <a href="logout.html">Log out</a>
+      <li sec:authorize="isAuthenticated()">
+        <a th:href="@{/logout}">Log out</a>
       </li>
     </ul>
   </nav>

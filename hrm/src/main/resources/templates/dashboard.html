@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,7 +14,7 @@
 
     <main class="dash-main">
       <div class="dash-main-greet">
-        <h2>Witaj - Jacek</h2>
+        <h2 th:text="${'Witaj - ' + username}"></h2>
       </div>
       <div class="dash-main-panel">
         <div class="dash-box">
