@@ -25,7 +25,8 @@ public class JobOffer {
     private String description;
     private String status;
 
-    @OneToMany(mappedBy = "jobOffer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "jobOffer", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER,
+            targetEntity = ApplicationForm.class)
     private Set<ApplicationForm> applicationForms;
 
     public JobOffer() {}
@@ -76,5 +77,13 @@ public class JobOffer {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Set<ApplicationForm> getApplicationForms() {
+        return applicationForms;
+    }
+
+    public void setApplicationForms(Set<ApplicationForm> applicationForms) {
+        this.applicationForms = applicationForms;
     }
 }

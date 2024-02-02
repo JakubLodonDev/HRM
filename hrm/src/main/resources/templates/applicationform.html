@@ -15,8 +15,10 @@
       <ul>
         <li th:each="error : ${#fields.errors('applicationForm.*')}" th:text="${error}" />
       </ul>
+      <p th:if="${email}" th:text="${email}"></p>
+
       <form
-        th:action="@{'/saveApplicationForm'}"
+              th:action="@{'/saveApplicationForm/' + ${jobOfferId}}"
         method="post"
         th:object="${applicationForm}"
       >
@@ -31,6 +33,18 @@
 
         <label >Numer telefonu:</label>
         <input type="text" th:field="*{mobilePhone}"/>
+
+        <label >Ulica:</label>
+        <input type="text" th:field="*{address.streetAddress}"/>
+
+        <label >Miasto:</label>
+        <input type="text" th:field="*{address.city}"/>
+
+        <label >Kraj:</label>
+        <input type="text" th:field="*{address.country}"/>
+
+        <label >Kod pocztowy:</label>
+        <input type="text" th:field="*{address.zipCode}"/>
 
         <label >Opis:</label>
         <textarea th:field="*{aboutYourself}" rows="4"></textarea>

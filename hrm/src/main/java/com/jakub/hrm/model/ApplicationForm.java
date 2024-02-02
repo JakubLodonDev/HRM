@@ -1,6 +1,7 @@
 package com.jakub.hrm.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -33,11 +34,11 @@ public class ApplicationForm {
 
     private String employmentStatus;
 
-    @ManyToOne
-    @JoinColumn(name = "job_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "job_id", referencedColumnName = "job_id")
     private JobOffer jobOffer;
-
-    @OneToOne(cascade = CascadeType.ALL)
+    @Valid
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "address_id", referencedColumnName = "address_id")
     private Address address;
 
@@ -105,6 +106,14 @@ public class ApplicationForm {
 
     public void setJobOffer(JobOffer jobOffer) {
         this.jobOffer = jobOffer;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @Override

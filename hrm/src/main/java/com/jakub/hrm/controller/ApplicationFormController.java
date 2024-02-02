@@ -1,5 +1,6 @@
 package com.jakub.hrm.controller;
 
+import com.jakub.hrm.model.Address;
 import com.jakub.hrm.model.ApplicationForm;
 import com.jakub.hrm.model.JobOffer;
 import com.jakub.hrm.repo.JobOfferRepo;
@@ -19,12 +20,11 @@ import java.util.UUID;
 public class ApplicationFormController {
 
     private final ApplicationFormService applicationFormService;
-    private final JobOfferRepo jobOfferRepo;
+
 
     @Autowired
-    public ApplicationFormController(ApplicationFormService applicationFormService, JobOfferRepo jobOfferRepo) {
-        this.applicationFormService = applicationFormService;
-        this.jobOfferRepo = jobOfferRepo;
+    public ApplicationFormController(ApplicationFormService applicationFormService) {
+        this.applicationFormService = applicationFormService;;
     }
 
     @RequestMapping("/applicationform/{jobOfferId}")
@@ -34,17 +34,23 @@ public class ApplicationFormController {
         return "applicationform.html";
     }
 
-    @PostMapping("/saveApplicationForm")
+    @PostMapping("/saveApplicationForm/{jobOfferId}")
     public String saveApplicationForm(@Valid @ModelAttribute("applicationForm") ApplicationForm applicationForm,
-                                      BindingResult bindingResult, @RequestParam String jobOfferId) {
+                                       BindingResult bindingResult, @PathVariable String jobOfferId) {
 
         if (bindingResult.hasErrors()) {
             log.error("Contact form validation failed due to : " + bindingResult.toString());
             return "applicationform.html";
         }
-        JobOffer jobOffer = jobOfferRepo.findById(UUID.fromString(jobOfferId)).orElse(null);
-        applicationForm.setJobOffer(jobOffer);
-        applicationFormService.saveApplicationForm(applicationForm);
+
+        if (applicationFormService.isAddressAlreadyApplied(jobOfferId, applicationForm.getEmail())) {
+            log.error("Aplikacja z adresem już istnieje dla tego JobOffer.");
+            bindingResult.rejectValue("email", "email.applicationForml", "Osoba o tym adresie e-mail już aplikowała na to stanowisko.");
+            return "applicationform.html";
+        }
+
+        applicationFormService.saveAddress(applicationForm);
+        applicationFormService.saveApplicationForm(applicationForm, jobOfferId);
         return "redirect:/applicationform/" + jobOfferId;
     }
 }
