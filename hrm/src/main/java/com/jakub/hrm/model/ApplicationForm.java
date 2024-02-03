@@ -1,5 +1,6 @@
 package com.jakub.hrm.model;
 
+import com.jakub.hrm.dto.AddressDTO;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
@@ -44,6 +45,20 @@ public class ApplicationForm {
 
 
     public ApplicationForm() {}
+
+    public ApplicationForm(String firstName, String lastName, String email, String mobilePhone,
+                           String aboutYourself, String employmentStatus, Address address) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.mobilePhone = mobilePhone;
+        this.aboutYourself = aboutYourself;
+        this.employmentStatus = employmentStatus;
+        this.address = address;
+    }
+
+    public ApplicationForm(String firstName, String lastName, String email, String mobilePhone, String aboutYourself, String employmentStatus, AddressDTO addressDTO) {
+    }
 
     public UUID getApplicationFormId() {
         return applicationFormId;

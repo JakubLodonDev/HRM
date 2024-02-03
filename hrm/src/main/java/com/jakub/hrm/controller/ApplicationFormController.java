@@ -1,5 +1,6 @@
 package com.jakub.hrm.controller;
 
+import com.jakub.hrm.dto.SubmittedApplicationDTO;
 import com.jakub.hrm.model.Address;
 import com.jakub.hrm.model.ApplicationForm;
 import com.jakub.hrm.model.JobOffer;
@@ -30,18 +31,22 @@ public class ApplicationFormController {
     @RequestMapping("/applicationform/{jobOfferId}")
     public String displayApplicationPage(@PathVariable String jobOfferId, Model model){
         model.addAttribute("jobOfferId", jobOfferId);
-        model.addAttribute("applicationForm", new ApplicationForm());
+        model.addAttribute("submittedApplicationDTO", new SubmittedApplicationDTO());
         return "applicationform.html";
     }
 
     @PostMapping("/saveApplicationForm/{jobOfferId}")
-    public String saveApplicationForm(@Valid @ModelAttribute("applicationForm") ApplicationForm applicationForm,
+    public String saveApplicationForm(@Valid @ModelAttribute("submittedApplicationDTO") SubmittedApplicationDTO submittedApplicationDTO,
                                        BindingResult bindingResult, @PathVariable String jobOfferId) {
 
         if (bindingResult.hasErrors()) {
             log.error("Contact form validation failed due to : " + bindingResult.toString());
             return "applicationform.html";
         }
+
+        ApplicationForm applicationForm = new ApplicationForm(submittedApplicationDTO.firstName,submittedApplicationDTO.lastName,
+                submittedApplicationDTO.email,submittedApplicationDTO.mobilePhone,submittedApplicationDTO.aboutYourself,
+                submittedApplicationDTO.employmentStatus,submittedApplicationDTO.address);
 
         if (applicationFormService.isAddressAlreadyApplied(jobOfferId, applicationForm.getEmail())) {
             log.error("Aplikacja z adresem już istnieje dla tego JobOffer.");
@@ -51,6 +56,7 @@ public class ApplicationFormController {
 
         applicationFormService.saveAddress(applicationForm);
         applicationFormService.saveApplicationForm(applicationForm, jobOfferId);
+
         return "redirect:/applicationform/" + jobOfferId;
     }
 }
