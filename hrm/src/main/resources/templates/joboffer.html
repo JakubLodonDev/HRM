@@ -16,13 +16,17 @@
           <tr>
             <th scope="col">Position</th>
             <th scope="col">Required Level</th>
+            <th scope="col">Requirement</th>
+            <th scope="col">Description</th>
             <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
-          <tr th:each="jobOffer : ${jobOffers}">
+          <tr th:each="jobOffer : ${jobOffersDTOList}">
             <td th:text="${jobOffer.name}"></td>
             <td th:text="${jobOffer.level}"></td>
+            <td th:text="${jobOffer.requirement}"></td>
+            <td th:text="${jobOffer.description}"></td>
             <td><a th:href="@{'/applicationform/' + ${jobOffer.jobOfferId}}">APPLY</a></td>
           </tr>
         </tbody>

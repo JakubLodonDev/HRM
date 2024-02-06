@@ -40,7 +40,7 @@ public class ApplicationFormController {
                                        BindingResult bindingResult, @PathVariable String jobOfferId) {
 
         if (bindingResult.hasErrors()) {
-            log.error("Contact form validation failed due to : " + bindingResult.toString());
+            log.warn("Contact form validation failed due to : " + bindingResult.toString());
             return "applicationform.html";
         }
 
@@ -49,7 +49,7 @@ public class ApplicationFormController {
                 submittedApplicationDTO.employmentStatus,submittedApplicationDTO.address);
 
         if (applicationFormService.isAddressAlreadyApplied(jobOfferId, applicationForm.getEmail())) {
-            log.error("Aplikacja z adresem już istnieje dla tego JobOffer.");
+            log.warn("Aplikacja z adresem już istnieje dla tego JobOffer.");
             bindingResult.rejectValue("email", "email.applicationForml", "Osoba o tym adresie e-mail już aplikowała na to stanowisko.");
             return "applicationform.html";
         }
