@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <title>Human Resource Menagment</title>
+  </head>
+  <body>
+  <!-- header -->
+    <div th:replace="~{header :: header}">...</div>
+  <!-- //header -->
+    <main>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">First name</th>
+            <th scope="col">Last name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Employment status</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="applicationForm : ${applicationFormList}">
+            <td th:text="${applicationForm.firstName}"></td>
+            <td th:text="${applicationForm.lastName}"></td>
+            <td th:text="${applicationForm.email}"></td>
+            <td th:text="${applicationForm.employmentStatus}"></td>
+            <td><a th:href="@{'//' + ${jobOffer.jobOfferId}}">DETAILS</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+    <!-- footer block -->
+      <div th:replace="~{footer :: footer}">...</div>
+    <!-- //footer block -->
+  </body>
+</html>

@@ -2,7 +2,7 @@ package com.jakub.hrm.controller;
 
 import com.jakub.hrm.constans.JobStatus;
 import com.jakub.hrm.dto.DisplayJobOffersDTO;
-import com.jakub.hrm.dto.SubmittedApplicationDTO;
+import com.jakub.hrm.model.ApplicationForm;
 import com.jakub.hrm.model.JobOffer;
 import com.jakub.hrm.repo.JobOfferRepo;
 import com.jakub.hrm.service.JobOfferService;
@@ -17,10 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Slf4j
 @Controller
@@ -93,5 +90,23 @@ public class JobOfferController {
         return "redirect:/managementjoboffers";
     }
 
+    @GetMapping("/managementopenjoboffers")
+    public String displayAllJobOffersToServiceApplicationForms(Model model){
+        List<DisplayJobOffersDTO> displayJobOffersDTOList = jobOfferService.getListOfOpenJobOffers();
+
+        model.addAttribute("openOffers", displayJobOffersDTOList);
+
+        return "managementopenjoboffers";
+    }
+
+    @GetMapping("/jobofferforms/{jobOfferId}")
+    public String displayJobOfferForms(@PathVariable String jobOfferId, Model model) {
+        Optional<JobOffer> jobOfferOptional = jobOfferRepo.findById(UUID.fromString(jobOfferId));
+        JobOffer jobOffer = jobOfferOptional.get();
+        List<ApplicationForm> applicationFormList = new ArrayList<>(jobOffer.getApplicationForms());
+        model.addAttribute("jobOffer", jobOffer);
+        model.addAttribute("applicationFormList", applicationFormList);
+        return "jobofferforms";
+    }
 
 }
