@@ -15,14 +15,15 @@ public class JobOffer {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "job_id")
     private UUID jobOfferId;
-    @NotBlank(message="First name must not be blank")
+    @NotBlank(message="Name must not be blank")
     private String name;
-    @NotBlank(message="First name must not be blank")
+    @NotBlank(message="Level must not be blank")
     private String level;
-    @NotBlank(message="First name must not be blank")
+    @NotBlank(message="Requirement must not be blank")
     private String requirement;
-    @NotBlank(message="First name must not be blank")
+    @NotBlank(message="Description must not be blank")
     private String description;
+    @NotBlank(message="Status must not be blank")
     private String status;
 
     @OneToMany(mappedBy = "jobOffer", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER,

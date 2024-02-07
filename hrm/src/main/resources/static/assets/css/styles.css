@@ -58,7 +58,8 @@ label {
 }
 
 input,
-textarea {
+textarea,
+select{
   width: calc(100% - 20px);
   padding: 10px;
   margin-bottom: 15px;
@@ -148,6 +149,14 @@ a:hover {
   font-weight: bold;
   font-size: 16px;
 }
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding: auto;
+}
+
 
 footer {
   background-color: #34495e;

@@ -26,5 +26,13 @@ public class JobOfferService {
         }
         return displayJobOffersDTOList;
     }
+
+    public void updateJobOffer(JobOffer jobOffer) {
+        jobOfferRepo.save(jobOffer);
+    }
+
+    public void createJobOffer(JobOffer newJobOffer) {
+        jobOfferRepo.save(newJobOffer);
+    }
 }
 

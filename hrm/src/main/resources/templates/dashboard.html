@@ -17,8 +17,8 @@
         <h2 th:text="${'Witaj - ' + username}"></h2>
       </div>
       <div class="dash-main-panel">
-        <div class="dash-box">
-          <a class="dash-box-text" href="job.html">Job</a>
+        <div class="dash-box" sec:authorize="isAuthenticated()">
+          <a class="dash-box-text" th:href="@{/managementjoboffers}">Job</a>
         </div>
         <div class="dash-box">
           <a class="dash-box-text" href="">Applications</a>

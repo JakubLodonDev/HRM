@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <title>Human Resource Menagment</title>
+  </head>
+  <body>
+  <!-- header -->
+    <div th:replace="~{header :: header}">...</div>
+  <!-- //header -->
+
+    <main>
+      <ul>
+        <li th:each="error : ${#fields.errors('newJobOffer.*')}" th:text="${error}" />
+      </ul>
+      <form
+              th:action="@{'/savenewjoboffer'}"
+        method="post"
+        th:object="${newJobOffer}"
+      >
+        <label>Nazwa:</label>
+        <input type="text" th:field="*{name}" />
+
+        <label>Poziom:</label>
+        <input type="text" th:field="*{level}" />
+
+        <label>Wymagania:</label>
+        <input type="text" th:field="*{requirement}" />
+
+        <label>Opis:</label>
+        <input type="text" th:field="*{description}" />
+
+        <label for="status">Status:</label>
+        <select id="status" name="status" th:field="*{status}">
+          <option th:each="statusOption : ${jobStatusOptions}" th:value="${statusOption}" th:text="${statusOption}"></option>
+        </select>
+
+        <button >UPDATE</button>
+      </form>
+    </main>
+
+    <!-- footer block -->
+        <div th:replace="~{footer :: footer}">...</div>
+    <!-- //footer block -->
+  </body>
+</html>

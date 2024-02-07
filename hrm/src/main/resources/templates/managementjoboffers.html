@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <title>Human Resource Menagment</title>
+  </head>
+  <body>
+  <!-- header -->
+    <div th:replace="~{header :: header}">...</div>
+  <!-- //header -->
+    <main>
+      <div class="button-group">
+        <a th:href="@{/createjoboffer}" class="btn btn-primary">Dodaj nową ofertę pracy</a>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Position</th>
+            <th scope="col">Required Level</th>
+            <th scope="col">Requirement</th>
+            <th scope="col">Description</th>
+            <th scope="col">Status</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="jobOffer : ${displayJobOffers}">
+            <td th:text="${jobOffer.name}"></td>
+            <td th:text="${jobOffer.level}"></td>
+            <td th:text="${jobOffer.requirement}"></td>
+            <td th:text="${jobOffer.description}"></td>
+            <td th:text="${jobOffer.status}"></td>
+            <td><a th:href="@{'/managementjoboffers/' + ${jobOffer.jobOfferId}}">UPDATE</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+    <!-- footer block -->
+      <div th:replace="~{footer :: footer}">...</div>
+    <!-- //footer block -->
+  </body>
+</html>
