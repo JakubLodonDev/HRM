@@ -1,5 +1,7 @@
 package com.jakub.hrm.controller;
 
+import com.jakub.hrm.constans.EmploymentStatus;
+import com.jakub.hrm.constans.JobStatus;
 import com.jakub.hrm.dto.SubmittedApplicationDTO;
 import com.jakub.hrm.model.Address;
 import com.jakub.hrm.model.ApplicationForm;
@@ -43,10 +45,13 @@ public class ApplicationFormController {
             log.warn("Contact form validation failed due to : " + bindingResult.toString());
             return "applicationform.html";
         }
+        submittedApplicationDTO.setEmploymentStatus(EmploymentStatus.PROCESS);
+        Address address = new Address(submittedApplicationDTO.address.getStreetAddress(),submittedApplicationDTO.address.getCity(),
+                submittedApplicationDTO.address.getCountry(),submittedApplicationDTO.address.getZipCode());
 
-        ApplicationForm applicationForm = new ApplicationForm(submittedApplicationDTO.firstName,submittedApplicationDTO.lastName,
+        ApplicationForm applicationForm = new ApplicationForm(submittedApplicationDTO.getFirstName(),submittedApplicationDTO.lastName,
                 submittedApplicationDTO.email,submittedApplicationDTO.mobilePhone,submittedApplicationDTO.aboutYourself,
-                submittedApplicationDTO.employmentStatus,submittedApplicationDTO.address);
+                submittedApplicationDTO.employmentStatus,address);
 
         if (applicationFormService.isAddressAlreadyApplied(jobOfferId, applicationForm.getEmail())) {
             log.warn("Aplikacja z adresem już istnieje dla tego JobOffer.");

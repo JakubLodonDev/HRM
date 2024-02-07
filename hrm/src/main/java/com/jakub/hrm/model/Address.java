@@ -35,6 +35,13 @@ public class Address {
     public Address() {
     }
 
+    public Address(String streetAddress, String city, String country, String zipCode) {
+        this.streetAddress = streetAddress;
+        this.city = city;
+        this.country = country;
+        this.zipCode = zipCode;
+    }
+
     public UUID getAddressId() {
         return addressId;
     }

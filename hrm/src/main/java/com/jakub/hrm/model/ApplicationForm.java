@@ -57,8 +57,6 @@ public class ApplicationForm {
         this.address = address;
     }
 
-    public ApplicationForm(String firstName, String lastName, String email, String mobilePhone, String aboutYourself, String employmentStatus, AddressDTO addressDTO) {
-    }
 
     public UUID getApplicationFormId() {
         return applicationFormId;
