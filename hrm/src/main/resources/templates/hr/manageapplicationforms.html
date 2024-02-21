@@ -11,6 +11,15 @@
     <div th:replace="~{header :: header}">...</div>
   <!-- //header -->
     <main>
+      <div class="button-group">
+        <a th:href="@{/admin/displayjobofferstoreviewapplications/all}" class="btn btn-primary">Wyświetl wszystkie</a>
+      </div>
+      <div class="button-group">
+        <a th:href="@{/admin/displayjobofferstoreviewapplications/open}" class="btn btn-primary">Wyświetl otwarte</a>
+      </div>
+      <div class="button-group">
+        <a th:href="@{/admin/displayjobofferstoreviewapplications/close}" class="btn btn-primary">Wyświetl zamknietne</a>
+      </div>
       <table>
         <thead>
           <tr>
@@ -23,12 +32,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr th:each="jobOffer : ${openOffers}">
+          <tr th:each="jobOffer : ${jobOffersByStatus}">
             <td th:text="${jobOffer.name}"></td>
             <td th:text="${jobOffer.level}"></td>
             <td th:text="${jobOffer.requirement}"></td>
             <td th:text="${jobOffer.description}"></td>
-            <td><a th:href="@{'/jobofferforms/' + ${jobOffer.jobOfferId}}">DETAILS</a></td>
+            <td th:text="${jobOffer.status}"></td>
+            <td><a th:href="@{'/admin/listofapplicationforms/' + ${jobOffer.jobOfferId}}">DETAILS</a></td>
           </tr>
         </tbody>
       </table>

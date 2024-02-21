@@ -20,10 +20,11 @@ public class WebSecurityConfig {
         http.csrf((csrf) -> csrf.ignoringRequestMatchers("/saveApplicationForm"))
                 .authorizeRequests((requests) -> requests
                         .requestMatchers("/", "/home").permitAll()
-                        .requestMatchers("/joboffer/**").permitAll()
+                        .requestMatchers("/displayjoboffer/**").permitAll()
                         .requestMatchers("/applicationform").permitAll()
                         .requestMatchers("/assets/**").permitAll()
                         .requestMatchers("/dashboard").authenticated()
+                        .requestMatchers("/admin/**").authenticated()
                         .requestMatchers("/logout").authenticated())
 
                 .formLogin(formLogin -> formLogin

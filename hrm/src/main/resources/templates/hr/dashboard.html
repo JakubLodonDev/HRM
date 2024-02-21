@@ -18,10 +18,10 @@
       </div>
       <div class="dash-main-panel">
         <div class="dash-box" sec:authorize="isAuthenticated()">
-          <a class="dash-box-text" th:href="@{/managementjoboffers}">Manage job offers</a>
+          <a class="dash-box-text" th:href="@{/admin/displayjobofferstomanage}">Manage job offers</a>
         </div>
         <div class="dash-box" sec:authorize="isAuthenticated()">
-          <a class="dash-box-text" th:href="@{/managementopenjoboffers}">Manage application forms</a>
+          <a class="dash-box-text" th:href="@{/admin/displayjobofferstoreviewapplications/all}">Manage application forms</a>
         </div>
         <div class="dash-box">
           <a class="dash-box-text" href="">Employee</a>

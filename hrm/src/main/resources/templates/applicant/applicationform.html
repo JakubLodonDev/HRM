@@ -13,14 +13,14 @@
 
     <main>
       <ul>
-        <li th:each="error : ${#fields.errors('submittedApplicationDTO.*')}" th:text="${error}" />
+        <li th:each="error : ${#fields.errors('submitApplicationCommand.*')}" th:text="${error}" />
       </ul>
       <p th:if="${email}" th:text="${email}"></p>
 
       <form
-              th:action="@{'/saveApplicationForm/' + ${jobOfferId}}"
+              th:action="@{'/saveApplicationForm'}"
         method="post"
-        th:object="${submittedApplicationDTO}"
+        th:object="${submitApplicationCommand}"
       >
         <label >Imię:</label>
         <input type="text" th:field="*{firstName}" />

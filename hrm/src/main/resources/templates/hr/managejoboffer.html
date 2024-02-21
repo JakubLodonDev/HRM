@@ -16,12 +16,12 @@
         <li th:each="error : ${#fields.errors('jobOffer.*')}" th:text="${error}" />
       </ul>
       <form
-              th:action="@{'/updatejoboffer/' + ${jobOfferId}}"
+              th:action="@{'/admin/updatejoboffer'}"
         method="post"
         th:object="${jobOffer}"
       >
         <label >Nazwa:</label>
-        <input type="text" th:field="*{name}" />
+        <input type="text" th:field="${jobOffer.name}" />
 
         <label >Poziom:</label>
         <input type="text" th:field="*{level}" />
@@ -33,7 +33,9 @@
         <input type="text" th:field="*{description}"/>
 
         <label >Status:</label>
-        <input type="text" th:field="*{status}"/>
+        <select id="status" name="status" th:field="*{status}">
+          <option th:each="statusOption : ${jobStatusOptions}" th:value="${statusOption}" th:text="${statusOption}"></option>
+        </select>
 
         <input type="hidden" name="jobOfferId" th:value="${jobOfferId}" />
 

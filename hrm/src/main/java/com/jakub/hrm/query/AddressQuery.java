@@ -1,10 +1,10 @@
-package com.jakub.hrm.dto;
+package com.jakub.hrm.query;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-public class AddressDTO {
+public class AddressQuery {
 
     @NotBlank(message="Address must not be blank")
     @Size(min=5, message="Address must be at least 5 characters long")
@@ -22,7 +22,7 @@ public class AddressDTO {
     @Pattern(regexp="(^$|[0-9]{5})",message = "Zip Code must be 5 digits")
     private String zipCode;
 
-    public AddressDTO() {
+    public AddressQuery() {
     }
 
     public String getStreetAddress() {

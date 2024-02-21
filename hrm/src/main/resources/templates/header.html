@@ -14,7 +14,7 @@
         <a th:href="@{/home}" >Home</a>
       </li>
       <li sec:authorize="isAnonymous()">
-        <a th:href="@{/joboffer}" >Career</a>
+        <a th:href="@{/displayjoboffers}" >Career</a>
       </li >
       <li sec:authorize="isAuthenticated()">
         <a th:href="@{/dashboard}" >Dashboard</a>

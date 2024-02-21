@@ -1,15 +1,12 @@
 package com.jakub.hrm.model;
 
-import com.jakub.hrm.dto.AddressDTO;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-import java.util.Set;
 import java.util.UUID;
 
 @Data

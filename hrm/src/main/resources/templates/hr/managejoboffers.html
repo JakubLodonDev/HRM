@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,8 +12,8 @@
     <div th:replace="~{header :: header}">...</div>
   <!-- //header -->
     <main>
-      <div class="button-group">
-        <a th:href="@{/createjoboffer}" class="btn btn-primary">Dodaj nową ofertę pracy</a>
+      <div class="button-group" sec:authorize="isAuthenticated()">
+        <a th:href="@{/admin/createjoboffer}" class="btn btn-primary">Dodaj nową ofertę pracy</a>
       </div>
       <table>
         <thead>
@@ -32,7 +33,7 @@
             <td th:text="${jobOffer.requirement}"></td>
             <td th:text="${jobOffer.description}"></td>
             <td th:text="${jobOffer.status}"></td>
-            <td><a th:href="@{'/managementjoboffers/' + ${jobOffer.jobOfferId}}">UPDATE</a></td>
+            <td><a th:href="@{'/admin/managesinglejoboffer/' + ${jobOffer.jobOfferId}}">UPDATE</a></td>
           </tr>
         </tbody>
       </table>

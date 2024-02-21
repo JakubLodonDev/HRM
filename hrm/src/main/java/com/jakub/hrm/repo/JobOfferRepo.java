@@ -12,4 +12,8 @@ import java.util.UUID;
 public interface JobOfferRepo extends JpaRepository<JobOffer, UUID> {
 
     List<JobOffer> findAllByStatus(String status);
+
+    List<JobOffer> findAllByOrderByStatusDesc();
+
+    boolean existsByJobOfferId(UUID jobOfferId);
 }

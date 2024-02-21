@@ -1,20 +1,12 @@
-package com.jakub.hrm.model;
+package com.jakub.hrm.commands.joboffer;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
-import java.util.Set;
 import java.util.UUID;
 
-@Entity
-@Table(name="job_offer")
-public class JobOffer {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "job_id")
+public class SaveNewJobOfferCommand {
     private UUID jobOfferId;
-    @NotBlank(message="Name must not be blank")
+    @NotBlank(message="First name must not be blank")
     private String name;
     @NotBlank(message="Level must not be blank")
     private String level;
@@ -25,19 +17,7 @@ public class JobOffer {
     @NotBlank(message="Status must not be blank")
     private String status;
 
-    @OneToMany(mappedBy = "jobOffer", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER,
-            targetEntity = ApplicationForm.class)
-    private Set<ApplicationForm> applicationForms;
-
-    public JobOffer() {}
-
-    public JobOffer(UUID jobOfferId, String name, String level, String requirement, String description, String status) {
-        this.jobOfferId = jobOfferId;
-        this.name = name;
-        this.level = level;
-        this.requirement = requirement;
-        this.description = description;
-        this.status = status;
+    public SaveNewJobOfferCommand() {
     }
 
     public UUID getJobOfferId() {
@@ -86,13 +66,5 @@ public class JobOffer {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public Set<ApplicationForm> getApplicationForms() {
-        return applicationForms;
-    }
-
-    public void setApplicationForms(Set<ApplicationForm> applicationForms) {
-        this.applicationForms = applicationForms;
     }
 }

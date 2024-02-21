@@ -1,32 +1,44 @@
-package com.jakub.hrm.dto;
+package com.jakub.hrm.query.applicationform;
 
-import com.jakub.hrm.model.Address;
-import com.jakub.hrm.model.JobOffer;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
 import java.util.UUID;
 
-public class SubmittedApplicationDTO {
+public class ApplicationFormQuery {
 
+    private UUID applicationFormId;
     @NotBlank(message="First name must not be blank")
-    public String firstName;
+    private String firstName;
     @NotBlank(message="Last name must not be blank")
-    public String lastName;
+    private String lastName;
     @NotBlank(message="Email must not be blank")
     @Email(message = "Please provide a valid email address" )
-    public String email;
+    private String email;
     @NotBlank(message="Mobile number must not be blank")
     @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
-    public String mobilePhone;
-    public String aboutYourself;
-    public String employmentStatus;
-    @Valid
-    public AddressDTO address;
+    private String mobilePhone;
+    private String aboutYourself;
 
-    public SubmittedApplicationDTO() {
+    private String employmentStatus;
+
+    public ApplicationFormQuery(UUID applicationFormId, String firstName, String lastName, String email, String mobilePhone, String aboutYourself, String employmentStatus) {
+        this.applicationFormId = applicationFormId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.mobilePhone = mobilePhone;
+        this.aboutYourself = aboutYourself;
+        this.employmentStatus = employmentStatus;
+    }
+
+    public UUID getApplicationFormId() {
+        return applicationFormId;
+    }
+
+    public void setApplicationFormId(UUID applicationFormId) {
+        this.applicationFormId = applicationFormId;
     }
 
     public String getFirstName() {
@@ -71,18 +83,9 @@ public class SubmittedApplicationDTO {
 
     public String getEmploymentStatus() {
         return employmentStatus;
-
     }
 
     public void setEmploymentStatus(String employmentStatus) {
         this.employmentStatus = employmentStatus;
-    }
-
-    public AddressDTO getAddress() {
-        return address;
-    }
-
-    public void setAddress(AddressDTO address) {
-        this.address = address;
     }
 }

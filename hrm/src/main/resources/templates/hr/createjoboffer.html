@@ -13,12 +13,12 @@
 
     <main>
       <ul>
-        <li th:each="error : ${#fields.errors('newJobOffer.*')}" th:text="${error}" />
+        <li th:each="error : ${#fields.errors('newJobOfferQuery.*')}" th:text="${error}" />
       </ul>
       <form
-              th:action="@{'/savenewjoboffer'}"
+              th:action="@{'/admin/savenewjoboffer'}"s
         method="post"
-        th:object="${newJobOffer}"
+        th:object="${newJobOfferQuery}"
       >
         <label>Nazwa:</label>
         <input type="text" th:field="*{name}" />

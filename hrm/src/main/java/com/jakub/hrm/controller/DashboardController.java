@@ -13,7 +13,7 @@ public class DashboardController {
     @RequestMapping("/dashboard")
     public String displayDashboard(Model model,Authentication authentication) {
         model.addAttribute("username", authentication.getName());
-        return "dashboard.html";
+        return "hr/dashboard";
     }
 
 }
