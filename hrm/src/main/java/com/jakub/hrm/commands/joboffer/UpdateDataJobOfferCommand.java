@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 
 import java.util.UUID;
 
-public class UpdateJobOfferCommand {
+public class UpdateDataJobOfferCommand {
 
     private UUID jobOfferId;
     @NotBlank(message="First name must not be blank")
@@ -18,7 +18,7 @@ public class UpdateJobOfferCommand {
     @NotBlank(message="Status must not be blank")
     private String status;
 
-    public UpdateJobOfferCommand(UUID jobOfferId, String name, String level, String requirement, String description, String status) {
+    public UpdateDataJobOfferCommand(UUID jobOfferId, String name, String level, String requirement, String description, String status) {
         this.jobOfferId = jobOfferId;
         this.name = name;
         this.level = level;

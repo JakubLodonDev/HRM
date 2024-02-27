@@ -1,13 +1,11 @@
 package com.jakub.hrm.controller;
 
-import com.jakub.hrm.commands.joboffer.SaveNewJobOfferCommand;
-import com.jakub.hrm.commands.joboffer.SaveNewJobOfferCommandHandler;
-import com.jakub.hrm.commands.joboffer.UpdateJobOfferCommand;
-import com.jakub.hrm.commands.joboffer.UpdateJobOfferCommandHandler;
+import com.jakub.hrm.commands.joboffer.*;
 import com.jakub.hrm.constans.JobStatus;
 import com.jakub.hrm.query.joboffer.GetAllJobOffersQueryHandler;
 import com.jakub.hrm.query.joboffer.GetJobOfferByIdQueryHandler;
 import com.jakub.hrm.query.joboffer.GetOpenJobOffersQueryHandler;
+import com.jakub.hrm.query.joboffer.IsJobOfferOpen;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,20 +21,26 @@ public class HrJobOfferController {
     GetOpenJobOffersQueryHandler getOpenJobOffersQueryHandler;
     GetAllJobOffersQueryHandler getAllJobOffersQueryHandler;
     GetJobOfferByIdQueryHandler getJobOfferByIdQueryHandler;
-    UpdateJobOfferCommandHandler updateJobOfferCommandHandler;
+    UpdateDataJobOfferCommandHandler updateJobOfferCommandHandler;
     SaveNewJobOfferCommandHandler saveNewJobOfferCommandHandler;
+    IsJobOfferOpen isJobOfferOpen;
+    CloseJobOfferCommandHandler closeJobOfferCommandHandler;
 
     @Autowired
     public HrJobOfferController(GetOpenJobOffersQueryHandler jobOfferDisplayQueryHandler,
                                 GetAllJobOffersQueryHandler getAllJobOffersQueryHandler,
                                 GetJobOfferByIdQueryHandler getJobOfferByIdQueryHandler,
-                                UpdateJobOfferCommandHandler updateJobOfferCommandHandler,
-                                SaveNewJobOfferCommandHandler saveNewJobOfferCommandHandler) {
+                                UpdateDataJobOfferCommandHandler updateJobOfferCommandHandler,
+                                SaveNewJobOfferCommandHandler saveNewJobOfferCommandHandler,
+                                IsJobOfferOpen isJobOfferOpen,
+                                CloseJobOfferCommandHandler closeJobOfferCommandHandler) {
         this.getOpenJobOffersQueryHandler = jobOfferDisplayQueryHandler;
         this.getAllJobOffersQueryHandler = getAllJobOffersQueryHandler;
         this.getJobOfferByIdQueryHandler = getJobOfferByIdQueryHandler;
         this.updateJobOfferCommandHandler = updateJobOfferCommandHandler;
         this.saveNewJobOfferCommandHandler = saveNewJobOfferCommandHandler;
+        this.isJobOfferOpen = isJobOfferOpen;
+        this.closeJobOfferCommandHandler = closeJobOfferCommandHandler;
     }
 
     @RequestMapping("/displayjobofferstomanage")
@@ -47,20 +51,32 @@ public class HrJobOfferController {
 
     @GetMapping("/managesinglejoboffer/{jobOfferId}")
     public String displayDetailsOfSingleJobOffer(@PathVariable String jobOfferId, Model model){
-        List<String> jobStatusOptions = Arrays.asList(JobStatus.OPEN, JobStatus.CLOSE);
-        model.addAttribute("jobStatusOptions", jobStatusOptions);
         model.addAttribute("jobOfferId", jobOfferId);
         model.addAttribute("jobOffer", getJobOfferByIdQueryHandler.Handle(jobOfferId));
+
+        model.addAttribute("statusOpen", isJobOfferOpen.Handle(jobOfferId));
+
+
         return "hr/managejoboffer";
     }
 
-    @PostMapping("/updatejoboffer")
-    public String updateJobOffer(@Valid @ModelAttribute("jobOffer") UpdateJobOfferCommand updateJobOfferRequest,
+    @PostMapping(value = "/updatedatajoboffer", params = "action=updateData")
+    public String updateJobOffer(@Valid @ModelAttribute("jobOffer") UpdateDataJobOfferCommand updateDataJobOfferRequest,
                                  BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             return "hr/managejoboffer";
         }
-        updateJobOfferCommandHandler.Handle(updateJobOfferRequest);
+        updateJobOfferCommandHandler.Handle(updateDataJobOfferRequest);
+        return "redirect:/admin/displayjobofferstomanage";
+    }
+
+    @PostMapping(value = "/updatedatajoboffer", params = "action=closeOffer")
+    public String closeJobOffer(@Valid @ModelAttribute("jobOffer") UpdateDataJobOfferCommand updateDataJobOfferRequest,
+                                 BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return "hr/managejoboffer";
+        }
+        closeJobOfferCommandHandler.Handle(updateDataJobOfferRequest);
         return "redirect:/admin/displayjobofferstomanage";
     }
 

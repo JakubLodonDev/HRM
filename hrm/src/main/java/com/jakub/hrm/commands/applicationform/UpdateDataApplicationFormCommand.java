@@ -1,4 +1,4 @@
-package com.jakub.hrm.query.applicationform;
+package com.jakub.hrm.commands.applicationform;
 
 import com.jakub.hrm.query.AddressQuery;
 import jakarta.validation.Valid;
@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Pattern;
 
 import java.util.UUID;
 
-public class ApplicationFormQuery {
+public class UpdateDataApplicationFormCommand {
 
     private UUID applicationFormId;
     @NotBlank(message="First name must not be blank")
@@ -26,33 +26,6 @@ public class ApplicationFormQuery {
     @Valid
     private AddressQuery address;
     private UUID jobOfferId;
-
-    public ApplicationFormQuery() {
-    }
-
-    public ApplicationFormQuery(UUID applicationFormId, String firstName, String lastName, String email,
-                                String mobilePhone, String aboutYourself, String employmentStatus) {
-        this.applicationFormId = applicationFormId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.mobilePhone = mobilePhone;
-        this.aboutYourself = aboutYourself;
-        this.employmentStatus = employmentStatus;
-    }
-
-    public ApplicationFormQuery(UUID applicationFormId, String firstName, String lastName, String email,
-                                String mobilePhone, String aboutYourself, String employmentStatus, AddressQuery address, UUID jobOfferId) {
-        this.applicationFormId = applicationFormId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.mobilePhone = mobilePhone;
-        this.aboutYourself = aboutYourself;
-        this.employmentStatus = employmentStatus;
-        this.address = address;
-        this.jobOfferId = jobOfferId;
-    }
 
     public UUID getApplicationFormId() {
         return applicationFormId;
@@ -125,4 +98,5 @@ public class ApplicationFormQuery {
     public void setJobOfferId(UUID jobOfferId) {
         this.jobOfferId = jobOfferId;
     }
+
 }

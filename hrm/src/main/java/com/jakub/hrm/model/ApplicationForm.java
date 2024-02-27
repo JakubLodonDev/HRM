@@ -1,5 +1,6 @@
 package com.jakub.hrm.model;
 
+import com.jakub.hrm.query.AddressQuery;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
@@ -32,7 +33,7 @@ public class ApplicationForm {
 
     private String employmentStatus;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "job_id", referencedColumnName = "job_id")
     private JobOffer jobOffer;
     @Valid
@@ -51,6 +52,15 @@ public class ApplicationForm {
         this.mobilePhone = mobilePhone;
         this.aboutYourself = aboutYourself;
         this.employmentStatus = employmentStatus;
+        this.address = address;
+    }
+
+    public void updateData(String firstName, String lastName, String email, String mobilePhone, String aboutYourself, Address address){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.mobilePhone = mobilePhone;
+        this.aboutYourself = aboutYourself;
         this.address = address;
     }
 

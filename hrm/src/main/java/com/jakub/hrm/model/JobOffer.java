@@ -1,5 +1,6 @@
 package com.jakub.hrm.model;
 
+import com.jakub.hrm.constans.JobStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
@@ -38,6 +39,21 @@ public class JobOffer {
         this.requirement = requirement;
         this.description = description;
         this.status = status;
+    }
+
+    public void updateData(String name, String level, String requirement, String description) {
+        this.name = name;
+        this.level = level;
+        this.requirement = requirement;
+        this.description = description;
+    }
+
+    public void closeJobOffer() {
+        this.status = JobStatus.CLOSE;
+    }
+
+    public void updateStatus(String close) {
+        this.status = close;
     }
 
     public UUID getJobOfferId() {

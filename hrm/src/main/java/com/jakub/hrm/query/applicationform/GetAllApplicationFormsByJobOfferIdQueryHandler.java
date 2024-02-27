@@ -24,7 +24,7 @@ public class GetAllApplicationFormsByJobOfferIdQueryHandler {
         this.applicationFormRepo = applicationFormRepo;
     }
 
-    public List<ApplicationFormQuery> Handle(String jobOfferId) {
+    public List<ApplicationFormByJobIdQuery> Handle(String jobOfferId) {
         Optional<JobOffer> jobOffer = jobOfferRepo.findById(UUID.fromString(jobOfferId));
 
         List<ApplicationForm> applicationFormList = applicationFormRepo.findAllByJobOffer(jobOffer);
@@ -32,12 +32,12 @@ public class GetAllApplicationFormsByJobOfferIdQueryHandler {
         return duplicateListToDisplay(applicationFormList);
     }
 
-    private List<ApplicationFormQuery> duplicateListToDisplay(List<ApplicationForm> applicationFormList) {
-        List<ApplicationFormQuery> applicationFormQueryList = new ArrayList<>();
+    private List<ApplicationFormByJobIdQuery> duplicateListToDisplay(List<ApplicationForm> applicationFormList) {
+        List<ApplicationFormByJobIdQuery> applicationFormQueryList = new ArrayList<>();
+
         for (ApplicationForm application: applicationFormList) {
-            ApplicationFormQuery applicationFormQuery = new ApplicationFormQuery(application.getApplicationFormId(),application.getFirstName(),
-                    application.getLastName(),application.getEmail(),application.getMobilePhone(),application.getAboutYourself(),
-                    application.getEmploymentStatus());
+            ApplicationFormByJobIdQuery applicationFormQuery = new ApplicationFormByJobIdQuery(application.getApplicationFormId(),
+                    application.getFirstName(), application.getLastName(),application.getEmail(), application.getEmploymentStatus());
             applicationFormQueryList.add(applicationFormQuery);
         }
         return applicationFormQueryList;

@@ -25,6 +25,13 @@ public class AddressQuery {
     public AddressQuery() {
     }
 
+    public AddressQuery(String streetAddress, String city, String country, String zipCode) {
+        this.streetAddress = streetAddress;
+        this.city = city;
+        this.country = country;
+        this.zipCode = zipCode;
+    }
+
     public String getStreetAddress() {
         return streetAddress;
     }

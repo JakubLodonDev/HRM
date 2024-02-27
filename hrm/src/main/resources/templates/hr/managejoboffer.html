@@ -16,30 +16,26 @@
         <li th:each="error : ${#fields.errors('jobOffer.*')}" th:text="${error}" />
       </ul>
       <form
-              th:action="@{'/admin/updatejoboffer'}"
+              th:action="@{'/admin/updatedatajoboffer'}"
         method="post"
         th:object="${jobOffer}"
       >
         <label >Nazwa:</label>
-        <input type="text" th:field="${jobOffer.name}" />
+        <input type="text" th:attrappend="disabled=${statusOpen ?  null : 'disabled'}" th:field="${jobOffer.name}" />
 
         <label >Poziom:</label>
-        <input type="text" th:field="*{level}" />
+        <input type="text" th:attrappend="disabled=${statusOpen ?  null : 'disabled'}" th:field="*{level}" />
 
         <label >Wymagania:</label>
-        <input type="text" th:field="*{requirement}" />
+        <input type="text" th:attrappend="disabled=${statusOpen ?  null : 'disabled'}" th:field="*{requirement}" />
 
         <label >Opis:</label>
-        <input type="text" th:field="*{description}"/>
-
-        <label >Status:</label>
-        <select id="status" name="status" th:field="*{status}">
-          <option th:each="statusOption : ${jobStatusOptions}" th:value="${statusOption}" th:text="${statusOption}"></option>
-        </select>
+        <input type="text" th:attrappend="disabled=${statusOpen ?  null : 'disabled'}" th:field="*{description}"/>
 
         <input type="hidden" name="jobOfferId" th:value="${jobOfferId}" />
 
-        <button >UPDATE</button>
+        <button th:if="${statusOpen}" name="action" value="updateData">UPDATE</button>
+        <button th:if="${statusOpen}" name="action" value="closeOffer">CLOSE</button>
       </form>
     </main>
 

@@ -10,30 +10,57 @@
   <!-- header -->
     <div th:replace="~{header :: header}">...</div>
   <!-- //header -->
+
     <main>
-      <table>
-        <thead>
-          <tr>
-            <th scope="col">First name</th>
-            <th scope="col">Last name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Employment status</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="applicationForm : ${applicationFormList}">
-            <td th:text="${applicationForm.firstName}"></td>
-            <td th:text="${applicationForm.lastName}"></td>
-            <td th:text="${applicationForm.email}"></td>
-            <td th:text="${applicationForm.employmentStatus}"></td>
-            <td><a th:href="@{'//' + ${jobOfferId}}">DETAILS</a></td>
-          </tr>
-        </tbody>
-      </table>
+      <ul>
+        <li th:each="error : ${#fields.errors('applicationFormQuery.*')}" th:text="${error}" />
+      </ul>
+      <form
+              th:action="@{'/admin/updateapplicationform'}"
+        method="post"
+        th:object="${applicationFormQuery}"
+      >
+        <label >Imie:</label>
+        <input type="text" th:field="*{firstName}" />
+
+        <label >Nazwisko:</label>
+        <input type="text" th:field="*{lastName}" />
+
+        <label >Email:</label>
+        <input type="text" th:field="*{email}" />
+
+        <label >Numer Telefonu:</label>
+        <input type="text" th:field="*{mobilePhone}"/>
+
+        <label >Opis:</label>
+        <input type="text" th:field="*{aboutYourself}"/>
+
+        <label >Status:</label>
+        <select id="status" name="status" th:field="*{employmentStatus}">
+          <option th:each="statusOption : ${applicationEmploymentStatusOptions}" th:value="${statusOption}" th:text="${statusOption}"></option>
+        </select>
+
+        <label >Ulica:</label>
+        <input type="text" th:field="*{address.streetAddress}"/>
+
+        <label >Miasto:</label>
+        <input type="text" th:field="*{address.city}"/>
+
+        <label >Kraj:</label>
+        <input type="text" th:field="*{address.country}"/>
+
+        <label >Kod pocztowy:</label>
+        <input type="text" th:field="*{address.zipCode}"/>
+
+        <input type="hidden" name="applicationFormId" th:value="${applicationFormId}" />
+        <input type="hidden" name="jobOfferId" th:value="${applicationFormQuery.jobOfferId}" />
+
+        <button >UPDATE</button>
+      </form>
     </main>
+
     <!-- footer block -->
-      <div th:replace="~{footer :: footer}">...</div>
+        <div th:replace="~{footer :: footer}">...</div>
     <!-- //footer block -->
   </body>
 </html>
