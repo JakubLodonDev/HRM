@@ -33,3 +33,17 @@ CREATE TABLE IF NOT EXISTS application_form (
     job_id UUID REFERENCES job_offer(job_id),
     address_id UUID REFERENCES address(address_id)
 );
+
+CREATE TABLE IF NOT EXISTS `roles` (
+    role_id UUID PRIMARY KEY,
+    role_name VARCHAR(30) NOT NULL,
+);
+
+CREATE TABLE IF NOT EXISTS `user` (
+    user_id UUID PRIMARY KEY,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    pwd VARCHAR(200) NOT NULL,
+    role_id UUID REFERENCES roles(role_id)
+);
