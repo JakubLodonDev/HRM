@@ -18,7 +18,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("admin")
-public class HrApplicationForm {
+public class HrApplicationFormController {
 
     GetJobOffersByStatusQueryHandler getJobOffersByStatusQueryHandler;
     GetAllApplicationFormsByJobOfferIdQueryHandler getAllApplicationFormsByJobOfferIdQueryHandler;
@@ -26,10 +26,10 @@ public class HrApplicationForm {
     UpdateDataApplicationFormCommandHandler updateApplicationFormCommandHandler;
 
     @Autowired
-    public HrApplicationForm(GetJobOffersByStatusQueryHandler getJobOffersByStatusQueryHandler,
-                                GetAllApplicationFormsByJobOfferIdQueryHandler getAllApplicationFormsByJobOfferIdQueryHandler,
-                             GetApplicationFormByIdQueryHandler getApplicationFormByIdQueryHandler,
-                             UpdateDataApplicationFormCommandHandler updateApplicationFormCommandHandler) {
+    public HrApplicationFormController(GetJobOffersByStatusQueryHandler getJobOffersByStatusQueryHandler,
+                                       GetAllApplicationFormsByJobOfferIdQueryHandler getAllApplicationFormsByJobOfferIdQueryHandler,
+                                       GetApplicationFormByIdQueryHandler getApplicationFormByIdQueryHandler,
+                                       UpdateDataApplicationFormCommandHandler updateApplicationFormCommandHandler) {
         this.getJobOffersByStatusQueryHandler = getJobOffersByStatusQueryHandler;
         this.getAllApplicationFormsByJobOfferIdQueryHandler = getAllApplicationFormsByJobOfferIdQueryHandler;
         this.getApplicationFormByIdQueryHandler = getApplicationFormByIdQueryHandler;

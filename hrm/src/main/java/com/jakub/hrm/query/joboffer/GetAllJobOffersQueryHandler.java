@@ -16,11 +16,10 @@ public class GetAllJobOffersQueryHandler {
 
     public List<JobOfferQuery> Handle(){
         List<JobOffer> jobOffers = jobOfferRepo.findAllByOrderByStatusDesc();
-        List<JobOfferQuery> jobOfferQueryList = duplicateToJobOffers(jobOffers);
-        return jobOfferQueryList;
+        return moveDataToQuery(jobOffers);
     }
 
-    private List<JobOfferQuery> duplicateToJobOffers(List<JobOffer> jobOffers) {
+    private List<JobOfferQuery> moveDataToQuery(List<JobOffer> jobOffers) {
         List<JobOfferQuery> list = new ArrayList<>();
         for (JobOffer job: jobOffers) {
             JobOfferQuery jobOfferDisplayQuery = new JobOfferQuery(job.getJobOfferId(),

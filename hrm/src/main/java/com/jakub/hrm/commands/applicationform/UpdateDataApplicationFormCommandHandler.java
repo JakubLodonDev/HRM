@@ -26,12 +26,11 @@ public class UpdateDataApplicationFormCommandHandler {
         if (dbApplicationForm.isPresent()){
             ApplicationForm applicationForm = dbApplicationForm.get();
 
-            Address address = applicationForm.getAddress();
-
             applicationForm.updateData(command.getFirstName(), command.getLastName(), command.getEmail(),
-                    command.getMobilePhone(), command.getAboutYourself(), address);
+                    command.getMobilePhone(), command.getAboutYourself(), command.getAddress().getStreetAddress(),
+                    command.getAddress().getCountry(), command.getAddress().getCity(), command.getAddress().getZipCode());
 
-            addressRepo.save(address);
+            //addressRepo.save(address);
             applicationFormRepo.save(applicationForm);
         }
     }

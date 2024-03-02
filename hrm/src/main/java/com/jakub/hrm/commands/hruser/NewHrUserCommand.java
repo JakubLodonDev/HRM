@@ -1,19 +1,12 @@
-package com.jakub.hrm.model;
+package com.jakub.hrm.commands.hruser;
 
-import jakarta.persistence.*;
+import com.jakub.hrm.model.HrRole;
+import com.jakub.hrm.query.HrRoleQuery;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
 
-import java.util.UUID;
-
-@Entity
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID userId;
+public class NewHrUserCommand {
 
     @NotBlank(message="First Name must not be blank")
     @Size(min=3, message="Name must be at least 3 characters long")
@@ -24,25 +17,10 @@ public class User {
     private String lastName;
 
     @NotBlank(message="Email must not be blank")
-    @Email(message = "Please provide a valid email address" )
+    @Email(message = "Please provide a svalid email address" )
     private String email;
 
-    @NotBlank(message="Password must not be blank")
-    @Size(min=5, message="Password must be at least 5 characters long")
-    private String pwd;
-
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, targetEntity = Roles.class)
-    private Roles roles;
-
-    public User() {}
-
-    public UUID getUserId() {
-        return userId;
-    }
-
-    public void setUserId(UUID userId) {
-        this.userId = userId;
-    }
+    private HrRoleQuery role;
 
     public String getFirstName() {
         return firstName;
@@ -68,19 +46,11 @@ public class User {
         this.email = email;
     }
 
-    public String getPwd() {
-        return pwd;
+    public HrRoleQuery getRole() {
+        return role;
     }
 
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
-    }
-
-    public Roles getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Roles roles) {
-        this.roles = roles;
+    public void setRole(HrRoleQuery role) {
+        this.role = role;
     }
 }

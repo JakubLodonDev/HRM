@@ -42,6 +42,13 @@ public class Address {
         this.zipCode = zipCode;
     }
 
+    public void update(String streetName, String country, String city, String zipCode) {
+        this.streetAddress = streetName;
+        this.city = city;
+        this.country = country;
+        this.zipCode = zipCode;
+    }
+
     public UUID getAddressId() {
         return addressId;
     }

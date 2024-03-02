@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <title>Human Resource Menagment</title>
+  </head>
+  <body>
+  <!-- header -->
+    <div th:replace="~{header :: header}">...</div>
+  <!-- //header -->
+
+    <main>
+      <ul>
+        <li th:each="error : ${#fields.errors('newUserCommand.*')}" th:text="${error}" />
+      </ul>
+      <form
+              th:action="@{'/admin/savenewjoboffer'}"s
+        method="post"
+        th:object="${newUserCommand}"
+      >
+        <label>Imie:</label>
+        <input type="text" th:field="*{firstName}" />
+
+        <label>Nazwisko:</label>
+        <input type="text" th:field="*{lastName}" />
+
+        <label>Email:</label>
+        <input type="text" th:field="*{email}" />
+
+
+
+        <button >CREATE</button>
+      </form>
+    </main>
+
+    <!-- footer block -->
+        <div th:replace="~{footer :: footer}">...</div>
+    <!-- //footer block -->
+  </body>
+</html>

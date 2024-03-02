@@ -1,17 +1,16 @@
 package com.jakub.hrm.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
 @Entity
-public class Roles {
+@Table(name="hr_role")
+public class HrRole {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "role_id")
     private UUID roleId;
 
     private String roleName;

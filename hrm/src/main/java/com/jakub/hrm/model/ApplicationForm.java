@@ -55,13 +55,15 @@ public class ApplicationForm {
         this.address = address;
     }
 
-    public void updateData(String firstName, String lastName, String email, String mobilePhone, String aboutYourself, Address address){
+    public void updateData(String firstName, String lastName, String email, String mobilePhone,
+                           String aboutYourself, String streetName, String country, String city,
+                           String zipCode){
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.mobilePhone = mobilePhone;
         this.aboutYourself = aboutYourself;
-        this.address = address;
+        this.address.update(streetName, country, city, zipCode);
     }
 
 

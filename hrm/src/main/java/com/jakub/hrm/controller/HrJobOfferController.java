@@ -4,7 +4,6 @@ import com.jakub.hrm.commands.joboffer.*;
 import com.jakub.hrm.constans.JobStatus;
 import com.jakub.hrm.query.joboffer.GetAllJobOffersQueryHandler;
 import com.jakub.hrm.query.joboffer.GetJobOfferByIdQueryHandler;
-import com.jakub.hrm.query.joboffer.GetOpenJobOffersQueryHandler;
 import com.jakub.hrm.query.joboffer.IsJobOfferOpen;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ import java.util.*;
 @Controller
 @RequestMapping("admin")
 public class HrJobOfferController {
-    GetOpenJobOffersQueryHandler getOpenJobOffersQueryHandler;
     GetAllJobOffersQueryHandler getAllJobOffersQueryHandler;
     GetJobOfferByIdQueryHandler getJobOfferByIdQueryHandler;
     UpdateDataJobOfferCommandHandler updateJobOfferCommandHandler;
@@ -27,14 +25,12 @@ public class HrJobOfferController {
     CloseJobOfferCommandHandler closeJobOfferCommandHandler;
 
     @Autowired
-    public HrJobOfferController(GetOpenJobOffersQueryHandler jobOfferDisplayQueryHandler,
-                                GetAllJobOffersQueryHandler getAllJobOffersQueryHandler,
+    public HrJobOfferController(GetAllJobOffersQueryHandler getAllJobOffersQueryHandler,
                                 GetJobOfferByIdQueryHandler getJobOfferByIdQueryHandler,
                                 UpdateDataJobOfferCommandHandler updateJobOfferCommandHandler,
                                 SaveNewJobOfferCommandHandler saveNewJobOfferCommandHandler,
                                 IsJobOfferOpen isJobOfferOpen,
                                 CloseJobOfferCommandHandler closeJobOfferCommandHandler) {
-        this.getOpenJobOffersQueryHandler = jobOfferDisplayQueryHandler;
         this.getAllJobOffersQueryHandler = getAllJobOffersQueryHandler;
         this.getJobOfferByIdQueryHandler = getJobOfferByIdQueryHandler;
         this.updateJobOfferCommandHandler = updateJobOfferCommandHandler;
@@ -81,10 +77,10 @@ public class HrJobOfferController {
     }
 
     @GetMapping("/createjoboffer")
-    public String displayCreateJobOfferForm(Model model) {
+    public String createJobOfferForm(Model model) {
         List<String> jobStatusOptions = Arrays.asList(JobStatus.OPEN, JobStatus.CLOSE);
         model.addAttribute("jobStatusOptions", jobStatusOptions);
-        model.addAttribute("newJobOfferQuery", new SaveNewJobOfferCommand());
+        model.addAttribute("newJobOfferCommand", new SaveNewJobOfferCommand());
         return "hr/createjoboffer";
     }
 
