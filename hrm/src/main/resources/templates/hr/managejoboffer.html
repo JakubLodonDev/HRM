@@ -32,6 +32,7 @@
         <label >Opis:</label>
         <input type="text" th:attrappend="disabled=${statusOpen ?  null : 'disabled'}" th:field="*{description}"/>
 
+        <input type="hidden"  th:field="*{status}"/>
         <input type="hidden" name="jobOfferId" th:value="${jobOfferId}" />
 
         <button th:if="${statusOpen}" name="action" value="updateData">UPDATE</button>

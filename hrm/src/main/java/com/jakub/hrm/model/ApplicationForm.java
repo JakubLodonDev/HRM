@@ -1,11 +1,10 @@
 package com.jakub.hrm.model;
 
-import com.jakub.hrm.query.AddressQuery;
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.util.UUID;
@@ -29,41 +28,57 @@ public class ApplicationForm {
     @NotBlank(message="Mobile number must not be blank")
     @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
     private String mobilePhone;
+    @NotBlank(message="Address must not be blank")
+    @Size(min=5, message="Address must be at least 5 characters long")
+    private String streetAddress;
+    @NotBlank(message="City must not be blank")
+    @Size(min=5, message="City must be at least 5 characters long")
+    private String city;
+    @NotBlank(message="State must not be blank")
+    @Size(min=5, message="State must be at least 5 characters long")
+    private String country;
+    @NotBlank(message="Zip Code must not be blank")
+    @Pattern(regexp="(^$|[0-9]{5})",message = "Zip Code must be 5 digits")
+    private String zipCode;
     private String aboutYourself;
-
     private String employmentStatus;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "job_id", referencedColumnName = "job_id")
     private JobOffer jobOffer;
-    @Valid
-    @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "address_id", referencedColumnName = "address_id")
-    private Address address;
 
 
     public ApplicationForm() {}
 
+
+
     public ApplicationForm(String firstName, String lastName, String email, String mobilePhone,
-                           String aboutYourself, String employmentStatus, Address address) {
+                           String streetAddress, String city, String country, String zipCode,
+                           String aboutYourself, String employmentStatus) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.mobilePhone = mobilePhone;
+        this.streetAddress = streetAddress;
+        this.city = city;
+        this.country = country;
+        this.zipCode = zipCode;
         this.aboutYourself = aboutYourself;
         this.employmentStatus = employmentStatus;
-        this.address = address;
     }
 
     public void updateData(String firstName, String lastName, String email, String mobilePhone,
-                           String aboutYourself, String streetName, String country, String city,
-                           String zipCode){
+                           String streetAddress, String country, String city,
+                           String zipCode, String aboutYourself){
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.mobilePhone = mobilePhone;
+        this.streetAddress = streetAddress;
+        this.city = city;
+        this.country = country;
+        this.zipCode = zipCode;
         this.aboutYourself = aboutYourself;
-        this.address.update(streetName, country, city, zipCode);
     }
 
 
@@ -130,12 +145,36 @@ public class ApplicationForm {
         this.jobOffer = jobOffer;
     }
 
-    public Address getAddress() {
-        return address;
+    public String getStreetAddress() {
+        return streetAddress;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 
     @Override

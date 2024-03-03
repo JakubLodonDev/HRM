@@ -52,7 +52,6 @@ public class HrJobOfferController {
 
         model.addAttribute("statusOpen", isJobOfferOpen.Handle(jobOfferId));
 
-
         return "hr/managejoboffer";
     }
 

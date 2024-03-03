@@ -1,10 +1,8 @@
 package com.jakub.hrm.commands.applicationform;
 
 import com.jakub.hrm.constans.EmploymentStatus;
-import com.jakub.hrm.model.Address;
 import com.jakub.hrm.model.ApplicationForm;
 import com.jakub.hrm.model.JobOffer;
-import com.jakub.hrm.repo.AddressRepo;
 import com.jakub.hrm.repo.ApplicationFormRepo;
 import com.jakub.hrm.repo.JobOfferRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +16,12 @@ public class SubmitApplicationCommandHandler {
 
     ApplicationFormRepo applicationFormRepo;
     JobOfferRepo jobOfferRepo;
-    AddressRepo addressRepo;
 
     @Autowired
     public SubmitApplicationCommandHandler(ApplicationFormRepo applicationFormRepo,
-                                           JobOfferRepo jobOfferRepo, AddressRepo addressRepo) {
+                                           JobOfferRepo jobOfferRepo) {
         this.applicationFormRepo = applicationFormRepo;
         this.jobOfferRepo = jobOfferRepo;
-        this.addressRepo = addressRepo;
     }
 
     public SubmitApplicationCommandResult Handle(SubmitApplicationCommand command) {
@@ -35,17 +31,14 @@ public class SubmitApplicationCommandHandler {
             return result;
         }
 
-        Address address = new Address(command.address.getStreetAddress(), command.address.getCity(),
-                command.address.getCountry(), command.address.getZipCode());
+        ApplicationForm applicationForm = new ApplicationForm(command.getFirstName(), command.getLastName(),
+                command.getEmail(), command.getMobilePhone(), command.getStreetAddress(), command.getCity(),
+                command.getCountry(), command.getZipCode(), command.getAboutYourself(),
+                command.getEmploymentStatus());
 
-        ApplicationForm applicationForm = new ApplicationForm(command.firstName, command.lastName,
-                command.email, command.mobilePhone, command.aboutYourself,
-                command.employmentStatus, address);
-
-        JobOffer jobOffer = jobOfferRepo.findById(UUID.fromString(command.jobOfferId)).orElse(null);
+        JobOffer jobOffer = jobOfferRepo.findById(UUID.fromString(command.getJobOfferId())).orElse(null);
         applicationForm.setJobOffer(jobOffer);
 
-        addressRepo.save(address);
         applicationForm.setEmploymentStatus(EmploymentStatus.PROCESS);
         applicationFormRepo.save(applicationForm);
         return new SubmitApplicationCommandResult(true);
@@ -53,8 +46,8 @@ public class SubmitApplicationCommandHandler {
 
     private SubmitApplicationCommandResult Validate(SubmitApplicationCommand command) {
 
-        Optional<JobOffer> jobOffer = jobOfferRepo.findById(UUID.fromString(command.jobOfferId));
-        boolean isApplicationExist = applicationFormRepo.existsByEmailAndJobOffer(command.email, jobOffer);
+        Optional<JobOffer> jobOffer = jobOfferRepo.findById(UUID.fromString(command.getJobOfferId()));
+        boolean isApplicationExist = applicationFormRepo.existsByEmailAndJobOffer(command.getEmail(), jobOffer);
 
         if (isApplicationExist) {
             return new SubmitApplicationCommandResult(false, "Osoba o takim emailu juz aplikowala na ta oferte");

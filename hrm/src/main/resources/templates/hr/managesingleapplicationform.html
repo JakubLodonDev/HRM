@@ -41,16 +41,16 @@
         </select>
 
         <label >Ulica:</label>
-        <input type="text" th:field="*{address.streetAddress}"/>
+        <input type="text" th:field="*{streetAddress}"/>
 
         <label >Miasto:</label>
-        <input type="text" th:field="*{address.city}"/>
+        <input type="text" th:field="*{city}"/>
 
         <label >Kraj:</label>
-        <input type="text" th:field="*{address.country}"/>
+        <input type="text" th:field="*{country}"/>
 
         <label >Kod pocztowy:</label>
-        <input type="text" th:field="*{address.zipCode}"/>
+        <input type="text" th:field="*{zipCode}"/>
 
         <input type="hidden" name="applicationFormId" th:value="${applicationFormId}" />
         <input type="hidden" name="jobOfferId" th:value="${applicationFormQuery.jobOfferId}" />

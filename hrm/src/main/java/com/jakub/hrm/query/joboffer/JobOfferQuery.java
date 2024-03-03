@@ -18,8 +18,6 @@ public class JobOfferQuery {
     @NotBlank(message="Status must not be blank")
     private String status;
 
-    public JobOfferQuery() {
-    }
 
     public JobOfferQuery(UUID jobOfferId, String name, String level, String requirement, String description, String status) {
         this.jobOfferId = jobOfferId;
