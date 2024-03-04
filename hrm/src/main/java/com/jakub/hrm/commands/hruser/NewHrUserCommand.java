@@ -1,7 +1,6 @@
 package com.jakub.hrm.commands.hruser;
 
-import com.jakub.hrm.model.HrRole;
-import com.jakub.hrm.query.HrRoleQuery;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -17,10 +16,13 @@ public class NewHrUserCommand {
     private String lastName;
 
     @NotBlank(message="Email must not be blank")
-    @Email(message = "Please provide a svalid email address" )
+    @Email(message = "Please provide a valid email address" )
     private String email;
 
-    private HrRoleQuery role;
+    @Valid
+    private NewHrIdentificationCommand identification;
+
+    private NewHrRoleCommand role;
 
     public String getFirstName() {
         return firstName;
@@ -46,11 +48,19 @@ public class NewHrUserCommand {
         this.email = email;
     }
 
-    public HrRoleQuery getRole() {
+    public NewHrIdentificationCommand getIdentification() {
+        return identification;
+    }
+
+    public void setIdentification(NewHrIdentificationCommand identification) {
+        this.identification = identification;
+    }
+
+    public NewHrRoleCommand getRole() {
         return role;
     }
 
-    public void setRole(HrRoleQuery role) {
+    public void setRole(NewHrRoleCommand role) {
         this.role = role;
     }
 }

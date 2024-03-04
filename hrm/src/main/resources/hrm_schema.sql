@@ -2,9 +2,9 @@ DROP TABLE application_form;
 
 DROP TABLE job_offer;
 
-DROP TABLE address;
-
 DROP TABLE hr_user;
+
+DROP TABLE hr_identification;
 
 DROP TABLE hr_role;
 
@@ -37,11 +37,17 @@ CREATE TABLE IF NOT EXISTS hr_role (
     role_name VARCHAR(30) NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS hr_identification (
+    identification_id UUID PRIMARY KEY,
+    login VARCHAR(50) NOT NULL,
+    pwd VARCHAR(30) NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS hr_user (
     user_id UUID PRIMARY KEY,
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
     email VARCHAR(50) NOT NULL,
-    pwd VARCHAR(200) NOT NULL,
+    identification_id UUID REFERENCES hr_identification(identification_id),
     role_id UUID REFERENCES hr_role(role_id)
 );

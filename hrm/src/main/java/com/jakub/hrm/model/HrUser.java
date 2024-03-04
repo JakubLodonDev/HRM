@@ -28,15 +28,23 @@ public class HrUser {
     @Email(message = "Please provide a valid email address" )
     private String email;
 
-    @NotBlank(message="Password must not be blank")
-    @Size(min=5, message="Password must be at least 5 characters long")
-    private String pwd;
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = HrIdentification.class)
+    @JoinColumn(name = "identification_id", referencedColumnName = "identification_id", nullable = false)
+    private HrIdentification identification;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, targetEntity = HrRole.class)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, targetEntity = HrRole.class)
     @JoinColumn(name = "role_id", referencedColumnName = "role_id", nullable = false)
     private HrRole role;
 
     public HrUser() {}
+
+    public HrUser(String firstName, String lastName, String email, HrIdentification identification, HrRole role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.identification = identification;
+        this.role = role;
+    }
 
     public UUID getUserId() {
         return userId;
@@ -70,12 +78,12 @@ public class HrUser {
         this.email = email;
     }
 
-    public String getPwd() {
-        return pwd;
+    public HrIdentification getIdentification() {
+        return identification;
     }
 
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
+    public void setIdentification(HrIdentification identification) {
+        this.identification = identification;
     }
 
     public HrRole getRole() {

@@ -15,6 +15,9 @@ public class HrRole {
 
     private String roleName;
 
+    public HrRole() {
+    }
+
     public UUID getRoleId() {
         return roleId;
     }

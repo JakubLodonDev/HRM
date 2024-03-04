@@ -20,6 +20,7 @@
 
         <label for="password">Hasło:</label>
         <input type="password" id="password" name="password" required />
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
         <button type="submit">Zaloguj się</button>
       </form>

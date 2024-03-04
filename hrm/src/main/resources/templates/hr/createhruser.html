@@ -12,24 +12,60 @@
   <!-- //header -->
 
     <main>
-      <ul>
-        <li th:each="error : ${#fields.errors('newUserCommand.*')}" th:text="${error}" />
-      </ul>
       <form
-              th:action="@{'/admin/savenewjoboffer'}"s
+              th:action="@{'/admin/savenewuser'}"s
         method="post"
         th:object="${newUserCommand}"
       >
         <label>Imie:</label>
         <input type="text" th:field="*{firstName}" />
 
+        <ul th:each="error: ${#fields.errors('firstName')}">
+          <li th:each="message : ${error}">
+            <p th:text="${message}"></p>
+          </li>
+        </ul>
+
         <label>Nazwisko:</label>
         <input type="text" th:field="*{lastName}" />
+
+        <ul th:each="error: ${#fields.errors('lastName')}">
+          <li th:each="message : ${error}">
+            <p th:text="${message}"></p>
+          </li>
+        </ul>
 
         <label>Email:</label>
         <input type="text" th:field="*{email}" />
 
+        <ul th:each="error: ${#fields.errors('email')}">
+          <li th:each="message : ${error}">
+            <p th:text="${message}"></p>
+          </li>
+        </ul>
 
+        <label>Hasło:</label>
+        <input type="text" th:field="*{identification.pwd}" />
+
+        <ul th:each="error: ${#fields.errors('identification.pwd')}">
+          <li th:each="message : ${error.split(',')}">
+            <p th:text="${message}"></p>
+          </li>
+        </ul>
+
+        <label>Podtwierdź hasło:</label>
+        <input type="text" th:field="*{identification.confirmPwd}" />
+
+        <ul th:each="error: ${#fields.errors('identification')}">
+          <li th:each="message : ${error}">
+            <p th:text="${message}"></p>
+          </li>
+        </ul>
+
+        <label >Status:</label>
+        <select id="status" name="status" th:field="*{role.roleName}">
+          <option th:each="role : ${userRoleOptions}" th:value="${role}" th:text="${role}"></option>
+        </select>
 
         <button >CREATE</button>
       </form>
