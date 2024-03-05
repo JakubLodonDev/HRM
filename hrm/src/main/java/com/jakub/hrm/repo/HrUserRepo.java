@@ -9,4 +9,5 @@ import java.util.UUID;
 @Repository
 public interface HrUserRepo extends JpaRepository<HrUser, UUID> {
 
+    HrUser getByIdentification_Login(String login);
 }

@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS hr_role (
 CREATE TABLE IF NOT EXISTS hr_identification (
     identification_id UUID PRIMARY KEY,
     login VARCHAR(50) NOT NULL,
-    pwd VARCHAR(30) NOT NULL
+    pwd VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS hr_user (
