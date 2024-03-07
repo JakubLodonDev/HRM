@@ -48,6 +48,7 @@ CREATE TABLE IF NOT EXISTS hr_user (
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
     email VARCHAR(50) NOT NULL,
+    is_password_change_required BOOLEAN NOT NULL,
     identification_id UUID REFERENCES hr_identification(identification_id),
     role_id UUID REFERENCES hr_role(role_id)
 );

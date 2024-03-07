@@ -26,11 +26,10 @@ public class NewHrCommandHandler {
 
     public void Handle(NewHrUserCommand command) {
         HrIdentification identification = new HrIdentification(command.getEmail(), command.getIdentification().getPwd());
-        //hrIdentificationRepo.save(identification);
 
         HrRole role = hrRoleRepo.findByRoleName(command.getRole().getRoleName());
 
-        HrUser user = new HrUser(command.getFirstName(), command.getLastName(), command.getEmail(),
+        HrUser user = new HrUser(command.getFirstName(), command.getLastName(), command.getEmail(), true,
                 identification, role);
 
         hrUserRepo.save(user);

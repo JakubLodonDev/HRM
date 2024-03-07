@@ -2,9 +2,7 @@ package com.jakub.hrm.security;
 
 import com.jakub.hrm.model.HrRole;
 import com.jakub.hrm.model.HrUser;
-import com.jakub.hrm.repo.HrRoleRepo;
 import com.jakub.hrm.repo.HrUserRepo;
-import jakarta.persistence.criteria.Root;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -36,7 +34,7 @@ public class HRMUsernamePwdAuthenticationProvider implements AuthenticationProvi
 
         if(null != user && passwordEncoder.matches(pwd, user.getIdentification().getPwd())){
             return new UsernamePasswordAuthenticationToken(
-                    user.getFirstName()+" "+user.getLastName(), pwd, getGrantedAuthorities(user.getRole()));
+                    user.getIdentification().getLogin(), pwd, getGrantedAuthorities(user.getRole()));
         }else{
             throw new BadCredentialsException("Invalid credentials!");
         }

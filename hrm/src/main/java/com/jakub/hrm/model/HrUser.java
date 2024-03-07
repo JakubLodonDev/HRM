@@ -28,6 +28,8 @@ public class HrUser {
     @Email(message = "Please provide a valid email address" )
     private String email;
 
+    private boolean isPasswordChangeRequired;
+
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = HrIdentification.class)
     @JoinColumn(name = "identification_id", referencedColumnName = "identification_id", nullable = false)
     private HrIdentification identification;
@@ -38,10 +40,11 @@ public class HrUser {
 
     public HrUser() {}
 
-    public HrUser(String firstName, String lastName, String email, HrIdentification identification, HrRole role) {
+    public HrUser(String firstName, String lastName, String email, boolean isPasswordChangeRequired, HrIdentification identification, HrRole role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.isPasswordChangeRequired = isPasswordChangeRequired;
         this.identification = identification;
         this.role = role;
     }
@@ -76,6 +79,14 @@ public class HrUser {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public boolean isPasswordChangeRequired() {
+        return isPasswordChangeRequired;
+    }
+
+    public void setPasswordChangeRequired(boolean passwordChangeRequired) {
+        isPasswordChangeRequired = passwordChangeRequired;
     }
 
     public HrIdentification getIdentification() {
