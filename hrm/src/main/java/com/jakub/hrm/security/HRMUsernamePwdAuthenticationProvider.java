@@ -22,7 +22,6 @@ public class HRMUsernamePwdAuthenticationProvider implements AuthenticationProvi
 
     @Autowired
     private HrUserRepo hrUserRepo;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
 

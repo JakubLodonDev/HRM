@@ -2,12 +2,9 @@ package com.jakub.hrm.config;
 
 import com.jakub.hrm.security.ChangePasswordFilter;
 import com.jakub.hrm.security.CustomAuthenticationSuccessHandler;
-import com.jakub.hrm.security.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,10 +19,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  */
 @Configuration
 public class WebSecurityConfig {
-
-    @Autowired
-    private CustomUserDetailsService userDetailsService;
-
     @Autowired
     private CustomAuthenticationSuccessHandler successHandler;
 
@@ -39,6 +32,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/resetpassword").authenticated()
                         .requestMatchers("/assets/**").permitAll()
                         .requestMatchers("/dashboard").authenticated()
+                        .requestMatchers("/admin/displaylistofusers").hasRole("ADMIN")
                         .requestMatchers("/admin/**").authenticated()
                         .requestMatchers("/logout").authenticated())
 
@@ -48,7 +42,7 @@ public class WebSecurityConfig {
                 .logout(formlogout -> formlogout.logoutSuccessUrl("/login?logout=true")
                         .invalidateHttpSession(true).permitAll())
                 .httpBasic(Customizer.withDefaults())
-                .addFilterBefore(changePasswordFilter(), UsernamePasswordAuthenticationFilter.class);;
+                .addFilterAfter(changePasswordFilter(), UsernamePasswordAuthenticationFilter.class);;
 
         return http.build();
     }
@@ -68,25 +62,6 @@ public class WebSecurityConfig {
         return new ChangePasswordFilter();
     }
 
-    /**
-     * Tworzy i konfiguruje bean dostawcy uwierzytelniania używany przez Spring Security
-     * do przeprowadzania procesu uwierzytelniania. Ten bean jest szczególnie ważny,
-     * ponieważ określa logikę używaną do ładowania danych użytkownika (za pomocą
-     * zdefiniowanego UserDetailsService) oraz sposób kodowania i weryfikacji haseł
-     * (za pomocą zdefiniowanego PasswordEncoder).
-     *
-     * @return skonfigurowana instancja DaoAuthenticationProvider, która będzie używana
-     * przez Spring Security do uwierzytelniania użytkowników. DaoAuthenticationProvider
-     * jest standardowym dostawcą uwierzytelniania w Spring Security, wspierającym
-     * ładowanie danych użytkownika z bazy danych i weryfikację haseł.
-     */
-    @Bean
-    public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService);
-        provider.setPasswordEncoder(passwordEncoder());
-        return provider;
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

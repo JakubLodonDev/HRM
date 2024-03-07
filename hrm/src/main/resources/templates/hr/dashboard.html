@@ -15,6 +15,7 @@
     <main class="dash-main">
       <div class="dash-main-greet">
         <h2 th:text="${'Witaj - ' + username}"></h2>
+        <p th:text="${'You logged in as - ' + role}"></p>
       </div>
       <div class="dash-main-panel">
         <div class="dash-box" sec:authorize="isAuthenticated()">
@@ -26,7 +27,7 @@
         <div class="dash-box">
           <a class="dash-box-text" href="">Employee</a>
         </div>
-        <div class="dash-box" sec:authorize="isAuthenticated()">
+        <div class="dash-box" sec:authorize="hasRole('ROLE_ADMIN')">
           <a class="dash-box-text" th:href="@{/admin/displaylistofusers}">Users</a>
         </div>
       </div>

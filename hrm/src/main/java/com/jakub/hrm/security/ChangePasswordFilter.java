@@ -7,6 +7,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -40,7 +41,7 @@ public class ChangePasswordFilter extends OncePerRequestFilter {
                 request.getRequestURI().equals("/logout");
 
         if (authentication != null && authentication.isAuthenticated() && !changePasswordPageRequest) {
-            String username = ((UserDetails)authentication.getPrincipal()).getUsername();
+            String username = authentication.getPrincipal().toString();
             HrUser user = hrUserRepo.getByIdentification_Login(username);
 
             if (user.isPasswordChangeRequired()) {

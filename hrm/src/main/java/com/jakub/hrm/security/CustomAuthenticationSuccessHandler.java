@@ -26,7 +26,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        String username = ((UserDetails) authentication.getPrincipal()).getUsername();
+        String username = authentication.getPrincipal().toString();
         HrUser user = hrUserRepo.getByIdentification_Login(username);
 
         if (user.isPasswordChangeRequired()) {
