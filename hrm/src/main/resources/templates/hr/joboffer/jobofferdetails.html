@@ -16,7 +16,7 @@
         <li th:each="error : ${#fields.errors('jobOffer.*')}" th:text="${error}" />
       </ul>
       <form
-              th:action="@{'/admin/updatedatajoboffer'}"
+              th:action="@{'/joboffer/updatedatajoboffer'}"
         method="post"
         th:object="${jobOffer}"
       >

@@ -15,11 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Arrays;
-import java.util.List;
-
 @Controller
-@RequestMapping("admin")
+@RequestMapping("user")
 public class HrUserController {
 
     GetAllUsersQueryHandle getAllUsersQueryHandle;
@@ -38,24 +35,24 @@ public class HrUserController {
         this.newHrCommandHandler = newHrCommandHandler;
     }
 
-    @RequestMapping("/displaylistofusers")
+    @RequestMapping("/listofusers")
     public String displayListOfUsers(Model model){
         model.addAttribute("listOfUsersQuery", getAllUsersQueryHandle.Handle());
-        return "hr/listofusers";
+        return "hr/user/listofusers";
     }
 
-    @RequestMapping("/displaydetalishruser/{userId}")
+    @RequestMapping("/userdetails/{userId}")
     public String displayDetailsOfUsers(@PathVariable String userId, Model model){
         model.addAttribute("hrUserId", userId);
         model.addAttribute("hrUserQuery", getHrUserByIdQueryHandler.Handle(userId));
-        return "hr/detailshruser";
+        return "hr/user/userdetails";
     }
 
     @RequestMapping("/createnewuser")
     public String createNewHrUser(Model model){
         model.addAttribute("userRoleOptions", getAllRolesHandle.Handle());
         model.addAttribute("newUserCommand", new NewHrUserCommand());
-        return "hr/createhruser";
+        return "hr/user/createhruser";
     }
 
     @PostMapping("/savenewuser")
@@ -63,9 +60,9 @@ public class HrUserController {
                              BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("userRoleOptions", getAllRolesHandle.Handle());
-            return "hr/createhruser";
+            return "hr/user/createhruser";
         }
         newHrCommandHandler.Handle(newUserRequest);
-        return "redirect:/admin/displaylistofusers";
+        return "redirect:/user/listofusers";
     }
 }

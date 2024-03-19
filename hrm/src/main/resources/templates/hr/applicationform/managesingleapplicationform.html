@@ -16,7 +16,7 @@
         <li th:each="error : ${#fields.errors('applicationFormQuery.*')}" th:text="${error}" />
       </ul>
       <form
-              th:action="@{'/admin/updateapplicationform'}"
+              th:action="@{'/applicationform/updateapplicationform'}"
         method="post"
         th:object="${applicationFormQuery}"
       >

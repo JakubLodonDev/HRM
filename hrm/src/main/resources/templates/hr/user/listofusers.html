@@ -13,27 +13,25 @@
   <!-- //header -->
     <main>
       <div class="button-group" sec:authorize="isAuthenticated()">
-        <a th:href="@{/admin/createjoboffer}" class="btn btn-primary">Dodaj nową ofertę pracy</a>
+        <a th:href="@{/user/createnewuser}" class="btn btn-primary">Dodaj nowego użytkownika</a>
       </div>
       <table>
         <thead>
           <tr>
-            <th scope="col">Position</th>
-            <th scope="col">Required Level</th>
-            <th scope="col">Requirement</th>
-            <th scope="col">Description</th>
-            <th scope="col">Status</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Role</th>
             <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
-          <tr th:each="jobOffer : ${displayJobOffers}">
-            <td th:text="${jobOffer.name}"></td>
-            <td th:text="${jobOffer.level}"></td>
-            <td th:text="${jobOffer.requirement}"></td>
-            <td th:text="${jobOffer.description}"></td>
-            <td th:text="${jobOffer.status}"></td>
-            <td><a th:href="@{'/admin/managesinglejoboffer/' + ${jobOffer.jobOfferId}}">UPDATE</a></td>
+          <tr th:each="user : ${listOfUsersQuery}">
+            <td th:text="${user.firstName}"></td>
+            <td th:text="${user.lastName}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.roleName}"></td>
+            <td><a th:href="@{'/user/userdetails/' + ${user.userId}}">DETAILS</a></td>
           </tr>
         </tbody>
       </table>

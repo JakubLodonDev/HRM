@@ -18,17 +18,17 @@
         <p th:text="${'You logged in as - ' + role}"></p>
       </div>
       <div class="dash-main-panel">
-        <div class="dash-box" sec:authorize="isAuthenticated()">
-          <a class="dash-box-text" th:href="@{/admin/displayjobofferstomanage}">Manage job offers</a>
+        <div class="dash-box" sec:authorize="hasAnyRole('ROLE_RECRUITMENT_SPECIALIST', 'ROLE_MANAGER')">
+          <a class="dash-box-text" th:href="@{/joboffer/listofjoboffers}">Manage job offers</a>
         </div>
-        <div class="dash-box" sec:authorize="isAuthenticated()">
-          <a class="dash-box-text" th:href="@{/admin/displayjobofferstoreviewapplications/all}">Manage application forms</a>
+        <div class="dash-box" sec:authorize="hasAnyRole('ROLE_RECRUITMENT_SPECIALIST', 'ROLE_MANAGER')">
+          <a class="dash-box-text" th:href="@{/applicationform/listofjobofferstoreviewapplications/all}">Manage application forms</a>
         </div>
         <div class="dash-box">
           <a class="dash-box-text" href="">Employee</a>
         </div>
         <div class="dash-box" sec:authorize="hasRole('ROLE_ADMIN')">
-          <a class="dash-box-text" th:href="@{/admin/displaylistofusers}">Users</a>
+          <a class="dash-box-text" th:href="@{/user/listofusers}">Users</a>
         </div>
       </div>
     </main>

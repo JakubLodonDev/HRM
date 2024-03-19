@@ -69,7 +69,7 @@ public class ApplicationForm {
 
     public void updateData(String firstName, String lastName, String email, String mobilePhone,
                            String streetAddress, String country, String city,
-                           String zipCode, String aboutYourself){
+                           String zipCode, String aboutYourself, String employmentStatus){
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -79,6 +79,7 @@ public class ApplicationForm {
         this.country = country;
         this.zipCode = zipCode;
         this.aboutYourself = aboutYourself;
+        this.employmentStatus = employmentStatus;
     }
 
 

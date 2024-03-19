@@ -24,8 +24,8 @@ public class UpdateDataApplicationFormCommandHandler {
             ApplicationForm applicationForm = dbApplicationForm.get();
 
             applicationForm.updateData(command.getFirstName(), command.getLastName(), command.getEmail(),
-                    command.getMobilePhone(), command.getStreetAddress(),
-                    command.getCountry(), command.getCity(), command.getZipCode(), command.getAboutYourself());
+                    command.getMobilePhone(), command.getStreetAddress(), command.getCountry(), command.getCity(),
+                    command.getZipCode(), command.getAboutYourself(), command.getEmploymentStatus());
 
             applicationFormRepo.save(applicationForm);
         }

@@ -1,5 +1,6 @@
 package com.jakub.hrm.commands.joboffer;
 
+import com.jakub.hrm.constans.JobStatus;
 import jakarta.validation.constraints.NotBlank;
 
 import java.util.UUID;
@@ -15,7 +16,7 @@ public class SaveNewJobOfferCommand {
     @NotBlank(message="Description must not be blank")
     private String description;
     @NotBlank(message="Status must not be blank")
-    private String status;
+    private String status = JobStatus.OPEN;
 
     public SaveNewJobOfferCommand() {
     }

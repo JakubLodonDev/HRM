@@ -34,9 +34,9 @@ public class ChangePasswordFilter extends OncePerRequestFilter {
 
         boolean changePasswordPageRequest = request.getRequestURI().equals("/resetpassword") ||
                 request.getRequestURI().startsWith("/assets") ||
-                request.getRequestURI().startsWith("/applicationform") ||
-                request.getRequestURI().startsWith("/saveApplicationForm") ||
-                request.getRequestURI().startsWith("/displayjoboffer") ||
+                request.getRequestURI().startsWith("/applicationform/**") ||
+                request.getRequestURI().startsWith("/admin/**") ||
+                request.getRequestURI().startsWith("/joboffer/**") ||
                 request.getRequestURI().startsWith("/savenewpassword") ||
                 request.getRequestURI().equals("/logout");
 

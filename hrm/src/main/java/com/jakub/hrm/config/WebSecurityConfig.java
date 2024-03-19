@@ -32,8 +32,9 @@ public class WebSecurityConfig {
                         .requestMatchers("/resetpassword").authenticated()
                         .requestMatchers("/assets/**").permitAll()
                         .requestMatchers("/dashboard").authenticated()
-                        .requestMatchers("/admin/displaylistofusers").hasRole("ADMIN")
-                        .requestMatchers("/admin/**").authenticated()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/joboffer/**").hasAnyRole("RECRUITMENT_SPECIALIST", "MANAGER")
+                        .requestMatchers("/applicationform/**").hasAnyRole("RECRUITMENT_SPECIALIST", "MANAGER")
                         .requestMatchers("/logout").authenticated())
 
                 .formLogin(formLogin -> formLogin
@@ -42,7 +43,7 @@ public class WebSecurityConfig {
                 .logout(formlogout -> formlogout.logoutSuccessUrl("/login?logout=true")
                         .invalidateHttpSession(true).permitAll())
                 .httpBasic(Customizer.withDefaults())
-                .addFilterAfter(changePasswordFilter(), UsernamePasswordAuthenticationFilter.class);;
+                .addFilterAfter(changePasswordFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

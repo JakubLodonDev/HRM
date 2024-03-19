@@ -27,7 +27,7 @@
             <td th:text="${applicationForm.lastName}"></td>
             <td th:text="${applicationForm.email}"></td>
             <td th:text="${applicationForm.employmentStatus}"></td>
-            <td><a th:href="@{'/admin/managesingleapplicationform/' + ${applicationForm.applicationFormId}}">DETAILS</a></td>
+            <td><a th:href="@{'/applicationform/managesingleapplicationform/' + ${applicationForm.applicationFormId}}">DETAILS</a></td>
           </tr>
         </tbody>
       </table>

@@ -12,13 +12,13 @@
   <!-- //header -->
     <main>
       <div class="button-group">
-        <a th:href="@{/admin/displayjobofferstoreviewapplications/all}" class="btn btn-primary">Wyświetl wszystkie</a>
+        <a th:href="@{/applicationform/listofjobofferstoreviewapplications/all}" class="btn btn-primary">Wyświetl wszystkie</a>
       </div>
       <div class="button-group">
-        <a th:href="@{/admin/displayjobofferstoreviewapplications/open}" class="btn btn-primary">Wyświetl otwarte</a>
+        <a th:href="@{/applicationform/listofjobofferstoreviewapplications/open}" class="btn btn-primary">Wyświetl otwarte</a>
       </div>
       <div class="button-group">
-        <a th:href="@{/admin/displayjobofferstoreviewapplications/close}" class="btn btn-primary">Wyświetl zamknietne</a>
+        <a th:href="@{/applicationform/listofjobofferstoreviewapplications/close}" class="btn btn-primary">Wyświetl zamknietne</a>
       </div>
       <table>
         <thead>
@@ -38,7 +38,7 @@
             <td th:text="${jobOffer.requirement}"></td>
             <td th:text="${jobOffer.description}"></td>
             <td th:text="${jobOffer.status}"></td>
-            <td><a th:href="@{'/admin/listofapplicationforms/' + ${jobOffer.jobOfferId}}">DETAILS</a></td>
+            <td><a th:href="@{'/applicationform/listofapplicationforms/' + ${jobOffer.jobOfferId}}">DETAILS</a></td>
           </tr>
         </tbody>
       </table>

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @Controller
-@RequestMapping("admin")
+@RequestMapping("joboffer")
 public class HrJobOfferController {
     GetAllJobOffersQueryHandler getAllJobOffersQueryHandler;
     GetJobOfferByIdQueryHandler getJobOfferByIdQueryHandler;
@@ -39,40 +39,40 @@ public class HrJobOfferController {
         this.closeJobOfferCommandHandler = closeJobOfferCommandHandler;
     }
 
-    @RequestMapping("/displayjobofferstomanage")
+    @RequestMapping("/listofjoboffers")
     public String displayAllJobOffersForManagement(Model model){
         model.addAttribute("displayJobOffers", getAllJobOffersQueryHandler.Handle());
-        return "hr/managejoboffers";
+        return "hr/joboffer/listofjoboffers";
     }
 
-    @GetMapping("/managesinglejoboffer/{jobOfferId}")
+    @GetMapping("/jobofferdetails/{jobOfferId}")
     public String displayDetailsOfSingleJobOffer(@PathVariable String jobOfferId, Model model){
         model.addAttribute("jobOfferId", jobOfferId);
         model.addAttribute("jobOffer", getJobOfferByIdQueryHandler.Handle(jobOfferId));
 
         model.addAttribute("statusOpen", isJobOfferOpen.Handle(jobOfferId));
 
-        return "hr/managejoboffer";
+        return "hr/joboffer/jobofferdetails";
     }
 
     @PostMapping(value = "/updatedatajoboffer", params = "action=updateData")
     public String updateJobOffer(@Valid @ModelAttribute("jobOffer") UpdateDataJobOfferCommand updateDataJobOfferRequest,
                                  BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
-            return "hr/managejoboffer";
+            return "jobofferdetails";
         }
         updateJobOfferCommandHandler.Handle(updateDataJobOfferRequest);
-        return "redirect:/admin/displayjobofferstomanage";
+        return "redirect:/joboffer/listofjoboffers";
     }
 
     @PostMapping(value = "/updatedatajoboffer", params = "action=closeOffer")
     public String closeJobOffer(@Valid @ModelAttribute("jobOffer") UpdateDataJobOfferCommand updateDataJobOfferRequest,
                                  BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
-            return "hr/managejoboffer";
+            return "jobofferdetails";
         }
         closeJobOfferCommandHandler.Handle(updateDataJobOfferRequest);
-        return "redirect:/admin/displayjobofferstomanage";
+        return "redirect:/joboffer/listofjoboffers";
     }
 
     @GetMapping("/createjoboffer")
@@ -80,17 +80,17 @@ public class HrJobOfferController {
         List<String> jobStatusOptions = Arrays.asList(JobStatus.OPEN, JobStatus.CLOSE);
         model.addAttribute("jobStatusOptions", jobStatusOptions);
         model.addAttribute("newJobOfferCommand", new SaveNewJobOfferCommand());
-        return "hr/createjoboffer";
+        return "hr/joboffer/createjoboffer";
     }
 
     @PostMapping("/savenewjoboffer")
-    public String createJobOffer(@Valid @ModelAttribute("newJobOffer") SaveNewJobOfferCommand newJobOfferQueryRequest,
+    public String createJobOffer(@Valid @ModelAttribute("newJobOfferCommand") SaveNewJobOfferCommand newJobOfferQueryRequest,
                                  BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return "hr/createjoboffer";
+            return "hr/joboffer/createjoboffer";
         }
         saveNewJobOfferCommandHandler.Handle(newJobOfferQueryRequest);
-        return "redirect:/admin/displayjobofferstomanage";
+        return "redirect:/joboffer/listofjoboffers";
     }
 }

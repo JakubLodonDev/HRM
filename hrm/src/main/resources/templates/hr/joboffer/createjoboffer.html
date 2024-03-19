@@ -16,7 +16,7 @@
         <li th:each="error : ${#fields.errors('newJobOfferCommand.*')}" th:text="${error}" />
       </ul>
       <form
-              th:action="@{'/admin/savenewjoboffer'}"
+              th:action="@{'/joboffer/savenewjoboffer'}"
         method="post"
         th:object="${newJobOfferCommand}"
       >
@@ -32,12 +32,7 @@
         <label>Opis:</label>
         <input type="text" th:field="*{description}" />
 
-        <label for="status">Status:</label>
-        <select id="status" name="status" th:field="*{status}">
-          <option th:each="statusOption : ${jobStatusOptions}" th:value="${statusOption}" th:text="${statusOption}"></option>
-        </select>
-
-        <button >UPDATE</button>
+        <button >CREATE</button>
       </form>
     </main>
 
