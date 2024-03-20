@@ -20,13 +20,17 @@ public class GetHrUserByIdQuery {
 
     private String roleName;
 
+    private boolean isPasswordChangeRequired;
+
     public GetHrUserByIdQuery() {}
 
-    public GetHrUserByIdQuery(String firstName, String lastName, String email, String roleName) {
+    public GetHrUserByIdQuery(String firstName, String lastName, String email, String roleName,
+                               boolean isPasswordChangeRequired) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.roleName = roleName;
+        this.isPasswordChangeRequired = isPasswordChangeRequired;
     }
 
     public String getFirstName() {
@@ -57,7 +61,15 @@ public class GetHrUserByIdQuery {
         return roleName;
     }
 
-    public void setRoles(String roleName) {
+    public void setRoleName(String roleName) {
         this.roleName = roleName;
+    }
+
+    public boolean isPasswordChangeRequired() {
+        return isPasswordChangeRequired;
+    }
+
+    public void setPasswordChangeRequired(boolean passwordChangeRequired) {
+        isPasswordChangeRequired = passwordChangeRequired;
     }
 }

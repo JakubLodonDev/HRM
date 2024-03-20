@@ -19,8 +19,9 @@ public class GetHrUserByIdQueryHandler {
         Optional<HrUser> dbHrUser = hrUserRepo.findById(UUID.fromString(userId));
         if(dbHrUser.isPresent()){
             HrUser hrUser = dbHrUser.get();
-            return  new GetHrUserByIdQuery(hrUser.getFirstName(), hrUser.getLastName(),
-                    hrUser.getEmail(), hrUser.getRole().getRoleName());
+            return new GetHrUserByIdQuery(hrUser.getFirstName(), hrUser.getLastName(),
+                    hrUser.getEmail(), hrUser.getRole().getRoleName(),
+                    hrUser.isPasswordChangeRequired());
         }
         return new GetHrUserByIdQuery();
     }

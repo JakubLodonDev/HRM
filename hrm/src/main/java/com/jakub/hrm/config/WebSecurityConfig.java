@@ -33,6 +33,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/assets/**").permitAll()
                         .requestMatchers("/dashboard").authenticated()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/user/**").hasRole("ADMIN")
                         .requestMatchers("/joboffer/**").hasAnyRole("RECRUITMENT_SPECIALIST", "MANAGER")
                         .requestMatchers("/applicationform/**").hasAnyRole("RECRUITMENT_SPECIALIST", "MANAGER")
                         .requestMatchers("/logout").authenticated())

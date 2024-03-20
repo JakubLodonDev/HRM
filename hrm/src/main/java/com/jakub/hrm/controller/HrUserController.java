@@ -1,5 +1,6 @@
 package com.jakub.hrm.controller;
 
+import com.jakub.hrm.commands.hruser.DeleteUserCommandHandler;
 import com.jakub.hrm.commands.hruser.NewHrCommandHandler;
 import com.jakub.hrm.commands.hruser.NewHrUserCommand;
 import com.jakub.hrm.query.role.GetAllRolesHandle;
@@ -21,16 +22,19 @@ public class HrUserController {
 
     GetAllUsersQueryHandle getAllUsersQueryHandle;
     GetHrUserByIdQueryHandler getHrUserByIdQueryHandler;
+    DeleteUserCommandHandler deleteUserCommandHandler;
     GetAllRolesHandle getAllRolesHandle;
     NewHrCommandHandler newHrCommandHandler;
 
     @Autowired
     public HrUserController(GetAllUsersQueryHandle getAllUsersQueryHandle,
                             GetHrUserByIdQueryHandler getHrUserByIdQueryHandler,
+                            DeleteUserCommandHandler deleteUserCommandHandler,
                             GetAllRolesHandle getAllRolesHandle,
                             NewHrCommandHandler newHrCommandHandler) {
         this.getAllUsersQueryHandle = getAllUsersQueryHandle;
         this.getHrUserByIdQueryHandler = getHrUserByIdQueryHandler;
+        this.deleteUserCommandHandler = deleteUserCommandHandler;
         this.getAllRolesHandle = getAllRolesHandle;
         this.newHrCommandHandler = newHrCommandHandler;
     }
@@ -46,6 +50,12 @@ public class HrUserController {
         model.addAttribute("hrUserId", userId);
         model.addAttribute("hrUserQuery", getHrUserByIdQueryHandler.Handle(userId));
         return "hr/user/userdetails";
+    }
+
+    @PostMapping(value = "/updateuser", params = "action=delete")
+    public String deleteUser(@ModelAttribute("hrUserId") String userId){
+        deleteUserCommandHandler.Handle(userId);
+        return "redirect:/user/listofusers";
     }
 
     @RequestMapping("/createnewuser")

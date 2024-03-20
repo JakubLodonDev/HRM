@@ -16,7 +16,7 @@
         <li th:each="error : ${#fields.errors('hrUserQuery.*')}" th:text="${error}" />
       </ul>
       <form
-              th:action="@{'/admin/updatedatajoboffer'}"
+              th:action="@{'/user/updateuser'}"
         method="post"
         th:object="${hrUserQuery}"
       >
@@ -32,9 +32,11 @@
         <label >Opis:</label>
         <input type="text" th:field="*{roleName}"/>
 
-        <input type="hidden" name="jobOfferId" th:value="${hrUserId}" />
+        <input type="hidden" name="hrUserId" th:value="${hrUserId}" />
 
-        <button>DELETE</button>
+        <button name="action" value="updateData">UPDATE</button>
+        <button name="action" value="resetPassword">ResetPassword</button>
+        <button name="action" value="delete">DELETE</button>
       </form>
     </main>
 
