@@ -62,7 +62,7 @@
           </li>
         </ul>
 
-        <label >Status:</label>
+        <label >Rola:</label>
         <select id="status" name="status" th:field="*{role.roleName}">
           <option th:each="role : ${userRoleOptions}" th:value="${role}" th:text="${role}"></option>
         </select>

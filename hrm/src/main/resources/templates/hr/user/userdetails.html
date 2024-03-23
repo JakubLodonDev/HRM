@@ -20,19 +20,21 @@
         method="post"
         th:object="${hrUserQuery}"
       >
-        <label >Nazwa:</label>
+        <label >Imie:</label>
         <input type="text" th:field="*{firstName}" />
 
-        <label >Poziom:</label>
+        <label >Nazwisko:</label>
         <input type="text" th:field="*{lastName}" />
 
-        <label >Wymagania:</label>
+        <label >Email:</label>
         <input type="text" th:field="*{email}" />
 
-        <label >Opis:</label>
-        <input type="text" th:field="*{roleName}"/>
+        <label >Rola:</label>
+        <select id="status" name="status" th:field="*{roleName}">
+          <option th:each="role : ${userRoleOptions}" th:value="${role}" th:text="${role}"></option>
+        </select>
 
-        <input type="hidden" name="hrUserId" th:value="${hrUserId}" />
+        <input type="hidden" name="userId" th:value="${userId}" />
 
         <button name="action" value="updateData">UPDATE</button>
         <button name="action" value="resetPassword">ResetPassword</button>

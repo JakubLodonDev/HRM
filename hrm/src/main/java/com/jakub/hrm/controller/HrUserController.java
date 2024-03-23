@@ -1,8 +1,7 @@
 package com.jakub.hrm.controller;
 
-import com.jakub.hrm.commands.hruser.DeleteUserCommandHandler;
-import com.jakub.hrm.commands.hruser.NewHrCommandHandler;
-import com.jakub.hrm.commands.hruser.NewHrUserCommand;
+import com.jakub.hrm.commands.hruser.*;
+import com.jakub.hrm.commands.joboffer.UpdateDataJobOfferCommand;
 import com.jakub.hrm.query.role.GetAllRolesHandle;
 import com.jakub.hrm.query.user.GetAllUsersQueryHandle;
 import com.jakub.hrm.query.user.GetHrUserByIdQueryHandler;
@@ -22,6 +21,7 @@ public class HrUserController {
 
     GetAllUsersQueryHandle getAllUsersQueryHandle;
     GetHrUserByIdQueryHandler getHrUserByIdQueryHandler;
+    UpdateDataHrUserHandler updateDataHrUserHandler;
     DeleteUserCommandHandler deleteUserCommandHandler;
     GetAllRolesHandle getAllRolesHandle;
     NewHrCommandHandler newHrCommandHandler;
@@ -29,11 +29,13 @@ public class HrUserController {
     @Autowired
     public HrUserController(GetAllUsersQueryHandle getAllUsersQueryHandle,
                             GetHrUserByIdQueryHandler getHrUserByIdQueryHandler,
+                            UpdateDataHrUserHandler updateDataHrUserHandler,
                             DeleteUserCommandHandler deleteUserCommandHandler,
                             GetAllRolesHandle getAllRolesHandle,
                             NewHrCommandHandler newHrCommandHandler) {
         this.getAllUsersQueryHandle = getAllUsersQueryHandle;
         this.getHrUserByIdQueryHandler = getHrUserByIdQueryHandler;
+        this.updateDataHrUserHandler = updateDataHrUserHandler;
         this.deleteUserCommandHandler = deleteUserCommandHandler;
         this.getAllRolesHandle = getAllRolesHandle;
         this.newHrCommandHandler = newHrCommandHandler;
@@ -47,9 +49,20 @@ public class HrUserController {
 
     @RequestMapping("/userdetails/{userId}")
     public String displayDetailsOfUsers(@PathVariable String userId, Model model){
-        model.addAttribute("hrUserId", userId);
+        model.addAttribute("userId", userId);
+        model.addAttribute("userRoleOptions", getAllRolesHandle.Handle());
         model.addAttribute("hrUserQuery", getHrUserByIdQueryHandler.Handle(userId));
         return "hr/user/userdetails";
+    }
+
+    @PostMapping(value = "/updateuser", params = "action=updateData")
+    public String updateUser(@Valid @ModelAttribute("hrUserQuery") UpdateDataHrUserCommand updateDataHrUserRequest,
+                             BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return "userdetails";
+        }
+        updateDataHrUserHandler.Handle(updateDataHrUserRequest);
+        return "redirect:/user/listofusers";
     }
 
     @PostMapping(value = "/updateuser", params = "action=delete")

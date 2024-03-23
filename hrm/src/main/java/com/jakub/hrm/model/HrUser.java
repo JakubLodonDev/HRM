@@ -49,6 +49,13 @@ public class HrUser {
         this.role = role;
     }
 
+    public void updateData(String firstName, String lastName, String email, HrRole role){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.role = role;
+    }
+
     public UUID getUserId() {
         return userId;
     }
