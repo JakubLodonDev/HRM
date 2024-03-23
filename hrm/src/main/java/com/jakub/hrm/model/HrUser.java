@@ -56,6 +56,11 @@ public class HrUser {
         this.role = role;
     }
 
+    public void resetPassword(String defaultPassword) {
+        this.isPasswordChangeRequired = true;
+        this.identification.setPwd(defaultPassword);
+    }
+
     public UUID getUserId() {
         return userId;
     }

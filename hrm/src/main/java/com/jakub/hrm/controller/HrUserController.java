@@ -1,7 +1,6 @@
 package com.jakub.hrm.controller;
 
 import com.jakub.hrm.commands.hruser.*;
-import com.jakub.hrm.commands.joboffer.UpdateDataJobOfferCommand;
 import com.jakub.hrm.query.role.GetAllRolesHandle;
 import com.jakub.hrm.query.user.GetAllUsersQueryHandle;
 import com.jakub.hrm.query.user.GetHrUserByIdQueryHandler;
@@ -21,7 +20,8 @@ public class HrUserController {
 
     GetAllUsersQueryHandle getAllUsersQueryHandle;
     GetHrUserByIdQueryHandler getHrUserByIdQueryHandler;
-    UpdateDataHrUserHandler updateDataHrUserHandler;
+    UpdateDataHrUserCommandHandler updateDataHrUserHandler;
+    ResetPasswordHrUserCommandHandler resetPasswordHrUserHandler;
     DeleteUserCommandHandler deleteUserCommandHandler;
     GetAllRolesHandle getAllRolesHandle;
     NewHrCommandHandler newHrCommandHandler;
@@ -29,13 +29,15 @@ public class HrUserController {
     @Autowired
     public HrUserController(GetAllUsersQueryHandle getAllUsersQueryHandle,
                             GetHrUserByIdQueryHandler getHrUserByIdQueryHandler,
-                            UpdateDataHrUserHandler updateDataHrUserHandler,
+                            UpdateDataHrUserCommandHandler updateDataHrUserHandler,
+                            ResetPasswordHrUserCommandHandler resetPasswordHrUserHandler,
                             DeleteUserCommandHandler deleteUserCommandHandler,
                             GetAllRolesHandle getAllRolesHandle,
                             NewHrCommandHandler newHrCommandHandler) {
         this.getAllUsersQueryHandle = getAllUsersQueryHandle;
         this.getHrUserByIdQueryHandler = getHrUserByIdQueryHandler;
         this.updateDataHrUserHandler = updateDataHrUserHandler;
+        this.resetPasswordHrUserHandler = resetPasswordHrUserHandler;
         this.deleteUserCommandHandler = deleteUserCommandHandler;
         this.getAllRolesHandle = getAllRolesHandle;
         this.newHrCommandHandler = newHrCommandHandler;
@@ -65,8 +67,14 @@ public class HrUserController {
         return "redirect:/user/listofusers";
     }
 
+    @PostMapping(value = "/updateuser", params = "action=resetPassword")
+    public String resetPasswordForUser(@ModelAttribute("userId") String userId){
+        resetPasswordHrUserHandler.Handle(userId);
+        return "redirect:/user/listofusers";
+    }
+
     @PostMapping(value = "/updateuser", params = "action=delete")
-    public String deleteUser(@ModelAttribute("hrUserId") String userId){
+    public String deleteUser(@ModelAttribute("userId") String userId){
         deleteUserCommandHandler.Handle(userId);
         return "redirect:/user/listofusers";
     }

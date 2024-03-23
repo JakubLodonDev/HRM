@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class UpdateDataHrUserHandler {
+public class UpdateDataHrUserCommandHandler {
 
     @Autowired
     HrUserRepo hrUserRepo;
