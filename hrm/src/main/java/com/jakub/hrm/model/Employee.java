@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.util.UUID;
@@ -41,6 +40,16 @@ public class Employee {
 
 
     public Employee( String firstName, String lastName, String email, String mobilePhone, String employmentStatus, String position_name, EmployeeAddress employeeAddress) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.mobilePhone = mobilePhone;
+        this.employmentStatus = employmentStatus;
+        this.position_name = position_name;
+        this.employeeAddress = employeeAddress;
+    }
+
+    public void createNewEmployee(String firstName, String lastName, String email, String mobilePhone, String employmentStatus, String position_name, EmployeeAddress employeeAddress) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

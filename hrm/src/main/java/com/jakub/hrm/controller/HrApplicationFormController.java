@@ -74,6 +74,7 @@ public class HrApplicationFormController {
     public String updateApplicationForm(@Valid @ModelAttribute("applicationFormQuery") UpdateDataApplicationFormCommand updateApplicationFormRequest,
                                  BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
+
             return "hr/applicationform/managesingleapplicationform";
         }
         updateApplicationFormCommandHandler.Handle(updateApplicationFormRequest);

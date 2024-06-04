@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <title>Human Resource Menagment</title>
+  </head>
+  <body>
+  <!-- header -->
+    <div th:replace="~{header :: header}">...</div>
+  <!-- //header -->
+    <main>
+      <div class="button-group" sec:authorize="isAuthenticated()">
+        <a th:href="@{/employee/createnewemployee}" class="btn btn-primary">Dodaj nowego pracownika</a>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Nazwa stanowiska</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="employee : ${listOfEmployeeQuery}">
+            <td th:text="${employee.firstName}"></td>
+            <td th:text="${employee.lastName}"></td>
+            <td th:text="${employee.email}"></td>
+            <td th:text="${employee.position_name}"></td>
+            <td><a th:href="@{'/employee/employeedetails/' + ${employee.employeeId}}">DETAILS</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+    <!-- footer block -->
+      <div th:replace="~{footer :: footer}">...</div>
+    <!-- //footer block -->
+  </body>
+</html>

@@ -36,6 +36,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/user/**").hasRole("ADMIN")
                         .requestMatchers("/joboffer/**").hasAnyRole("RECRUITMENT_SPECIALIST", "MANAGER")
                         .requestMatchers("/applications/**").hasAnyRole("RECRUITMENT_SPECIALIST", "MANAGER")
+                        .requestMatchers("/employee/**").hasAnyRole("RECRUITMENT_SPECIALIST", "MANAGER")
                         .requestMatchers("/logout").authenticated())
 
                 .formLogin(formLogin -> formLogin

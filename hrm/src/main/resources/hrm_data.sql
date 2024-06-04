@@ -42,3 +42,21 @@ VALUES ('550e8400-e29b-41d4-a716-446655440061', 'Aro', 'Koko', 'arrokoko@gmail.c
 
 INSERT INTO application_form (form_id, first_name, last_name, email, mobile_phone, street_address, city, country, zip_code, about_yourself, employment_status, job_id)
 VALUES ('550e8400-e29b-41d4-a716-446655440062', 'Tako', 'Mako', 'takomako@gmail.com', '9284742657', 'Pawia 2', 'Warszawa', 'Polska', '92450', '', 'Process', '550e8400-e29b-41d4-a716-446655440000');
+
+INSERT INTO application_form (form_id, first_name, last_name, email, mobile_phone, street_address, city, country, zip_code, about_yourself, employment_status, job_id)
+VALUES ('550e8400-e29b-41d4-a716-446655440063', 'Jako', 'Lolo', 'jakololo@gmail.com', '9283742657', 'Kurza 5', 'Warszawa', 'Polska', '02020', '', 'Process', '550e8400-e29b-41d4-a716-446655440000');
+
+INSERT INTO application_form (form_id, first_name, last_name, email, mobile_phone, street_address, city, country, zip_code, about_yourself, employment_status, job_id)
+VALUES ('550e8400-e29b-41d4-a716-446655440064', 'Aro', 'Koko', 'arrokoko@gmail.com', '9283742657', 'Kacza 5', 'Warszawa', 'Polska', '92020', '', 'Process', '550e8400-e29b-41d4-a716-446655440000');
+
+INSERT INTO application_form (form_id, first_name, last_name, email, mobile_phone, street_address, city, country, zip_code, about_yourself, employment_status, job_id)
+VALUES ('550e8400-e29b-41d4-a716-446655440065', 'Tako', 'Mako', 'takomako@gmail.com', '9284742657', 'Pawia 2', 'Warszawa', 'Polska', '92450', '', 'Process', '550e8400-e29b-41d4-a716-446655440000');
+
+INSERT INTO application_form (form_id, first_name, last_name, email, mobile_phone, street_address, city, country, zip_code, about_yourself, employment_status, job_id)
+VALUES ('550e8400-e29b-41d4-a716-446655440066', 'Jako', 'Lolo', 'jakololo@gmail.com', '9283742657', 'Kurza 5', 'Warszawa', 'Polska', '02020', '', 'Process', '550e8400-e29b-41d4-a716-446655440000');
+
+INSERT INTO application_form (form_id, first_name, last_name, email, mobile_phone, street_address, city, country, zip_code, about_yourself, employment_status, job_id)
+VALUES ('550e8400-e29b-41d4-a716-446655440067', 'Aro', 'Koko', 'arrokoko@gmail.com', '9283742657', 'Kacza 5', 'Warszawa', 'Polska', '92020', '', 'Process', '550e8400-e29b-41d4-a716-446655440000');
+
+INSERT INTO application_form (form_id, first_name, last_name, email, mobile_phone, street_address, city, country, zip_code, about_yourself, employment_status, job_id)
+VALUES ('550e8400-e29b-41d4-a716-446655440068', 'Tako', 'Mako', 'takomako@gmail.com', '9284742657', 'Pawia 2', 'Warszawa', 'Polska', '92450', '', 'Process', '550e8400-e29b-41d4-a716-446655440000');

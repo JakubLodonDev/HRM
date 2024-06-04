@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <title>Human Resource Menagment</title>
+  </head>
+  <body>
+  <!-- header -->
+    <div th:replace="~{header :: header}">...</div>
+  <!-- //header -->
+
+    <main>
+      <ul>
+        <li th:each="error : ${#fields.errors('newEmployeeCommand.*')}" th:text="${error}" />
+      </ul>
+      <form
+              th:action="@{'/employee/saveneemployee'}"
+        method="post"
+        th:object="${newEmployeeCommand}"
+      >
+        <label>Imie:</label>
+        <input type="text" th:field="*{firstName}" />
+
+        <label>Nazwisko:</label>
+        <input type="text" th:field="*{lastName}" />
+
+        <label>Email:</label>
+        <input type="text" th:field="*{email}" />
+
+        <label>Numer telefonu:</label>
+        <input type="text" th:field="*{mobilePhone}" />
+
+        <label>Nazwa stanowiska:</label>
+        <input type="text" th:field="*{position_name}" />
+
+        <label>Ulica:</label>
+        <input type="text" th:field="*{address.streetAddress}" />
+
+        <label>Miasto:</label>
+        <input type="text" th:field="*{address.city}" />
+
+        <label>Kraj:</label>
+        <input type="text" th:field="*{address.country}" />
+
+        <label>Kod pocztowy:</label>
+        <input type="text" th:field="*{address.zipCode}" />
+
+        <label >Źródło pracownika:</label>
+        <select id="status" name="status" th:field="*{sourceType}">
+          <option th:each="typeOfEmploymentSource : ${typeOfEmploymentSourceOptions}" th:value="${typeOfEmploymentSource}" th:text="${typeOfEmploymentSource}"></option>
+        </select>
+
+        <button >CREATE</button>
+      </form>
+    </main>
+
+    <!-- footer block -->
+        <div th:replace="~{footer :: footer}">...</div>
+    <!-- //footer block -->
+  </body>
+</html>

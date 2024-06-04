@@ -1,3 +1,5 @@
+DROP TABLE employment_source;
+
 DROP TABLE application_form;
 
 DROP TABLE hr_user;
@@ -6,9 +8,9 @@ DROP TABLE hr_identification;
 
 DROP TABLE hr_role;
 
-DROP TABLE employment_source;
+DROP TABLE employee;
 
-DROP TABLE employee
+DROP TABLE employee_address;
 
 DROP TABLE job_offer;
 
@@ -79,7 +81,7 @@ CREATE TABLE IF NOT EXISTS employee (
 
 CREATE TABLE IF NOT EXISTS employment_source (
     employment_source_id UUID PRIMARY KEY,
-    source_type VARCHAR(50) NOT NULL,
+    source_type VARCHAR(100) NOT NULL,
     form_id UUID REFERENCES application_form(form_id),
     employee_id UUID REFERENCES employee(employee_id)
 );

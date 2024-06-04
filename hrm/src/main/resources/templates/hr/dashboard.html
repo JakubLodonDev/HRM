@@ -24,8 +24,8 @@
         <div class="dash-box" sec:authorize="hasAnyRole('ROLE_RECRUITMENT_SPECIALIST', 'ROLE_MANAGER')">
           <a class="dash-box-text" th:href="@{/applications/listofjobofferstoreviewapplications/all}">Manage application forms</a>
         </div>
-        <div class="dash-box">
-          <a class="dash-box-text" href="">Employee</a>
+        <div class="dash-box" sec:authorize="hasAnyRole('ROLE_RECRUITMENT_SPECIALIST', 'ROLE_MANAGER')">
+          <a class="dash-box-text" th:href="@{/employee/listofemployee}">Employee</a>
         </div>
         <div class="dash-box" sec:authorize="hasRole('ROLE_ADMIN')">
           <a class="dash-box-text" th:href="@{/user/listofusers}">Users</a>
