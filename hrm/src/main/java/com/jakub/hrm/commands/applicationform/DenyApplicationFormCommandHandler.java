@@ -8,12 +8,12 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class UpdateDataApplicationFormCommandHandler {
+public class DenyApplicationFormCommandHandler {
     ApplicationFormRepo applicationFormRepo;
 
 
     @Autowired
-    public UpdateDataApplicationFormCommandHandler(ApplicationFormRepo applicationFormRepo) {
+    public DenyApplicationFormCommandHandler(ApplicationFormRepo applicationFormRepo) {
         this.applicationFormRepo = applicationFormRepo;
     }
 
@@ -23,12 +23,9 @@ public class UpdateDataApplicationFormCommandHandler {
         if (dbApplicationForm.isPresent()){
             ApplicationForm applicationForm = dbApplicationForm.get();
 
-            applicationForm.updateData(command.getFirstName(), command.getLastName(), command.getEmail(),
-                    command.getMobilePhone(), command.getStreetAddress(), command.getCountry(), command.getCity(),
-                    command.getZipCode(), command.getAboutYourself());
+            applicationForm.setStatusOnDeny();
 
             applicationFormRepo.save(applicationForm);
         }
     }
-
 }

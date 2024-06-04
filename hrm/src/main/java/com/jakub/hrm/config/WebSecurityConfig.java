@@ -28,14 +28,14 @@ public class WebSecurityConfig {
                 .authorizeRequests((requests) -> requests
                         .requestMatchers("/", "/home").permitAll()
                         .requestMatchers("/displayjoboffer/**").permitAll()
-                        .requestMatchers("/applicationform").permitAll()
+                        .requestMatchers("/applicationform/**").permitAll()
                         .requestMatchers("/resetpassword").authenticated()
                         .requestMatchers("/assets/**").permitAll()
                         .requestMatchers("/dashboard").authenticated()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/user/**").hasRole("ADMIN")
                         .requestMatchers("/joboffer/**").hasAnyRole("RECRUITMENT_SPECIALIST", "MANAGER")
-                        .requestMatchers("/applicationform/**").hasAnyRole("RECRUITMENT_SPECIALIST", "MANAGER")
+                        .requestMatchers("/applications/**").hasAnyRole("RECRUITMENT_SPECIALIST", "MANAGER")
                         .requestMatchers("/logout").authenticated())
 
                 .formLogin(formLogin -> formLogin

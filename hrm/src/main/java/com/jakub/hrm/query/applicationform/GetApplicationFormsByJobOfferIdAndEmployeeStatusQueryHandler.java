@@ -1,5 +1,6 @@
 package com.jakub.hrm.query.applicationform;
 
+import com.jakub.hrm.constans.EmploymentStatus;
 import com.jakub.hrm.model.ApplicationForm;
 import com.jakub.hrm.model.JobOffer;
 import com.jakub.hrm.repo.ApplicationFormRepo;
@@ -13,21 +14,37 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class GetAllApplicationFormsByJobOfferIdQueryHandler {
+public class GetApplicationFormsByJobOfferIdAndEmployeeStatusQueryHandler {
 
     JobOfferRepo jobOfferRepo;
     ApplicationFormRepo applicationFormRepo;
 
     @Autowired
-    public GetAllApplicationFormsByJobOfferIdQueryHandler(JobOfferRepo jobOfferRepo, ApplicationFormRepo applicationFormRepo) {
+    public GetApplicationFormsByJobOfferIdAndEmployeeStatusQueryHandler(JobOfferRepo jobOfferRepo, ApplicationFormRepo applicationFormRepo) {
         this.jobOfferRepo = jobOfferRepo;
         this.applicationFormRepo = applicationFormRepo;
     }
 
-    public List<ApplicationFormByJobIdQuery> Handle(String jobOfferId) {
+    public List<ApplicationFormByJobIdQuery> Handle(String jobOfferId, String display) {
         Optional<JobOffer> jobOffer = jobOfferRepo.findById(UUID.fromString(jobOfferId));
 
-        List<ApplicationForm> applicationFormList = applicationFormRepo.findAllByJobOffer(jobOffer);
+        List<ApplicationForm> applicationFormList;
+        switch (display) {
+            case "process":
+                applicationFormList = applicationFormRepo.findAllByJobOfferAndEmploymentStatus(jobOffer, EmploymentStatus.PROCESS);
+                break;
+            case "deny":
+                applicationFormList = applicationFormRepo.findAllByJobOfferAndEmploymentStatus(jobOffer, EmploymentStatus.DENY);
+                break;
+            case "hire":
+                applicationFormList = applicationFormRepo.findAllByJobOfferAndEmploymentStatus(jobOffer, EmploymentStatus.HIRE);
+                break;
+            default:
+                applicationFormList = applicationFormRepo.findAllByJobOffer(jobOffer);
+                break;
+        }
+
+
 
         return duplicateListToDisplay(applicationFormList);
     }

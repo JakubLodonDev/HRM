@@ -16,46 +16,43 @@
         <li th:each="error : ${#fields.errors('applicationFormQuery.*')}" th:text="${error}" />
       </ul>
       <form
-              th:action="@{'/applicationform/updateapplicationform'}"
+              th:action="@{'/applications/updateapplicationform'}"
         method="post"
         th:object="${applicationFormQuery}"
       >
         <label >Imie:</label>
-        <input type="text" th:field="*{firstName}" />
+        <input type="text" th:attrappend="disabled=${applicationFormQuery.employmentStatus == 'Process' ?  null : 'disabled'}" th:field="*{firstName}" />
 
         <label >Nazwisko:</label>
-        <input type="text" th:field="*{lastName}" />
+        <input type="text" th:attrappend="disabled=${applicationFormQuery.employmentStatus == 'Process' ?  null : 'disabled'}" th:field="*{lastName}" />
 
         <label >Email:</label>
-        <input type="text" th:field="*{email}" />
+        <input type="text" th:attrappend="disabled=${applicationFormQuery.employmentStatus == 'Process' ?  null : 'disabled'}" th:field="*{email}" />
 
         <label >Numer Telefonu:</label>
-        <input type="text" th:field="*{mobilePhone}"/>
+        <input type="text" th:attrappend="disabled=${applicationFormQuery.employmentStatus == 'Process' ?  null : 'disabled'}" th:field="*{mobilePhone}"/>
 
         <label >Opis:</label>
-        <input type="text" th:field="*{aboutYourself}"/>
-
-        <label >Status:</label>
-        <select id="status" name="status" th:field="*{employmentStatus}">
-          <option th:each="statusOption : ${applicationEmploymentStatusOptions}" th:value="${statusOption}" th:text="${statusOption}"></option>
-        </select>
+        <input type="text" th:attrappend="disabled=${applicationFormQuery.employmentStatus == 'Process' ?  null : 'disabled'}" th:field="*{aboutYourself}"/>
 
         <label >Ulica:</label>
-        <input type="text" th:field="*{streetAddress}"/>
+        <input type="text" th:attrappend="disabled=${applicationFormQuery.employmentStatus == 'Process' ?  null : 'disabled'}" th:field="*{streetAddress}"/>
 
         <label >Miasto:</label>
-        <input type="text" th:field="*{city}"/>
+        <input type="text" th:attrappend="disabled=${applicationFormQuery.employmentStatus == 'Process' ?  null : 'disabled'}" th:field="*{city}"/>
 
         <label >Kraj:</label>
-        <input type="text" th:field="*{country}"/>
+        <input type="text" th:attrappend="disabled=${applicationFormQuery.employmentStatus == 'Process' ?  null : 'disabled'}" th:field="*{country}"/>
 
         <label >Kod pocztowy:</label>
-        <input type="text" th:field="*{zipCode}"/>
+        <input type="text" th:attrappend="disabled=${applicationFormQuery.employmentStatus == 'Process' ?  null : 'disabled'}" th:field="*{zipCode}"/>
 
         <input type="hidden" name="applicationFormId" th:value="${applicationFormId}" />
         <input type="hidden" name="jobOfferId" th:value="${applicationFormQuery.jobOfferId}" />
 
-        <button >UPDATE</button>
+        <button th:if="*{employmentStatus == 'Process'}" name="action" value="updateData">UPDATE</button>
+        <button th:if="*{employmentStatus == 'Process'}" name="action" value="denyApplicant">DENY</button>
+        <button th:if="*{employmentStatus == 'Process'}" name="action" value="hireApplicant">HIRE</button>
       </form>
     </main>
 

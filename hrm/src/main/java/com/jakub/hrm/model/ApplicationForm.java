@@ -1,5 +1,7 @@
 package com.jakub.hrm.model;
 
+import com.jakub.hrm.constans.EmploymentStatus;
+import com.jakub.hrm.constans.JobStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -69,7 +71,7 @@ public class ApplicationForm {
 
     public void updateData(String firstName, String lastName, String email, String mobilePhone,
                            String streetAddress, String country, String city,
-                           String zipCode, String aboutYourself, String employmentStatus){
+                           String zipCode, String aboutYourself){
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -79,9 +81,11 @@ public class ApplicationForm {
         this.country = country;
         this.zipCode = zipCode;
         this.aboutYourself = aboutYourself;
-        this.employmentStatus = employmentStatus;
     }
 
+    public void setStatusOnDeny() {
+        this.employmentStatus = EmploymentStatus.DENY;
+    }
 
     public UUID getApplicationFormId() {
         return applicationFormId;

@@ -1,9 +1,11 @@
 package com.jakub.hrm.controller;
 
+import com.jakub.hrm.commands.applicationform.AcceptApplicationFormCommandHandler;
+import com.jakub.hrm.commands.applicationform.DenyApplicationFormCommandHandler;
 import com.jakub.hrm.commands.applicationform.UpdateDataApplicationFormCommand;
 import com.jakub.hrm.commands.applicationform.UpdateDataApplicationFormCommandHandler;
 import com.jakub.hrm.constans.EmploymentStatus;
-import com.jakub.hrm.query.applicationform.GetAllApplicationFormsByJobOfferIdQueryHandler;
+import com.jakub.hrm.query.applicationform.GetApplicationFormsByJobOfferIdAndEmployeeStatusQueryHandler;
 import com.jakub.hrm.query.applicationform.GetApplicationFormByIdQueryHandler;
 import com.jakub.hrm.query.joboffer.GetJobOffersByStatusQueryHandler;
 import jakarta.validation.Valid;
@@ -17,23 +19,29 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequestMapping("applicationform")
+@RequestMapping("applications")
 public class HrApplicationFormController {
 
     GetJobOffersByStatusQueryHandler getJobOffersByStatusQueryHandler;
-    GetAllApplicationFormsByJobOfferIdQueryHandler getAllApplicationFormsByJobOfferIdQueryHandler;
+    GetApplicationFormsByJobOfferIdAndEmployeeStatusQueryHandler getApplicationFormsByJobOfferIdAndEmployeeStatusQueryHandler;
     GetApplicationFormByIdQueryHandler getApplicationFormByIdQueryHandler;
     UpdateDataApplicationFormCommandHandler updateApplicationFormCommandHandler;
+    DenyApplicationFormCommandHandler denyApplicationFormCommandHandler;
+    AcceptApplicationFormCommandHandler acceptApplicationFormCommandHandler;
 
     @Autowired
     public HrApplicationFormController(GetJobOffersByStatusQueryHandler getJobOffersByStatusQueryHandler,
-                                       GetAllApplicationFormsByJobOfferIdQueryHandler getAllApplicationFormsByJobOfferIdQueryHandler,
+                                       GetApplicationFormsByJobOfferIdAndEmployeeStatusQueryHandler getApplicationFormsByJobOfferIdAndEmployeeStatusQueryHandler,
                                        GetApplicationFormByIdQueryHandler getApplicationFormByIdQueryHandler,
-                                       UpdateDataApplicationFormCommandHandler updateApplicationFormCommandHandler) {
+                                       UpdateDataApplicationFormCommandHandler updateApplicationFormCommandHandler,
+                                       DenyApplicationFormCommandHandler denyApplicationFormCommandHandler,
+                                       AcceptApplicationFormCommandHandler acceptApplicationFormCommandHandler) {
         this.getJobOffersByStatusQueryHandler = getJobOffersByStatusQueryHandler;
-        this.getAllApplicationFormsByJobOfferIdQueryHandler = getAllApplicationFormsByJobOfferIdQueryHandler;
+        this.getApplicationFormsByJobOfferIdAndEmployeeStatusQueryHandler = getApplicationFormsByJobOfferIdAndEmployeeStatusQueryHandler;
         this.getApplicationFormByIdQueryHandler = getApplicationFormByIdQueryHandler;
         this.updateApplicationFormCommandHandler = updateApplicationFormCommandHandler;
+        this.denyApplicationFormCommandHandler = denyApplicationFormCommandHandler;
+        this.acceptApplicationFormCommandHandler = acceptApplicationFormCommandHandler;
     }
 
 
@@ -43,15 +51,16 @@ public class HrApplicationFormController {
         return "hr/applicationform/listofjobofferstoreviewapplications";
     }
 
-    @GetMapping("/listofapplicationforms/{jobOfferId}")
-    public String displayListOfApplicationFormFromJobOffer(@PathVariable String jobOfferId, Model model) {
-        model.addAttribute("applicationFormList", getAllApplicationFormsByJobOfferIdQueryHandler.Handle(jobOfferId));
+    @GetMapping("/listofapplicationforms/{display}/{jobOfferId}")
+    public String displayListOfApplicationFormFromJobOffer(@PathVariable String display, @PathVariable String jobOfferId, Model model) {
+        model.addAttribute("jobOfferId", jobOfferId);
+        model.addAttribute("applicationFormList", getApplicationFormsByJobOfferIdAndEmployeeStatusQueryHandler.Handle(jobOfferId, display));
         return "hr/applicationform/listofapplicationsonoffer";
     }
 
     @GetMapping("/managesingleapplicationform/{applicationFormId}")
     public String displaySingleApplicationFormToManage(@PathVariable String applicationFormId, Model model){
-        List<String> applicationEmploymentStatusOptions = Arrays.asList(EmploymentStatus.PROCESS, EmploymentStatus.REVIEW, EmploymentStatus.DENY, EmploymentStatus.ACCEPT);
+        List<String> applicationEmploymentStatusOptions = Arrays.asList(EmploymentStatus.PROCESS, EmploymentStatus.DENY, EmploymentStatus.HIRE);
 
         model.addAttribute("applicationEmploymentStatusOptions", applicationEmploymentStatusOptions);
         model.addAttribute("applicationFormId", applicationFormId);
@@ -61,13 +70,33 @@ public class HrApplicationFormController {
         return "hr/applicationform/managesingleapplicationform";
     }
 
-    @PostMapping("/updateapplicationform")
-    public String updateJobOffer(@Valid @ModelAttribute("applicationFormQuery") UpdateDataApplicationFormCommand updateApplicationFormRequest,
+    @PostMapping(value = "/updateapplicationform", params = "action=updateData")
+    public String updateApplicationForm(@Valid @ModelAttribute("applicationFormQuery") UpdateDataApplicationFormCommand updateApplicationFormRequest,
                                  BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             return "hr/applicationform/managesingleapplicationform";
         }
         updateApplicationFormCommandHandler.Handle(updateApplicationFormRequest);
-        return "redirect:/applicationform/listofapplicationforms/" + updateApplicationFormRequest.getJobOfferId();
+        return "redirect:/applications/listofapplicationforms/process/" + updateApplicationFormRequest.getJobOfferId();
+    }
+
+    @PostMapping(value = "/updateapplicationform", params = "action=denyApplicant")
+    public String danyApplicationForm(@Valid @ModelAttribute("applicationFormQuery") UpdateDataApplicationFormCommand updateApplicationFormRequest,
+                                 BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return "jobofferdetails";
+        }
+        denyApplicationFormCommandHandler.Handle(updateApplicationFormRequest);
+        return "redirect:/applications/listofapplicationforms/process/" + updateApplicationFormRequest.getJobOfferId();
+    }
+
+    @PostMapping(value = "/updateapplicationform", params = "action=hireApplicant")
+    public String hireApplicant(@Valid @ModelAttribute("applicationFormQuery") UpdateDataApplicationFormCommand updateApplicationFormRequest,
+                                      BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return "jobofferdetails";
+        }
+        acceptApplicationFormCommandHandler.Handle(updateApplicationFormRequest);
+        return "redirect:/applications/listofapplicationforms/process/" + updateApplicationFormRequest.getJobOfferId();
     }
 }

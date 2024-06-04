@@ -11,6 +11,18 @@
     <div th:replace="~{header :: header}">...</div>
   <!-- //header -->
     <main>
+      <div class="button-group">
+        <a th:href="@{'/applications/listofapplicationforms/all/' + ${jobOfferId}}" class="btn btn-primary">Wyświetl wszystkich</a>
+      </div>
+      <div class="button-group">
+        <a th:href="@{'/applications/listofapplicationforms/hire/' + ${jobOfferId}}" class="btn btn-primary">Wyświetl zatrudionych</a>
+      </div>
+      <div class="button-group">
+        <a th:href="@{'/applications/listofapplicationforms/process/' + ${jobOfferId}}" class="btn btn-primary">Wyświetl w trakcie oceny</a>
+      </div>
+      <div class="button-group">
+        <a th:href="@{'/applications/listofapplicationforms/deny/' + ${jobOfferId}}" class="btn btn-primary">Wyświetl odrzucone</a>
+      </div>
       <table>
         <thead>
           <tr>
@@ -27,7 +39,7 @@
             <td th:text="${applicationForm.lastName}"></td>
             <td th:text="${applicationForm.email}"></td>
             <td th:text="${applicationForm.employmentStatus}"></td>
-            <td><a th:href="@{'/applicationform/managesingleapplicationform/' + ${applicationForm.applicationFormId}}">DETAILS</a></td>
+            <td><a th:href="@{'/applications/managesingleapplicationform/' + ${applicationForm.applicationFormId}}">DETAILS</a></td>
           </tr>
         </tbody>
       </table>

@@ -18,14 +18,16 @@ public class GetJobOffersByStatusQueryHandler {
 
     public List<JobOfferQuery> Handle(String display){
         List<JobOffer> jobOffers;
-        if(Objects.equals(display, "open")){
-            jobOffers = jobOfferRepo.findAllByStatus(JobStatus.OPEN);
-        }
-        else if(Objects.equals(display, "close")){
-            jobOffers = jobOfferRepo.findAllByStatus(JobStatus.CLOSE);
-        }
-        else {
-            jobOffers = jobOfferRepo.findAll();
+        switch (display) {
+            case "open":
+                jobOffers = jobOfferRepo.findAllByStatus(JobStatus.OPEN);
+                break;
+            case "close":
+                jobOffers = jobOfferRepo.findAllByStatus(JobStatus.CLOSE);
+                break;
+            default:
+                jobOffers = jobOfferRepo.findAll();
+                break;
         }
 
         return duplicateListToDisplay(jobOffers);

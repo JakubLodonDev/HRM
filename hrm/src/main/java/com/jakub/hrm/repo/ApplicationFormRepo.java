@@ -11,6 +11,8 @@ import java.util.*;
 public interface ApplicationFormRepo extends JpaRepository<ApplicationForm, UUID> {
 
     boolean existsByEmailAndJobOffer(String email, Optional<JobOffer> jobOffer);
+    List<ApplicationForm> findAllByJobOfferAndEmploymentStatus(Optional<JobOffer> jobOffer, String employmentStatus);
+
     List<ApplicationForm> findAllByJobOffer(Optional<JobOffer> jobOffer);
 
 }
