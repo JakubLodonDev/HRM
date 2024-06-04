@@ -1,7 +1,6 @@
 package com.jakub.hrm.model;
 
 import com.jakub.hrm.constans.EmploymentStatus;
-import com.jakub.hrm.constans.JobStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

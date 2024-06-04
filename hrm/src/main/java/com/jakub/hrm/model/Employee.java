@@ -1,6 +1,7 @@
 package com.jakub.hrm.model;
 
 
+import com.jakub.hrm.constans.EmploymentStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -57,5 +58,18 @@ public class Employee {
         this.employmentStatus = employmentStatus;
         this.position_name = position_name;
         this.employeeAddress = employeeAddress;
+    }
+
+    public void updateEmployee(String firstName, String lastName, String email, String mobilePhone, String position_name, EmployeeAddress employeeAddress) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.mobilePhone = mobilePhone;
+        this.position_name = position_name;
+        this.employeeAddress = employeeAddress;
+    }
+
+    public void setEmploymentStatusOnFire() {
+        this.employmentStatus = EmploymentStatus.FIRE;
     }
 }

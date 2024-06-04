@@ -1,10 +1,8 @@
 package com.jakub.hrm.query.employee;
 
+import com.jakub.hrm.constans.EmploymentStatus;
 import com.jakub.hrm.model.Employee;
-import com.jakub.hrm.model.HrUser;
-import com.jakub.hrm.query.user.GetAllUsersQuery;
 import com.jakub.hrm.repo.EmployeeRepo;
-import com.jakub.hrm.repo.HrUserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class GetAllEmployeeQueryHandle {
+public class GetAllHireEmployeeQueryHandle {
 
     @Autowired
     EmployeeRepo employeeRepo;
 
     public List<GetAllEmployeeQuery> Handle() {
 
-        List<Employee> employeeList = employeeRepo.findAll();
+        List<Employee> employeeList = employeeRepo.findAllByEmploymentStatus(EmploymentStatus.HIRE);
 
         return moveDataToQuery(employeeList);
     }
