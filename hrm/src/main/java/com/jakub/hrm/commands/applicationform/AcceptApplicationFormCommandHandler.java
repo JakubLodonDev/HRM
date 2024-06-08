@@ -6,7 +6,7 @@ import com.jakub.hrm.model.ApplicationForm;
 import com.jakub.hrm.model.Employee;
 import com.jakub.hrm.model.EmployeeAddress;
 import com.jakub.hrm.model.EmploymentSource;
-import com.jakub.hrm.repo.ApplicationFormRepo;
+import com.jakub.hrm.repo.applicationform.ApplicationFormRepo;
 import com.jakub.hrm.repo.EmployeeRepo;
 import com.jakub.hrm.repo.EmploymentSourceRepo;
 import org.springframework.beans.factory.annotation.Autowired;

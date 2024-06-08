@@ -44,18 +44,23 @@ public class ApplicationForm {
     private String aboutYourself;
     private String employmentStatus;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "job_id", referencedColumnName = "job_id")
     private JobOffer jobOffer;
 
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "form_attachment_id", referencedColumnName = "form_attachment_id")
+    @PrimaryKeyJoinColumn
+    private FormAttachment formAttachment;
+
+    private UUID form_attachment_id;
 
     public ApplicationForm() {}
 
-
-
     public ApplicationForm(String firstName, String lastName, String email, String mobilePhone,
                            String streetAddress, String city, String country, String zipCode,
-                           String aboutYourself, String employmentStatus) {
+                           String aboutYourself, String employmentStatus,
+                           FormAttachment formAttachment) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -66,6 +71,7 @@ public class ApplicationForm {
         this.zipCode = zipCode;
         this.aboutYourself = aboutYourself;
         this.employmentStatus = employmentStatus;
+        this.formAttachment = formAttachment;
     }
 
     public void updateData(String firstName, String lastName, String email, String mobilePhone,
@@ -93,6 +99,7 @@ public class ApplicationForm {
     public void setApplicationFormId(UUID applicationFormId) {
         this.applicationFormId = applicationFormId;
     }
+
     public String getFirstName() {
         return firstName;
     }
@@ -123,30 +130,6 @@ public class ApplicationForm {
 
     public void setMobilePhone(String mobilePhone) {
         this.mobilePhone = mobilePhone;
-    }
-
-    public String getAboutYourself() {
-        return aboutYourself;
-    }
-
-    public void setAboutYourself(String aboutYourself) {
-        this.aboutYourself = aboutYourself;
-    }
-
-    public String getEmploymentStatus() {
-        return employmentStatus;
-    }
-
-    public void setEmploymentStatus(String employmentStatus) {
-        this.employmentStatus = employmentStatus;
-    }
-
-    public JobOffer getJobOffer() {
-        return jobOffer;
-    }
-
-    public void setJobOffer(JobOffer jobOffer) {
-        this.jobOffer = jobOffer;
     }
 
     public String getStreetAddress() {
@@ -181,14 +164,43 @@ public class ApplicationForm {
         this.zipCode = zipCode;
     }
 
-    @Override
-    public String toString() {
-        return "ApplicationForm{" +
-                "name='" + firstName + '\'' +
-                "lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", mobilePhone='" + mobilePhone + '\'' +
-                ", aboutYourself='" + aboutYourself + '\'' +
-                '}';
+    public String getAboutYourself() {
+        return aboutYourself;
+    }
+
+    public void setAboutYourself(String aboutYourself) {
+        this.aboutYourself = aboutYourself;
+    }
+
+    public String getEmploymentStatus() {
+        return employmentStatus;
+    }
+
+    public void setEmploymentStatus(String employmentStatus) {
+        this.employmentStatus = employmentStatus;
+    }
+
+    public JobOffer getJobOffer() {
+        return jobOffer;
+    }
+
+    public void setJobOffer(JobOffer jobOffer) {
+        this.jobOffer = jobOffer;
+    }
+
+    public FormAttachment getFormAttachment() {
+        return formAttachment;
+    }
+
+    public void setFormAttachment(FormAttachment formAttachment) {
+        this.formAttachment = formAttachment;
+    }
+
+    public UUID getForm_attachment_id() {
+        return form_attachment_id;
+    }
+
+    public void setForm_attachment_id(UUID form_attachment_id) {
+        this.form_attachment_id = form_attachment_id;
     }
 }

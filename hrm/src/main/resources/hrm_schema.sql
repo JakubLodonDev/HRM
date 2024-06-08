@@ -2,6 +2,8 @@ DROP TABLE employment_source;
 
 DROP TABLE application_form;
 
+DROP TABLE form_attachment;
+
 DROP TABLE hr_user;
 
 DROP TABLE hr_identification;
@@ -14,6 +16,27 @@ DROP TABLE employee_address;
 
 DROP TABLE job_offer;
 
+CREATE TABLE IF NOT EXISTS hr_role (
+    role_id UUID PRIMARY KEY,
+    role_name VARCHAR(30) NOT NULL
+    );
+
+CREATE TABLE IF NOT EXISTS hr_identification (
+    identification_id UUID PRIMARY KEY,
+    login VARCHAR(50) NOT NULL,
+    pwd VARCHAR(100) NOT NULL
+    );
+
+CREATE TABLE IF NOT EXISTS hr_user (
+    user_id UUID PRIMARY KEY,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    is_password_change_required BOOLEAN NOT NULL,
+    identification_id UUID REFERENCES hr_identification(identification_id),
+    role_id UUID REFERENCES hr_role(role_id)
+    );
+
 CREATE TABLE IF NOT EXISTS job_offer (
     job_id UUID PRIMARY KEY,
     name VARCHAR(30) NOT NULL,
@@ -21,6 +44,13 @@ CREATE TABLE IF NOT EXISTS job_offer (
     requirement VARCHAR(200) NOT NULL,
     description VARCHAR(255) NOT NULL,
     status VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS form_attachment (
+    form_attachment_id UUID PRIMARY KEY,
+    file_name VARCHAR(255),
+    file_type VARCHAR(50),
+    data BYTEA
 );
 
 CREATE TABLE IF NOT EXISTS application_form (
@@ -35,28 +65,8 @@ CREATE TABLE IF NOT EXISTS application_form (
     zip_code VARCHAR(5) NOT NULL,
     about_yourself VARCHAR(255),
     employment_status VARCHAR(30) NOT NULL,
-    job_id UUID REFERENCES job_offer(job_id)
-);
-
-CREATE TABLE IF NOT EXISTS hr_role (
-    role_id UUID PRIMARY KEY,
-    role_name VARCHAR(30) NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS hr_identification (
-    identification_id UUID PRIMARY KEY,
-    login VARCHAR(50) NOT NULL,
-    pwd VARCHAR(100) NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS hr_user (
-    user_id UUID PRIMARY KEY,
-    first_name VARCHAR(100) NOT NULL,
-    last_name VARCHAR(100) NOT NULL,
-    email VARCHAR(50) NOT NULL,
-    is_password_change_required BOOLEAN NOT NULL,
-    identification_id UUID REFERENCES hr_identification(identification_id),
-    role_id UUID REFERENCES hr_role(role_id)
+    job_id UUID REFERENCES job_offer(job_id),
+    form_attachment_id UUID UNIQUE REFERENCES form_attachment(form_attachment_id)
 );
 
 CREATE TABLE IF NOT EXISTS employee_address (

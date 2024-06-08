@@ -49,10 +49,14 @@
 
         <input type="hidden" name="applicationFormId" th:value="${applicationFormId}" />
         <input type="hidden" name="jobOfferId" th:value="${applicationFormQuery.jobOfferId}" />
+        <input type="hidden" name="formAttachmentId" th:value="${formAttachmentId}" />
 
         <button th:if="*{employmentStatus == 'Process'}" name="action" value="updateData">UPDATE</button>
         <button th:if="*{employmentStatus == 'Process'}" name="action" value="denyApplicant">DENY</button>
         <button th:if="*{employmentStatus == 'Process'}" name="action" value="hireApplicant">HIRE</button>
+        <a th:href="@{'/applications/download/' + ${formAttachmentId}}">
+          Pobierz CV
+        </a>
       </form>
     </main>
 

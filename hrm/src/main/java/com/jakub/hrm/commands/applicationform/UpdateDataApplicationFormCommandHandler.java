@@ -1,7 +1,8 @@
 package com.jakub.hrm.commands.applicationform;
 
 import com.jakub.hrm.model.ApplicationForm;
-import com.jakub.hrm.repo.ApplicationFormRepo;
+import com.jakub.hrm.repo.applicationform.ApplicationFormRepo;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ public class UpdateDataApplicationFormCommandHandler {
         this.applicationFormRepo = applicationFormRepo;
     }
 
+    @Transactional
     public void Handle(UpdateDataApplicationFormCommand command) {
 
         Optional<ApplicationForm> dbApplicationForm = applicationFormRepo.findById(command.getApplicationFormId());
@@ -27,7 +29,7 @@ public class UpdateDataApplicationFormCommandHandler {
                     command.getMobilePhone(), command.getStreetAddress(), command.getCountry(), command.getCity(),
                     command.getZipCode(), command.getAboutYourself());
 
-            applicationFormRepo.save(applicationForm);
+            applicationFormRepo.updateForm(applicationForm);
         }
     }
 

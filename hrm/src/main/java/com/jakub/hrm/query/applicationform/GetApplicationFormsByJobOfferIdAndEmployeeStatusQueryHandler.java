@@ -3,7 +3,7 @@ package com.jakub.hrm.query.applicationform;
 import com.jakub.hrm.constans.EmploymentStatus;
 import com.jakub.hrm.model.ApplicationForm;
 import com.jakub.hrm.model.JobOffer;
-import com.jakub.hrm.repo.ApplicationFormRepo;
+import com.jakub.hrm.repo.applicationform.ApplicationFormRepo;
 import com.jakub.hrm.repo.JobOfferRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

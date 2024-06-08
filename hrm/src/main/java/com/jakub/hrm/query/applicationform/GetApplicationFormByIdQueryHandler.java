@@ -1,7 +1,7 @@
 package com.jakub.hrm.query.applicationform;
 
 import com.jakub.hrm.model.ApplicationForm;
-import com.jakub.hrm.repo.ApplicationFormRepo;
+import com.jakub.hrm.repo.applicationform.ApplicationFormRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

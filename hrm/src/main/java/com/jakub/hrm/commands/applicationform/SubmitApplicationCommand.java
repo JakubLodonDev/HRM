@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
+import java.util.UUID;
+
 
 public class SubmitApplicationCommand {
 
@@ -36,7 +38,7 @@ public class SubmitApplicationCommand {
     private String aboutYourself;
     private String employmentStatus;
 
-    private String jobOfferId;
+    private UUID jobOfferId;
 
     public String getFirstName() {
         return firstName;
@@ -118,11 +120,11 @@ public class SubmitApplicationCommand {
         this.zipCode = zipCode;
     }
 
-    public String getJobOfferId() {
+    public UUID getJobOfferId() {
         return jobOfferId;
     }
 
-    public void setJobOfferId(String jobOfferId) {
+    public void setJobOfferId(UUID jobOfferId) {
         this.jobOfferId = jobOfferId;
     }
 }

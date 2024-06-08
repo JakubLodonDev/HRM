@@ -45,7 +45,8 @@ public class ApplicationFormQuery {
     public ApplicationFormQuery(UUID applicationFormId, String firstName, String lastName,
                                 String email, String mobilePhone, String streetAddress,
                                 String city, String country, String zipCode,
-                                String aboutYourself, String employmentStatus, UUID jobOfferId) {
+                                String aboutYourself, String employmentStatus,
+                                UUID jobOfferId) {
         this.applicationFormId = applicationFormId;
         this.firstName = firstName;
         this.lastName = lastName;
