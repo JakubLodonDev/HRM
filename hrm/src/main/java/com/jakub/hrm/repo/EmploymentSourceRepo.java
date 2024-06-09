@@ -10,4 +10,5 @@ import java.util.UUID;
 @Repository
 public interface EmploymentSourceRepo extends JpaRepository<EmploymentSource, UUID> {
 
+    EmploymentSource getByEmployee(Employee employee);
 }

@@ -47,6 +47,9 @@
         <label >Kod pocztowy:</label>
         <input type="text" th:field="*{address.zipCode}"/>
 
+        <label >Employee source:</label>
+        <input type="text" th:attrappend="disabled=${'disabled'}" th:field="${employeeSourceQuery.sourceType}"/>
+
         <input type="hidden" name="employeeId" th:value="${employeeId}" />
 
         <button name="action" value="updateData">UPDATE</button>

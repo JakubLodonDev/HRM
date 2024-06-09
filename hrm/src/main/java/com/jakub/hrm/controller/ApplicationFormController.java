@@ -56,6 +56,7 @@ public class ApplicationFormController {
         }
 
         if (cv.isEmpty()) {
+            model.addAttribute("jobOfferId", submitApplicationRequest.getJobOfferId());
             model.addAttribute("errorMessage", "Przesłanie pliku CV jest wymagane.");
             return "applicant/applicationform";
         }

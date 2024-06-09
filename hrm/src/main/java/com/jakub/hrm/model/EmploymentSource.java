@@ -22,7 +22,7 @@ public class EmploymentSource {
     @JoinColumn(name = "form_id", referencedColumnName = "form_id")
     private ApplicationForm applicationForm;
 
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "employee_id", referencedColumnName = "employee_id")
     private Employee employee;
 

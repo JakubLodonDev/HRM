@@ -30,7 +30,7 @@ public class CustomApplicationFormRepositoryImpl implements CustomApplicationFor
         query.setParameter(10, form.getAboutYourself());
         query.setParameter(11, form.getEmploymentStatus());
         query.setParameter(12, form.getJobOffer().getJobOfferId());
-        query.setParameter(13, form.getFormAttachment());
+        query.setParameter(13, form.getFormAttachment().getFormAttachmentId());
 
         query.executeUpdate();
     }

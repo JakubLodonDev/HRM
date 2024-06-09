@@ -14,6 +14,7 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -85,9 +86,10 @@ public class HrApplicationFormController {
 
     @PostMapping(value = "/updateapplicationform", params = "action=updateData")
     public String updateApplicationForm(@Valid @ModelAttribute("applicationFormQuery") UpdateDataApplicationFormCommand updateApplicationFormRequest,
-                                 BindingResult bindingResult){
+                                 BindingResult bindingResult, Model model){
         if (bindingResult.hasErrors()) {
-
+            model.addAttribute("formAttachmentId", getFormAttachmentIdQueryHandler.Handle(String.valueOf(updateApplicationFormRequest.getApplicationFormId())));
+            model.addAttribute("applicationFormId", String.valueOf(updateApplicationFormRequest.getApplicationFormId()));
             return "hr/applicationform/managesingleapplicationform";
         }
         updateApplicationFormCommandHandler.Handle(updateApplicationFormRequest);
@@ -96,21 +98,21 @@ public class HrApplicationFormController {
 
     @PostMapping(value = "/updateapplicationform", params = "action=denyApplicant")
     public String danyApplicationForm(@Valid @ModelAttribute("applicationFormQuery") UpdateDataApplicationFormCommand updateApplicationFormRequest,
-                                 BindingResult bindingResult){
+                                 BindingResult bindingResult, Authentication authentication){
         if (bindingResult.hasErrors()) {
             return "jobofferdetails";
         }
-        denyApplicationFormCommandHandler.Handle(updateApplicationFormRequest);
+        denyApplicationFormCommandHandler.Handle(updateApplicationFormRequest, authentication);
         return "redirect:/applications/listofapplicationforms/process/" + updateApplicationFormRequest.getJobOfferId();
     }
 
     @PostMapping(value = "/updateapplicationform", params = "action=hireApplicant")
     public String hireApplicant(@Valid @ModelAttribute("applicationFormQuery") UpdateDataApplicationFormCommand updateApplicationFormRequest,
-                                      BindingResult bindingResult){
+                                      BindingResult bindingResult, Authentication authentication){
         if (bindingResult.hasErrors()) {
             return "jobofferdetails";
         }
-        acceptApplicationFormCommandHandler.Handle(updateApplicationFormRequest);
+        acceptApplicationFormCommandHandler.Handle(updateApplicationFormRequest, authentication);
         return "redirect:/applications/listofapplicationforms/process/" + updateApplicationFormRequest.getJobOfferId();
     }
 

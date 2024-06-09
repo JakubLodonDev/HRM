@@ -54,7 +54,7 @@
         <button th:if="*{employmentStatus == 'Process'}" name="action" value="updateData">UPDATE</button>
         <button th:if="*{employmentStatus == 'Process'}" name="action" value="denyApplicant">DENY</button>
         <button th:if="*{employmentStatus == 'Process'}" name="action" value="hireApplicant">HIRE</button>
-        <a th:href="@{'/applications/download/' + ${formAttachmentId}}">
+        <a th:if="*{employmentStatus == 'Process'}" th:href="@{'/applications/download/' + ${formAttachmentId}}">
           Pobierz CV
         </a>
       </form>

@@ -6,6 +6,8 @@ DROP TABLE form_attachment;
 
 DROP TABLE hr_user;
 
+DROP TABLE hr_user_application_form_information;
+
 DROP TABLE hr_identification;
 
 DROP TABLE hr_role;
@@ -68,6 +70,13 @@ CREATE TABLE IF NOT EXISTS application_form (
     job_id UUID REFERENCES job_offer(job_id),
     form_attachment_id UUID UNIQUE REFERENCES form_attachment(form_attachment_id)
 );
+
+CREATE TABLE IF NOT EXISTS application_form_audit (
+    application_form_audit_id UUID PRIMARY KEY,
+    date_modified TIMESTAMP NOT NULL,
+    form_id UUID REFERENCES application_form(form_id),
+    user_id UUID REFERENCES hr_user(user_id)
+    );
 
 CREATE TABLE IF NOT EXISTS employee_address (
     employee_address_id UUID PRIMARY KEY,

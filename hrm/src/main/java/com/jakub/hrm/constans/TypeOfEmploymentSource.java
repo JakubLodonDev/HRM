@@ -1,8 +1,8 @@
 package com.jakub.hrm.constans;
 
 public interface TypeOfEmploymentSource {
+    String APPLICATION = "Application";
+    String REFERENCE = "Reference";
+    String OTHER = "Other";
 
-    public static final String APPLICATION = "Aplikacja firmowa";
-    public static final String REFERENCE = "Polecenie";
-    public static final String OTHER = "Inne";
 }

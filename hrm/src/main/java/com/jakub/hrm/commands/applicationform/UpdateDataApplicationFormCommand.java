@@ -1,5 +1,6 @@
 package com.jakub.hrm.commands.applicationform;
 
+import com.jakub.hrm.constans.EmploymentStatus;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -23,17 +24,20 @@ public class UpdateDataApplicationFormCommand {
     @NotBlank(message="Address must not be blank")
     @Size(min=5, message="Address must be at least 5 characters long")
     private String streetAddress;
+
     @NotBlank(message="City must not be blank")
     @Size(min=5, message="City must be at least 5 characters long")
     private String city;
+
     @NotBlank(message="State must not be blank")
     @Size(min=5, message="State must be at least 5 characters long")
     private String country;
+
     @NotBlank(message="Zip Code must not be blank")
     @Pattern(regexp="(^$|[0-9]{5})",message = "Zip Code must be 5 digits")
     private String zipCode;
     private String aboutYourself;
-    private String employmentStatus;
+    private String employmentStatus = EmploymentStatus.PROCESS;
     private UUID jobOfferId;
 
     public UUID getApplicationFormId() {
