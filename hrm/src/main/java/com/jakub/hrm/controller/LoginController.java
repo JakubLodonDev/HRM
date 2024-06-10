@@ -21,7 +21,7 @@ public class LoginController {
                                    @RequestParam(value = "logout", required = false) String logout, Model model) {
         String errorMessage = LoginQueryHandler.Handle(error, logout);
 
-        model.addAttribute("errorMessge", errorMessage);
+        model.addAttribute("errorMessage", errorMessage);
         return "hr/login";
     }
 

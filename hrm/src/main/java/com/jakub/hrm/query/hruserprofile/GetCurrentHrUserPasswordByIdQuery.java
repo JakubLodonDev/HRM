@@ -1,17 +1,18 @@
-package com.jakub.hrm.commands.hruser;
+package com.jakub.hrm.query.hruserprofile;
+
 
 import com.jakub.hrm.annotation.FieldsValueMatch;
 import com.jakub.hrm.annotation.ValidPassword;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
-
+import jakarta.validation.constraints.Size;
 
 @FieldsValueMatch(
         field = "pwd",
         fieldMatch = "confirmPwd",
         message = "Passwords do not match!"
 )
-public class NewHrIdentificationCommand {
+public class GetCurrentHrUserPasswordByIdQuery {
 
     @ValidPassword
     @NotBlank(message="Password must not be blank")
@@ -21,7 +22,15 @@ public class NewHrIdentificationCommand {
     @Transient
     private String confirmPwd;
 
-    public NewHrIdentificationCommand() {
+    @NotBlank(message="Password must not be blank")
+    @Size(min=5, message="Password must be at least 5 characters long")
+    private String currentPassword;
+
+    public GetCurrentHrUserPasswordByIdQuery() {
+    }
+
+    public GetCurrentHrUserPasswordByIdQuery(String currentPassword) {
+        this.currentPassword = currentPassword;
     }
 
     public String getPwd() {
@@ -38,5 +47,13 @@ public class NewHrIdentificationCommand {
 
     public void setConfirmPwd(String confirmPwd) {
         this.confirmPwd = confirmPwd;
+    }
+
+    public String getCurrentPassword() {
+        return currentPassword;
+    }
+
+    public void setCurrentPassword(String currentPassword) {
+        this.currentPassword = currentPassword;
     }
 }

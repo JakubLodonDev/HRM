@@ -27,6 +27,9 @@
         <div class="dash-box" sec:authorize="hasAnyRole('ROLE_RECRUITMENT_SPECIALIST', 'ROLE_MANAGER')">
           <a class="dash-box-text" th:href="@{/employee/listofemployee}">Employee</a>
         </div>
+        <div class="dash-box" sec:authorize="hasAnyRole('ROLE_RECRUITMENT_SPECIALIST', 'ROLE_MANAGER')">
+          <a class="dash-box-text" th:href="@{'/profile/displayprofile/' + ${hrUserId}}">Profile</a>
+        </div>
         <div class="dash-box" sec:authorize="hasRole('ROLE_ADMIN')">
           <a class="dash-box-text" th:href="@{/user/listofusers}">Users</a>
         </div>

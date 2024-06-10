@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <title>Human Resource Menagment</title>
+  </head>
+  <body>
+  <!-- header -->
+    <div th:replace="~{header :: header}">...</div>
+  <!-- //header -->
+
+    <main>
+      <div class="button-group">
+        <a th:href="@{'/profile/changepassword/' + ${hrUserId}}" class="btn btn-primary">Change password</a>
+      </div>
+      <ul>
+        <li th:each="error : ${#fields.errors('hrUserProfileQuery.*')}" th:text="${error}" />
+      </ul>
+      <form
+              th:action="@{'/profile/updateuserprofile'}"
+        method="post"
+        th:object="${hrUserProfileQuery}"
+      >
+        <label >Imie:</label>
+        <input type="text" th:field="*{firstName}" />
+
+        <label >Nazwisko:</label>
+        <input type="text" th:field="*{lastName}" />
+
+        <label >Email:</label>
+        <input type="text" th:field="*{email}" />
+
+
+        <input type="hidden" name="userId" th:value="${hrUserId}" />
+
+        <button name="action" value="updateData">UPDATE</button>
+      </form>
+    </main>
+
+    <!-- footer block -->
+        <div th:replace="~{footer :: footer}">...</div>
+    <!-- //footer block -->
+  </body>
+</html>

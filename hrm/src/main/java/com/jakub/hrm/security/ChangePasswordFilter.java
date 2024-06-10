@@ -38,6 +38,7 @@ public class ChangePasswordFilter extends OncePerRequestFilter {
                 request.getRequestURI().startsWith("/admin/**") ||
                 request.getRequestURI().startsWith("/joboffer/**") ||
                 request.getRequestURI().startsWith("/employee/**") ||
+                request.getRequestURI().startsWith("/profile/**") ||
                 request.getRequestURI().startsWith("/savenewpassword") ||
                 request.getRequestURI().equals("/logout");
 

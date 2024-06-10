@@ -2,8 +2,8 @@ package com.jakub.hrm.controller;
 
 import com.jakub.hrm.commands.hruser.*;
 import com.jakub.hrm.query.role.GetAllRolesHandle;
-import com.jakub.hrm.query.user.GetAllUsersQueryHandle;
-import com.jakub.hrm.query.user.GetHrUserByIdQueryHandler;
+import com.jakub.hrm.query.hruser.GetAllUsersQueryHandle;
+import com.jakub.hrm.query.hruser.GetHrUserByIdQueryHandler;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("user")
-public class HrUserController {
+public class HrUserAdminController {
 
     GetAllUsersQueryHandle getAllUsersQueryHandle;
     GetHrUserByIdQueryHandler getHrUserByIdQueryHandler;
@@ -27,13 +27,13 @@ public class HrUserController {
     NewHrCommandHandler newHrCommandHandler;
 
     @Autowired
-    public HrUserController(GetAllUsersQueryHandle getAllUsersQueryHandle,
-                            GetHrUserByIdQueryHandler getHrUserByIdQueryHandler,
-                            UpdateDataHrUserCommandHandler updateDataHrUserHandler,
-                            ResetPasswordHrUserCommandHandler resetPasswordHrUserHandler,
-                            DeleteUserCommandHandler deleteUserCommandHandler,
-                            GetAllRolesHandle getAllRolesHandle,
-                            NewHrCommandHandler newHrCommandHandler) {
+    public HrUserAdminController(GetAllUsersQueryHandle getAllUsersQueryHandle,
+                                 GetHrUserByIdQueryHandler getHrUserByIdQueryHandler,
+                                 UpdateDataHrUserCommandHandler updateDataHrUserHandler,
+                                 ResetPasswordHrUserCommandHandler resetPasswordHrUserHandler,
+                                 DeleteUserCommandHandler deleteUserCommandHandler,
+                                 GetAllRolesHandle getAllRolesHandle,
+                                 NewHrCommandHandler newHrCommandHandler) {
         this.getAllUsersQueryHandle = getAllUsersQueryHandle;
         this.getHrUserByIdQueryHandler = getHrUserByIdQueryHandler;
         this.updateDataHrUserHandler = updateDataHrUserHandler;

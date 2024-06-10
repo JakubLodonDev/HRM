@@ -1,4 +1,4 @@
-package com.jakub.hrm.query.user;
+package com.jakub.hrm.query.hruser;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

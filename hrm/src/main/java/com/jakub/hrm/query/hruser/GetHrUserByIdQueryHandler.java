@@ -1,6 +1,5 @@
-package com.jakub.hrm.query.user;
+package com.jakub.hrm.query.hruser;
 
-import com.jakub.hrm.model.HrRole;
 import com.jakub.hrm.model.HrUser;
 import com.jakub.hrm.repo.HrUserRepo;
 import org.springframework.beans.factory.annotation.Autowired;

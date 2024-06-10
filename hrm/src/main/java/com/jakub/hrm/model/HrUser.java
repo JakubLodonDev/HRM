@@ -61,6 +61,17 @@ public class HrUser {
         this.identification.setPwd(defaultPassword);
     }
 
+    public void updateProfile(String firstName, String lastName, String email){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.identification.setLogin(email);
+    }
+
+    public void changePassword(String newPassword) {
+        this.identification.setPwd(newPassword);
+    }
+
     public UUID getUserId() {
         return userId;
     }

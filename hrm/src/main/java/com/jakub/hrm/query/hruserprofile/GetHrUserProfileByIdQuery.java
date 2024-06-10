@@ -1,13 +1,10 @@
-package com.jakub.hrm.query.user;
+package com.jakub.hrm.query.hruserprofile;
 
-import com.jakub.hrm.model.HrRole;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-import java.util.UUID;
-
-public class GetHrUserByIdQuery {
+public class GetHrUserProfileByIdQuery {
 
     @NotBlank(message="First Name must not be blank")
     @Size(min=3, message="Name must be at least 3 characters long")
@@ -21,18 +18,13 @@ public class GetHrUserByIdQuery {
     @Email(message = "Please provide a valid email address" )
     private String email;
 
-    private String roleName;
 
-    private boolean isPasswordChangeRequired;
+    public GetHrUserProfileByIdQuery() {}
 
-    public GetHrUserByIdQuery() {}
-
-    public GetHrUserByIdQuery(String firstName, String lastName, String email, String roleName, boolean isPasswordChangeRequired) {
+    public GetHrUserProfileByIdQuery(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.roleName = roleName;
-        this.isPasswordChangeRequired = isPasswordChangeRequired;
     }
 
 
@@ -59,21 +51,5 @@ public class GetHrUserByIdQuery {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
-
-    public boolean isPasswordChangeRequired() {
-        return isPasswordChangeRequired;
-    }
-
-    public void setPasswordChangeRequired(boolean passwordChangeRequired) {
-        isPasswordChangeRequired = passwordChangeRequired;
     }
 }
