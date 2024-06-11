@@ -1,18 +1,20 @@
 DROP TABLE employment_source;
 
+DROP TABLE application_form_audit;
+
 DROP TABLE application_form;
 
 DROP TABLE form_attachment;
 
 DROP TABLE hr_user;
 
-DROP TABLE hr_user_application_form_information;
-
 DROP TABLE hr_identification;
 
 DROP TABLE hr_role;
 
 DROP TABLE employee;
+
+DROP TABLE cv_attachment;
 
 DROP TABLE employee_address;
 
@@ -86,6 +88,12 @@ CREATE TABLE IF NOT EXISTS employee_address (
     zip_code VARCHAR(5) NOT NULL
     );
 
+CREATE TABLE IF NOT EXISTS cv_attachment (
+    cv_attachment_id UUID PRIMARY KEY,
+    file_name VARCHAR(255),
+    file_type VARCHAR(50),
+    data BYTEA
+);
 
 CREATE TABLE IF NOT EXISTS employee (
     employee_id UUID PRIMARY KEY,
@@ -95,7 +103,8 @@ CREATE TABLE IF NOT EXISTS employee (
     mobile_phone VARCHAR(10) NOT NULL,
     employment_status VARCHAR(30) NOT NULL,
     position_name VARCHAR(30) NOT NULL,
-    employee_address_id UUID REFERENCES employee_address(employee_address_id)
+    employee_address_id UUID REFERENCES employee_address(employee_address_id),
+    cv_attachment_id UUID UNIQUE REFERENCES cv_attachment(cv_attachment_id)
     );
 
 CREATE TABLE IF NOT EXISTS employment_source (

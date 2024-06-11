@@ -15,10 +15,12 @@
       <ul>
         <li th:each="error : ${#fields.errors('newEmployeeCommand.*')}" th:text="${error}" />
       </ul>
+      <div th:if="${errorMessage}" th:text="${errorMessage}" class="error"></div>
       <form
               th:action="@{'/employee/saveneemployee'}"
         method="post"
         th:object="${newEmployeeCommand}"
+              enctype="multipart/form-data"
       >
         <label>Imie:</label>
         <input type="text" th:field="*{firstName}" />
@@ -51,6 +53,9 @@
         <select id="status" name="status" th:field="*{sourceType}">
           <option th:each="typeOfEmploymentSource : ${typeOfEmploymentSourceOptions}" th:value="${typeOfEmploymentSource}" th:text="${typeOfEmploymentSource}"></option>
         </select>
+
+        <label for="cv">CV (PDF):</label>
+        <input type="file" id="cv" name="cv" accept=".pdf" />
 
         <button >CREATE</button>
       </form>

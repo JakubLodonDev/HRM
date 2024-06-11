@@ -18,21 +18,56 @@ public class EmploymentSource {
     @NotBlank(message="Type must not be blank")
     private String sourceType;
 
-    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "form_id", referencedColumnName = "form_id")
     private ApplicationForm applicationForm;
 
-    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "employee_id", referencedColumnName = "employee_id")
     private Employee employee;
 
+    public EmploymentSource() {
+
+    }
+    public EmploymentSource(String sourceType, ApplicationForm applicationForm) {
+        this.sourceType = sourceType;
+        this.applicationForm = applicationForm;
+    }
     public EmploymentSource(String sourceType, ApplicationForm applicationForm, Employee employee) {
         this.sourceType = sourceType;
         this.applicationForm = applicationForm;
         this.employee = employee;
     }
 
-    public EmploymentSource() {
+    public UUID getEmployeeSourceId() {
+        return employeeSourceId;
+    }
 
+    public void setEmployeeSourceId(UUID employeeSourceId) {
+        this.employeeSourceId = employeeSourceId;
+    }
+
+    public String getSourceType() {
+        return sourceType;
+    }
+
+    public void setSourceType(String sourceType) {
+        this.sourceType = sourceType;
+    }
+
+    public ApplicationForm getApplicationForm() {
+        return applicationForm;
+    }
+
+    public void setApplicationForm(ApplicationForm applicationForm) {
+        this.applicationForm = applicationForm;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }

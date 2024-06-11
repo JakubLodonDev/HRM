@@ -1,7 +1,7 @@
 package com.jakub.hrm.commands.employee;
 
 import com.jakub.hrm.model.Employee;
-import com.jakub.hrm.repo.EmployeeRepo;
+import com.jakub.hrm.repo.employee.EmployeeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,6 @@ import java.util.Optional;
 public class FireEmployeeCommandHandler {
 
     EmployeeRepo employeeRepo;
-
 
     @Autowired
     public FireEmployeeCommandHandler(EmployeeRepo employeeRepo) {

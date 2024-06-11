@@ -1,4 +1,4 @@
-package com.jakub.hrm.repo;
+package com.jakub.hrm.repo.employee;
 
 import com.jakub.hrm.model.EmployeeAddress;
 import org.springframework.data.jpa.repository.JpaRepository;

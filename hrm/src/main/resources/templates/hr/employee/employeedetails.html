@@ -54,6 +54,9 @@
 
         <button name="action" value="updateData">UPDATE</button>
         <button name="action" value="fireEmployee">FIRE</button>
+        <a th:href="@{'/employee/download/' + ${cvAttachmentId}}">
+          Pobierz CV
+        </a>
       </form>
     </main>
 

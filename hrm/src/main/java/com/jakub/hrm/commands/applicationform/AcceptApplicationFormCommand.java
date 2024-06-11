@@ -1,5 +1,7 @@
-package com.jakub.hrm.query.applicationform;
+package com.jakub.hrm.commands.applicationform;
 
+import com.jakub.hrm.constans.EmploymentStatus;
+import com.jakub.hrm.constans.TypeOfEmploymentSource;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -7,7 +9,7 @@ import jakarta.validation.constraints.Size;
 
 import java.util.UUID;
 
-public class ApplicationFormQuery {
+public class AcceptApplicationFormCommand {
 
     private UUID applicationFormId;
     @NotBlank(message="First name must not be blank")
@@ -36,29 +38,11 @@ public class ApplicationFormQuery {
     @Pattern(regexp="(^$|[0-9]{5})",message = "Zip Code must be 5 digits")
     private String zipCode;
     private String aboutYourself;
-    private String employmentStatus;
+    private String employmentStatus = EmploymentStatus.PROCESS;
+    private String sourceType = TypeOfEmploymentSource.APPLICATION;
     private UUID jobOfferId;
 
-    public ApplicationFormQuery() {
-    }
-
-    public ApplicationFormQuery(UUID applicationFormId, String firstName, String lastName,
-                                String email, String mobilePhone, String streetAddress,
-                                String city, String country, String zipCode,
-                                String aboutYourself, String employmentStatus,
-                                UUID jobOfferId) {
-        this.applicationFormId = applicationFormId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.mobilePhone = mobilePhone;
-        this.streetAddress = streetAddress;
-        this.city = city;
-        this.country = country;
-        this.zipCode = zipCode;
-        this.aboutYourself = aboutYourself;
-        this.employmentStatus = employmentStatus;
-        this.jobOfferId = jobOfferId;
+    public AcceptApplicationFormCommand() {
     }
 
     public UUID getApplicationFormId() {
@@ -147,6 +131,14 @@ public class ApplicationFormQuery {
 
     public void setEmploymentStatus(String employmentStatus) {
         this.employmentStatus = employmentStatus;
+    }
+
+    public String getSourceType() {
+        return sourceType;
+    }
+
+    public void setSourceType(String sourceType) {
+        this.sourceType = sourceType;
     }
 
     public UUID getJobOfferId() {

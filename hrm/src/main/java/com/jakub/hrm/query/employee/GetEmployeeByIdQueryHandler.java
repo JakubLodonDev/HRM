@@ -1,11 +1,8 @@
 package com.jakub.hrm.query.employee;
 
-import com.jakub.hrm.model.ApplicationForm;
 import com.jakub.hrm.model.Employee;
-import com.jakub.hrm.model.EmployeeAddress;
-import com.jakub.hrm.query.applicationform.ApplicationFormQuery;
-import com.jakub.hrm.repo.EmployeeAddressRepo;
-import com.jakub.hrm.repo.EmployeeRepo;
+import com.jakub.hrm.repo.employee.EmployeeAddressRepo;
+import com.jakub.hrm.repo.employee.EmployeeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

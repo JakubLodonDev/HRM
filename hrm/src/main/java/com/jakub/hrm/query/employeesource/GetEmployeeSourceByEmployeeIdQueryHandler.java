@@ -2,7 +2,7 @@ package com.jakub.hrm.query.employeesource;
 
 import com.jakub.hrm.model.Employee;
 import com.jakub.hrm.model.EmploymentSource;
-import com.jakub.hrm.repo.EmployeeRepo;
+import com.jakub.hrm.repo.employee.EmployeeRepo;
 import com.jakub.hrm.repo.EmploymentSourceRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

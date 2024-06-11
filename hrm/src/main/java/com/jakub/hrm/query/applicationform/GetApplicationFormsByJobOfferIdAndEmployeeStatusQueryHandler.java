@@ -44,8 +44,6 @@ public class GetApplicationFormsByJobOfferIdAndEmployeeStatusQueryHandler {
                 break;
         }
 
-
-
         return duplicateListToDisplay(applicationFormList);
     }
 

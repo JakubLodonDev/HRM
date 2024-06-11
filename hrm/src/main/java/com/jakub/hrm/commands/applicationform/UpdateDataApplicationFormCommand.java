@@ -1,6 +1,5 @@
 package com.jakub.hrm.commands.applicationform;
 
-import com.jakub.hrm.constans.EmploymentStatus;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -37,7 +36,7 @@ public class UpdateDataApplicationFormCommand {
     @Pattern(regexp="(^$|[0-9]{5})",message = "Zip Code must be 5 digits")
     private String zipCode;
     private String aboutYourself;
-    private String employmentStatus = EmploymentStatus.PROCESS;
+    private String employmentStatus;
     private UUID jobOfferId;
 
     public UUID getApplicationFormId() {

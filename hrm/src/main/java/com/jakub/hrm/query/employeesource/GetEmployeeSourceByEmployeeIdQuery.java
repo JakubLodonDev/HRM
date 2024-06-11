@@ -1,10 +1,5 @@
 package com.jakub.hrm.query.employeesource;
 
-import com.jakub.hrm.query.employee.GetEmployeeByIdQuery;
-import com.jakub.hrm.repo.EmployeeRepo;
-import com.jakub.hrm.repo.EmploymentSourceRepo;
-import org.springframework.stereotype.Service;
-
 public class GetEmployeeSourceByEmployeeIdQuery {
 
     private String sourceType;

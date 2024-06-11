@@ -1,6 +1,7 @@
 package com.jakub.hrm.controller;
 
 import com.jakub.hrm.commands.applicationform.*;
+import com.jakub.hrm.commands.employee.NewEmploymentSourceCommandHandler;
 import com.jakub.hrm.constans.EmploymentStatus;
 import com.jakub.hrm.query.applicationform.GetApplicationFormsByJobOfferIdAndEmployeeStatusQueryHandler;
 import com.jakub.hrm.query.applicationform.GetApplicationFormByIdQueryHandler;
@@ -36,6 +37,7 @@ public class HrApplicationFormController {
     UpdateDataApplicationFormCommandHandler updateApplicationFormCommandHandler;
     DenyApplicationFormCommandHandler denyApplicationFormCommandHandler;
     AcceptApplicationFormCommandHandler acceptApplicationFormCommandHandler;
+    NewEmploymentSourceCommandHandler newEmploymentSourceCommandHandler;
     GetFormAttachmentQueryHandler getFormAttachmentQueryHandler;
 
     @Autowired
@@ -46,6 +48,7 @@ public class HrApplicationFormController {
                                        UpdateDataApplicationFormCommandHandler updateApplicationFormCommandHandler,
                                        DenyApplicationFormCommandHandler denyApplicationFormCommandHandler,
                                        AcceptApplicationFormCommandHandler acceptApplicationFormCommandHandler,
+                                       NewEmploymentSourceCommandHandler newEmploymentSourceCommandHandler,
                                        GetFormAttachmentQueryHandler getFormAttachmentQueryHandler) {
         this.getJobOffersByStatusQueryHandler = getJobOffersByStatusQueryHandler;
         this.getApplicationFormsByJobOfferIdAndEmployeeStatusQueryHandler = getApplicationFormsByJobOfferIdAndEmployeeStatusQueryHandler;
@@ -54,6 +57,7 @@ public class HrApplicationFormController {
         this.updateApplicationFormCommandHandler = updateApplicationFormCommandHandler;
         this.denyApplicationFormCommandHandler = denyApplicationFormCommandHandler;
         this.acceptApplicationFormCommandHandler = acceptApplicationFormCommandHandler;
+        this.newEmploymentSourceCommandHandler = newEmploymentSourceCommandHandler;
         this.getFormAttachmentQueryHandler = getFormAttachmentQueryHandler;
     }
 
@@ -107,13 +111,17 @@ public class HrApplicationFormController {
     }
 
     @PostMapping(value = "/updateapplicationform", params = "action=hireApplicant")
-    public String hireApplicant(@Valid @ModelAttribute("applicationFormQuery") UpdateDataApplicationFormCommand updateApplicationFormRequest,
-                                      BindingResult bindingResult, Authentication authentication){
+    public String hireApplicant(@Valid @ModelAttribute("applicationFormQuery") AcceptApplicationFormCommand acceptApplicationFormRequest,
+                                      @ModelAttribute("formAttachmentId") UUID formAttachmentId,
+                                      BindingResult bindingResult, Authentication authentication) throws SQLException {
         if (bindingResult.hasErrors()) {
             return "jobofferdetails";
         }
-        acceptApplicationFormCommandHandler.Handle(updateApplicationFormRequest, authentication);
-        return "redirect:/applications/listofapplicationforms/process/" + updateApplicationFormRequest.getJobOfferId();
+        UUID employeeId = acceptApplicationFormCommandHandler.Handle(acceptApplicationFormRequest,
+                formAttachmentId, authentication);
+        newEmploymentSourceCommandHandler.Handle(acceptApplicationFormRequest.getSourceType(), employeeId,
+                acceptApplicationFormRequest.getApplicationFormId());
+        return "redirect:/applications/listofapplicationforms/process/" + acceptApplicationFormRequest.getJobOfferId();
     }
 
     @GetMapping("/download/{formAttachmentId}")

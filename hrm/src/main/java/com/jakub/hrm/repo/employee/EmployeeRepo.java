@@ -1,4 +1,4 @@
-package com.jakub.hrm.repo;
+package com.jakub.hrm.repo.employee;
 
 import com.jakub.hrm.model.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface EmployeeRepo extends JpaRepository<Employee, UUID> {
+public interface EmployeeRepo extends JpaRepository<Employee, UUID>, CustomEmployeeRepository {
     List<Employee> findAllByEmploymentStatus(String employmentStatus);
 }
