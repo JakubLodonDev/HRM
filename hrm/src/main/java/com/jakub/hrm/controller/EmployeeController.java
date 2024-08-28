@@ -59,13 +59,13 @@ public class EmployeeController {
         this.getCvAttachmentQueryHandler = getCvAttachmentQueryHandler;
     }
 
-    @RequestMapping("/listofemployee")
+    @GetMapping("/listofemployee")
     public String displayListOfUsers(Model model){
         model.addAttribute("listOfEmployeeQuery", getAllHireEmployeeQueryHandle.Handle());
         return "hr/employee/listofemployee";
     }
 
-    @RequestMapping("/createnewemployee")
+    @GetMapping("/createnewemployee")
     public String createNewHrUser(Model model){
 
         model.addAttribute("typeOfEmploymentSourceOptions", GetTypeOfEmploymentSourceQuery.Handle());

@@ -30,7 +30,7 @@ public class Employee {
     @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
     private String mobilePhone;
     private String employmentStatus;
-    private String position_name;
+    private String positionName;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "employee_address_id", referencedColumnName = "employee_address_id")
@@ -48,19 +48,19 @@ public class Employee {
 
 
     public Employee(String firstName, String lastName, String email, String mobilePhone,
-                    String employmentStatus, String position_name,
+                    String employmentStatus, String positionName,
                     EmployeeAddress employeeAddress, CvAttachment cvAttachment) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.mobilePhone = mobilePhone;
         this.employmentStatus = employmentStatus;
-        this.position_name = position_name;
+        this.positionName = positionName;
         this.employeeAddress = employeeAddress;
         this.cvAttachment = cvAttachment;
     }
     public Employee(UUID employeeId, String firstName, String lastName, String email,
-                    String mobilePhone, String employmentStatus, String position_name,
+                    String mobilePhone, String employmentStatus, String positionName,
                     EmployeeAddress employeeAddress, CvAttachment cvAttachment) {
         this.employeeId = employeeId;
         this.firstName = firstName;
@@ -68,7 +68,7 @@ public class Employee {
         this.email = email;
         this.mobilePhone = mobilePhone;
         this.employmentStatus = employmentStatus;
-        this.position_name = position_name;
+        this.positionName = positionName;
         this.employeeAddress = employeeAddress;
         this.cvAttachment = cvAttachment;
     }
@@ -82,7 +82,7 @@ public class Employee {
         this.email = email;
         this.mobilePhone = mobilePhone;
         this.employmentStatus = employmentStatus;
-        this.position_name = position_name;
+        this.positionName = position_name;
         this.employeeAddress = employeeAddress;
         this.cvAttachment = cvAttachment;
     }
@@ -94,7 +94,7 @@ public class Employee {
         this.lastName = lastName;
         this.email = email;
         this.mobilePhone = mobilePhone;
-        this.position_name = position_name;
+        this.positionName = position_name;
         this.employeeAddress = employeeAddress;
     }
 
@@ -150,12 +150,12 @@ public class Employee {
         this.employmentStatus = employmentStatus;
     }
 
-    public String getPosition_name() {
-        return position_name;
+    public String getPositionName() {
+        return positionName;
     }
 
-    public void setPosition_name(String position_name) {
-        this.position_name = position_name;
+    public void setPositionName(String position_name) {
+        this.positionName = position_name;
     }
 
     public EmployeeAddress getEmployeeAddress() {

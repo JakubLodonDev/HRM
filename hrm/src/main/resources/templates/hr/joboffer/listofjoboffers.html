@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/assets/css/styles.css" />
-    <title>Human Resource Menagment</title>
+    <title>Human Resource Management</title>
   </head>
   <body>
   <!-- header -->
@@ -13,7 +13,7 @@
   <!-- //header -->
     <main>
       <div class="button-group" sec:authorize="isAuthenticated()">
-        <a th:href="@{/joboffer/createjoboffer}" class="btn btn-primary">Dodaj nową ofertę pracy</a>
+        <a th:href="@{/joboffer/createjoboffer}" class="btn btn-primary">Create new job offer</a>
       </div>
       <table>
         <thead>

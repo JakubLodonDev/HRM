@@ -29,10 +29,6 @@ public class EmploymentSource {
     public EmploymentSource() {
 
     }
-    public EmploymentSource(String sourceType, ApplicationForm applicationForm) {
-        this.sourceType = sourceType;
-        this.applicationForm = applicationForm;
-    }
     public EmploymentSource(String sourceType, ApplicationForm applicationForm, Employee employee) {
         this.sourceType = sourceType;
         this.applicationForm = applicationForm;

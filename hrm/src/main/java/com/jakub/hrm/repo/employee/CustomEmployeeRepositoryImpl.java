@@ -6,8 +6,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 
-import java.util.UUID;
-
 public class CustomEmployeeRepositoryImpl implements CustomEmployeeRepository {
 
     @PersistenceContext
@@ -27,7 +25,7 @@ public class CustomEmployeeRepositoryImpl implements CustomEmployeeRepository {
         query.setParameter(4, employee.getEmail());
         query.setParameter(5, employee.getMobilePhone());
         query.setParameter(6, employee.getEmploymentStatus());
-        query.setParameter(7, employee.getPosition_name());
+        query.setParameter(7, employee.getPositionName());
         query.setParameter(8, employee.getEmployeeAddress().getEmployeeAddressId());
         query.setParameter(9, employee.getCvAttachment().getCvAttachmentId());
 
@@ -50,7 +48,7 @@ public class CustomEmployeeRepositoryImpl implements CustomEmployeeRepository {
         query.setParameter(2, employee.getLastName());
         query.setParameter(3, employee.getEmail());
         query.setParameter(4, employee.getMobilePhone());
-        query.setParameter(5, employee.getPosition_name());
+        query.setParameter(5, employee.getPositionName());
         query.setParameter(6, employee.getEmployeeAddress().getEmployeeAddressId());
         query.setParameter(7, employee.getEmployeeId());
 

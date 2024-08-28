@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/assets/css/styles.css" />
-    <title>Human Resource Menagment</title>
+    <title>Human Resource Management</title>
   </head>
   <body>
   <!-- header -->
@@ -20,16 +20,16 @@
         method="post"
         th:object="${jobOffer}"
       >
-        <label >Nazwa:</label>
+        <label >Name:</label>
         <input type="text" th:attrappend="disabled=${statusOpen ?  null : 'disabled'}" th:field="${jobOffer.name}" />
 
-        <label >Poziom:</label>
+        <label >Level:</label>
         <input type="text" th:attrappend="disabled=${statusOpen ?  null : 'disabled'}" th:field="*{level}" />
 
-        <label >Wymagania:</label>
+        <label >Requirement:</label>
         <input type="text" th:attrappend="disabled=${statusOpen ?  null : 'disabled'}" th:field="*{requirement}" />
 
-        <label >Opis:</label>
+        <label >Description:</label>
         <input type="text" th:attrappend="disabled=${statusOpen ?  null : 'disabled'}" th:field="*{description}"/>
 
         <input type="hidden"  th:field="*{status}"/>

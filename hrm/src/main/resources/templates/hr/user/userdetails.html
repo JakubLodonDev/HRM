@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/assets/css/styles.css" />
-    <title>Human Resource Menagment</title>
+    <title>Human Resource Management</title>
   </head>
   <body>
   <!-- header -->
@@ -20,16 +20,16 @@
         method="post"
         th:object="${hrUserQuery}"
       >
-        <label >Imie:</label>
+        <label >First name:</label>
         <input type="text" th:field="*{firstName}" />
 
-        <label >Nazwisko:</label>
+        <label >Last name:</label>
         <input type="text" th:field="*{lastName}" />
 
         <label >Email:</label>
         <input type="text" th:field="*{email}" />
 
-        <label >Rola:</label>
+        <label >Role:</label>
         <select id="status" name="status" th:field="*{roleName}">
           <option th:each="role : ${userRoleOptions}" th:value="${role}" th:text="${role}"></option>
         </select>

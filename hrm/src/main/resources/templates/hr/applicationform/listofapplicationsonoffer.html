@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/assets/css/styles.css" />
-    <title>Human Resource Menagment</title>
+    <title>Human Resource Management</title>
   </head>
   <body>
   <!-- header -->
@@ -12,16 +12,16 @@
   <!-- //header -->
     <main>
       <div class="button-group">
-        <a th:href="@{'/applications/listofapplicationforms/all/' + ${jobOfferId}}" class="btn btn-primary">Wyświetl wszystkich</a>
+        <a th:href="@{'/applications/listofapplicationforms/all/' + ${jobOfferId}}" class="btn btn-primary">Show all</a>
       </div>
       <div class="button-group">
-        <a th:href="@{'/applications/listofapplicationforms/hire/' + ${jobOfferId}}" class="btn btn-primary">Wyświetl zatrudionych</a>
+        <a th:href="@{'/applications/listofapplicationforms/hire/' + ${jobOfferId}}" class="btn btn-primary">Show hired</a>
       </div>
       <div class="button-group">
-        <a th:href="@{'/applications/listofapplicationforms/process/' + ${jobOfferId}}" class="btn btn-primary">Wyświetl w trakcie oceny</a>
+        <a th:href="@{'/applications/listofapplicationforms/process/' + ${jobOfferId}}" class="btn btn-primary">Show in progress</a>
       </div>
       <div class="button-group">
-        <a th:href="@{'/applications/listofapplicationforms/deny/' + ${jobOfferId}}" class="btn btn-primary">Wyświetl odrzucone</a>
+        <a th:href="@{'/applications/listofapplicationforms/deny/' + ${jobOfferId}}" class="btn btn-primary">Show Denied</a>
       </div>
       <table>
         <thead>

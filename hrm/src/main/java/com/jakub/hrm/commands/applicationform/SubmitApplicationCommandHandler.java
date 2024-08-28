@@ -65,7 +65,7 @@ public class SubmitApplicationCommandHandler {
         boolean isApplicationExist = applicationFormRepo.existsByEmailAndJobOffer(command.getEmail(), jobOffer);
 
         if (isApplicationExist) {
-            return new SubmitApplicationCommandResult(false, "Osoba o takim emailu juz aplikowala na ta oferte");
+            return new SubmitApplicationCommandResult(false, "A person with this email address has already applied for this offer");
         }
         return null;
     }

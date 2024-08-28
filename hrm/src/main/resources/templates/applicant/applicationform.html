@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/assets/css/styles.css" />
-    <title>Human Resource Menagment</title>
+    <title>Human Resource Management</title>
   </head>
   <body>
   <!-- header -->
@@ -25,31 +25,31 @@
         th:object="${submitApplicationCommand}"
               enctype="multipart/form-data"
       >
-        <label >Imię:</label>
+        <label >First name:</label>
         <input type="text" th:field="*{firstName}" />
 
-        <label >Nazwisko:</label>
+        <label >Last name:</label>
         <input type="text" th:field="*{lastName}" />
 
-        <label >Adres e-mail:</label>
+        <label >Address e-mail:</label>
         <input type="text" th:field="*{email}" />
 
-        <label >Numer telefonu:</label>
+        <label >Phone number:</label>
         <input type="text" th:field="*{mobilePhone}"/>
 
-        <label >Ulica:</label>
+        <label >Street:</label>
         <input type="text" th:field="*{streetAddress}"/>
 
-        <label >Miasto:</label>
+        <label >City:</label>
         <input type="text" th:field="*{city}"/>
 
-        <label >Kraj:</label>
+        <label >Country:</label>
         <input type="text" th:field="*{country}"/>
 
-        <label >Kod pocztowy:</label>
+        <label >Zip code:</label>
         <input type="text" th:field="*{zipCode}"/>
 
-        <label >Opis:</label>
+        <label >Description:</label>
         <textarea th:field="*{aboutYourself}" rows="4"></textarea>
 
         <label for="cv">CV (PDF):</label>
@@ -57,7 +57,7 @@
 
         <input type="hidden" name="jobOfferId" th:value="${jobOfferId}" />
 
-        <button >Wyślij zgłoszenie</button>
+        <button >Send application</button>
       </form>
     </main>
 

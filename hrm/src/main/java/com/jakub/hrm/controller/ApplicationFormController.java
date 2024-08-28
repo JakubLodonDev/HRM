@@ -47,8 +47,10 @@ public class ApplicationFormController {
     }
 
     @PostMapping("/saveApplicationForm")
-    public String saveApplicationForm(@Valid @ModelAttribute("submitApplicationCommand") SubmitApplicationCommand submitApplicationRequest,
-                                      BindingResult bindingResult, @RequestParam("cv") MultipartFile cv, Model model) throws IOException, SQLException {
+    public String saveApplicationForm(@Valid @ModelAttribute("submitApplicationCommand")
+                                          SubmitApplicationCommand submitApplicationRequest,
+                                      BindingResult bindingResult, @RequestParam("cv") MultipartFile cv,
+                                      Model model) throws IOException, SQLException {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("jobOfferId", submitApplicationRequest.getJobOfferId());

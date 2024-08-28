@@ -24,9 +24,9 @@ public class GetAllHireEmployeeQueryHandle {
 
     private List<GetAllEmployeeQuery> moveDataToQuery(List<Employee> employeeList) {
         List<GetAllEmployeeQuery> getAllEmployeeQueryList = new ArrayList<>();
-        for (Employee emplo: employeeList) {
-            GetAllEmployeeQuery employeeQuery = new GetAllEmployeeQuery(emplo.getEmployeeId(),
-                    emplo.getFirstName(), emplo.getLastName(), emplo.getEmail(), emplo.getPosition_name());
+        for (Employee employee: employeeList) {
+            GetAllEmployeeQuery employeeQuery = new GetAllEmployeeQuery(employee.getEmployeeId(),
+                    employee.getFirstName(), employee.getLastName(), employee.getEmail(), employee.getPositionName());
             getAllEmployeeQueryList.add(employeeQuery);
         }
         return getAllEmployeeQueryList;

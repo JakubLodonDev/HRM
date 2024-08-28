@@ -35,7 +35,7 @@ public class GetEmployeeByIdQueryHandler {
 
             return new GetEmployeeByIdQuery(employee.getFirstName(), employee.getLastName(),
                     employee.getEmail(), employee.getMobilePhone(), employee.getEmploymentStatus(),
-                    employee.getPosition_name(), addressQuery);
+                    employee.getPositionName(), addressQuery);
         }
 
         return new GetEmployeeByIdQuery();

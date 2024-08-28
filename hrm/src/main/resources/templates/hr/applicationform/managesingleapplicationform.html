@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/assets/css/styles.css" />
-    <title>Human Resource Menagment</title>
+    <title>Human Resource Management</title>
   </head>
   <body>
   <!-- header -->
@@ -20,31 +20,31 @@
         method="post"
         th:object="${applicationFormQuery}"
       >
-        <label >Imie:</label>
+        <label >First name:</label>
         <input type="text" th:attrappend="disabled=${applicationFormQuery.employmentStatus == 'Process' ?  null : 'disabled'}" th:field="*{firstName}" />
 
-        <label >Nazwisko:</label>
+        <label >Last name:</label>
         <input type="text" th:attrappend="disabled=${applicationFormQuery.employmentStatus == 'Process' ?  null : 'disabled'}" th:field="*{lastName}" />
 
         <label >Email:</label>
         <input type="text" th:attrappend="disabled=${applicationFormQuery.employmentStatus == 'Process' ?  null : 'disabled'}" th:field="*{email}" />
 
-        <label >Numer Telefonu:</label>
+        <label >Phone number:</label>
         <input type="text" th:attrappend="disabled=${applicationFormQuery.employmentStatus == 'Process' ?  null : 'disabled'}" th:field="*{mobilePhone}"/>
 
-        <label >Opis:</label>
+        <label >Description:</label>
         <input type="text" th:attrappend="disabled=${applicationFormQuery.employmentStatus == 'Process' ?  null : 'disabled'}" th:field="*{aboutYourself}"/>
 
-        <label >Ulica:</label>
+        <label >Street:</label>
         <input type="text" th:attrappend="disabled=${applicationFormQuery.employmentStatus == 'Process' ?  null : 'disabled'}" th:field="*{streetAddress}"/>
 
-        <label >Miasto:</label>
+        <label >City:</label>
         <input type="text" th:attrappend="disabled=${applicationFormQuery.employmentStatus == 'Process' ?  null : 'disabled'}" th:field="*{city}"/>
 
-        <label >Kraj:</label>
+        <label >Country:</label>
         <input type="text" th:attrappend="disabled=${applicationFormQuery.employmentStatus == 'Process' ?  null : 'disabled'}" th:field="*{country}"/>
 
-        <label >Kod pocztowy:</label>
+        <label >Zip code:</label>
         <input type="text" th:attrappend="disabled=${applicationFormQuery.employmentStatus == 'Process' ?  null : 'disabled'}" th:field="*{zipCode}"/>
 
 

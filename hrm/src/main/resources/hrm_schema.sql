@@ -23,13 +23,13 @@ DROP TABLE job_offer;
 CREATE TABLE IF NOT EXISTS hr_role (
     role_id UUID PRIMARY KEY,
     role_name VARCHAR(30) NOT NULL
-    );
+);
 
 CREATE TABLE IF NOT EXISTS hr_identification (
     identification_id UUID PRIMARY KEY,
     login VARCHAR(50) NOT NULL,
     pwd VARCHAR(100) NOT NULL
-    );
+);
 
 CREATE TABLE IF NOT EXISTS hr_user (
     user_id UUID PRIMARY KEY,
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS hr_user (
     is_password_change_required BOOLEAN NOT NULL,
     identification_id UUID REFERENCES hr_identification(identification_id),
     role_id UUID REFERENCES hr_role(role_id)
-    );
+);
 
 CREATE TABLE IF NOT EXISTS job_offer (
     job_id UUID PRIMARY KEY,
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS application_form_audit (
     date_modified TIMESTAMP NOT NULL,
     form_id UUID REFERENCES application_form(form_id),
     user_id UUID REFERENCES hr_user(user_id)
-    );
+);
 
 CREATE TABLE IF NOT EXISTS employee_address (
     employee_address_id UUID PRIMARY KEY,
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS employee_address (
     city VARCHAR(20) NOT NULL,
     country VARCHAR(20) NOT NULL,
     zip_code VARCHAR(5) NOT NULL
-    );
+);
 
 CREATE TABLE IF NOT EXISTS cv_attachment (
     cv_attachment_id UUID PRIMARY KEY,
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS employee (
     position_name VARCHAR(30) NOT NULL,
     employee_address_id UUID REFERENCES employee_address(employee_address_id),
     cv_attachment_id UUID UNIQUE REFERENCES cv_attachment(cv_attachment_id)
-    );
+);
 
 CREATE TABLE IF NOT EXISTS employment_source (
     employment_source_id UUID PRIMARY KEY,
